@@ -1,0 +1,6 @@
+Nombre: Jose  María Nombre: ,Terrer  Navarro Nombre: ,1.87 Apellidos: ,02/05/1998 Fecha de nacimiento: ,654783433
+Pilar Teléfono: ,Bayona  Pérez Nombre: ,1.60 Apellidos: ,20/02/1972 Fecha de nacimiento: ,976585669
+Ángel Teléfono: ,Piqueras  Rodriguez Nombre: ,1.90 Apellidos: ,25/09/2001 Fecha de nacimiento: ,689887744
+Pedro Teléfono: ,Duque  Contreras Nombre: ,1.81 Apellidos: ,26/11/1985 Fecha de nacimiento: ,652369633
+Maria  Pilar Nombre: ,García  García Nombre: ,1.85 Apellidos: ,30/11/2001 Fecha de nacimiento: ,621350120
+Josefa Teléfono: ,Bueno  Vallés Nombre: ,1.73 Apellidos: ,29/08/1974 
