@@ -34,38 +34,57 @@ public class Ejercicio1 {
 			
 			FileReader lector = new FileReader(mifichero);
 						
-			FileWriter escritor=new FileWriter(mifichero2,true); 
+			FileWriter escritor=new FileWriter(mifichero2,false); 
 			
 			int caracter = lector.read();
 			while (caracter > 0) {
 				
-				word += ((char)caracter);
+				if((char)caracter != ',' && (char)caracter != '\n') {
+					word += ((char)caracter);
+				}
 				caracter = lector.read();	
-					
-				if(word.length()>4 && (char)caracter == ',' || (char)caracter == ' ') {
+				System.out.println(caracter);
+				if(word.length()>4 && (char)caracter == ',' || (char)caracter == '\n' || caracter < 0) {
 					switch(select) {
-					case 1: escritor.write("Nombre: ");
+					case 1: 
+						escritor.write("Nombre: ");
+						escritor.write(word);
+						escritor.write("\n");
 					break;
-					case 2: escritor.write("Apellidos: ");
+					case 2:
+						escritor.write("Apellidos: ");
+						escritor.write(word);
+						escritor.write("\n");
 					break;
-					case 3: escritor.write("Fecha de nacimiento: ");
+					case 3: 
+						escritor.write("Fecha de nacimiento: ");
+						escritor.write(word);
+						escritor.write("\n");
 					break;
-					case 4: escritor.write("Teléfono: ");
+					case 4: 
+						escritor.write("Teléfono:");
+						escritor.write(word);
+						escritor.write("\n");
 					}
-					escritor.write(word);
-					escritor.write(' ');
+					
+					word = "";
+					if((char)caracter == ',') {
+						select += 1;
+					}
+					if((char)caracter == '\n') {
+						escritor.write("\n");
+						select = 1;
+					}
+				}
+				else if ((char)caracter == ',' || (char)caracter == '\n'){
 					word = "";
 				}
-				if((char)caracter == ',') {
-					select += 1;
-				}
-				if((char)caracter == ' ') {
-					
-					select = 0;
-				}
+				
+				
 			}
 			lector.close();
 			escritor.close();
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
