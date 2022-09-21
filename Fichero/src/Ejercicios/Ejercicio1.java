@@ -41,7 +41,7 @@ public class Ejercicio1 {
 					word += ((char)caracter);
 				}
 				caracter = lector.read();	
-				System.out.println(caracter);
+				
 				if(word.length()>4 && (char)caracter == ',' || (char)caracter == '\n' || caracter < 0) {
 					switch(select) {
 					case 1: 
