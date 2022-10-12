@@ -42,7 +42,7 @@ public class Main {
 			*/
 			Persona pLeoTodo = new Persona();
 			Persona [] registro;
-			registro = pLeoTodo.
+			//registro = ;
 			
 		} // COMPLETA CON LOS CATCH QUE HAGAN FALTA  
 		catch (FileNotFoundException e) {
