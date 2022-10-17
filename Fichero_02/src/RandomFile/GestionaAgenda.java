@@ -3,6 +3,7 @@ package RandomFile;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.util.ArrayList;
 
 /**
  * Aqu� se van a almacenar los datos de las personas
@@ -179,38 +180,24 @@ public class GestionaAgenda {
 	 * Lee el fichero de principio a fin
 	 * @param  pos -se considera que la primera posici�n es la 1 (no la 0)
 	 * @return 
+	 * @throws IOException 
 	 */
-	public Persona[] leerTodo(Persona [] agenda) {
-		int pos = 1;
-		Persona registro = null;
+	public ArrayList<Persona> leerTodo(){
+		ArrayList <Persona> agenda= new ArrayList <Persona>();
+		Persona p = new Persona();
 		
 		if (fichero != null) {
 			try {
-				fichero.seek(pos);
-				registro = new Persona();
-				
-				for(int n = pos; n < fichero.length(); n += calculaposicion(pos)) {
-					// TENGO QUE IR LEYENDO EN ORDEN LO QUE HE ESCRITO ANTES
-					// leo el NOMBRE
-					char campoN[] = new char[dimensionNombre];
-					for (int i = 0; i < dimensionNombre; i++) {
-						campoN[i] = fichero.readChar();
-					}	
-					registro.setNombre(new String(campoN));
-					
-					registro.setEdad(fichero.readInt());		
-	
-					// leo el EMAIL
-					char campoE[] = new char[dimensionEmail];
-					for (int i = 0; i < dimensionEmail; i++) {
-						campoE[i] = fichero.readChar();
-					}			
-					registro.setEmail(new String(campoE));
-					pos += fichero.getFilePointer();
+				this.iniciar();	
+				int pos = 0;
+				while(fichero.getFilePointer()> fichero.length()) {
+					p = this.leer(pos);
+					agenda.add(p);
+					pos++;
 				}
 			} catch (Exception e) {
 				// entrar� aqu� cuando haya llegado al final del fichero
-				registro = null;
+				p = null;
 			}
 		}
 		return agenda;

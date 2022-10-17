@@ -4,6 +4,7 @@
 package RandomFile;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * @author alu
@@ -16,7 +17,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		GestionaAgenda agenda = new GestionaAgenda("src//aleatorio//encapsulado//AgendaPersonas.dat");
+		GestionaAgenda agenda = new GestionaAgenda("D:\\Ángel Pavón\\WS - Acceso a Datos\\AccesoDatos\\Fichero_02\\AgendaPersonas.dat");
 		
 		
 		//  guarda las personas en el fichero secuencial
@@ -36,13 +37,18 @@ public class Main {
 			agenda.escribir(p3,3);
 			agenda.escribir(p4,4);
 			
-			/*Persona pLeo = new Persona();
+			Persona pLeo = new Persona();
 			pLeo = agenda.leer(2);
 			System.out.println(pLeo);
-			*/
+			
 			Persona pLeoTodo = new Persona();
-			Persona [] registro;
-			//registro = ;
+			ArrayList <Persona> registro = new ArrayList<Persona>();
+			registro = agenda.leerTodo();
+			for (Persona persona : registro) {
+				System.out.println("Inicio");
+				System.out.println(persona.toString());
+			}
+			
 			
 		} // COMPLETA CON LOS CATCH QUE HAGAN FALTA  
 		catch (FileNotFoundException e) {
@@ -54,14 +60,14 @@ public class Main {
 		}
 		
 		// leer las personas
-		try {
+		/*try {
 			
 			System.out.println(agenda.leer(3));
 			
 			
 		} catch (Exception e) {
 			// TODO: handle exception
-		}
+		}*/
 		
 	}
 
