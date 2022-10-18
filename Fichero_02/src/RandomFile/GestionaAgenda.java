@@ -23,7 +23,7 @@ public class GestionaAgenda {
 
 	private RandomAccessFile fichero;
 	private String nomFichero;
-	
+	ArrayList <Persona> agenda= new ArrayList <Persona>();
 	
 	/**
 	 * CONSTRUCTOR CON EL NOMBRE DEL FICHERO QUE UTILIZAREMOS
@@ -183,15 +183,15 @@ public class GestionaAgenda {
 	 * @throws IOException 
 	 */
 	public ArrayList<Persona> leerTodo(){
-		ArrayList <Persona> agenda= new ArrayList <Persona>();
+		
 		Persona p = new Persona();
 		
 		if (fichero != null) {
 			try {
-				this.iniciar();	
-				int pos = 0;
-				while(fichero.getFilePointer()> fichero.length()) {
-					p = this.leer(pos);
+				iniciar();	
+				int pos = 1;
+				while(fichero.getFilePointer()< fichero.length()) {
+					p = leer(pos);
 					agenda.add(p);
 					pos++;
 				}

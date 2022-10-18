@@ -17,7 +17,6 @@ public class Departamento {
 	 * @param localidad
 	 */
 	public Departamento( int num, String nombre, String localidad) {
-		super();
 		this.nombre = nombre;
 		this.num = num;
 		this.localidad = localidad;

@@ -45,7 +45,6 @@ public class Main {
 			ArrayList <Persona> registro = new ArrayList<Persona>();
 			registro = agenda.leerTodo();
 			for (Persona persona : registro) {
-				System.out.println("Inicio");
 				System.out.println(persona.toString());
 			}
 			
