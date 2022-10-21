@@ -24,11 +24,12 @@ public class Main {
 		// TODO Auto-generated method stub
 				GestorDepartamento gestor = new GestorDepartamento("departamentos.dat");
 				Scanner s = new Scanner(System.in);
+				int maxVal = 0;
 				
 				try {
 					gestor.abrir();
 					
-					// escrribe los primeros departamentos
+					// escrribe los primeros departamentos (usar si no se tiene el documento con los departamentos)
 					// EN CASO DE ERROR CON EL FICHERO: BORRAR FICHERO Y QUITAR COMENTARIO DEBAJO
 					/*
 					Departamento d1 = new Departamento(1,"Fisica", "Zaragoza");
@@ -44,10 +45,12 @@ public class Main {
 					Persona pLeoTodo = new Persona();
 					ArrayList <Departamento> registro = new ArrayList<Departamento>();
 					registro = gestor.leerTodo();
+					System.out.println("Departamentos existentes: \n");
 					for (Departamento dep : registro) {
 						System.out.println(dep.toString());
+						maxVal = dep.getNum();
 					}	
-					System.out.println("\n Quiere modificar alguno de los departamentos?");
+					System.out.println("\nQuiere modificar alguno de los departamentos?");
 					String respuesta = s.nextLine();
 					
 					if(respuesta.equalsIgnoreCase("si")) {
@@ -56,23 +59,29 @@ public class Main {
 						do {
 							numDep = s.nextInt();
 							if(numDep <= 0) System.err.println("Numero no valido");
-						}while(numDep <= 0);
+							else if(numDep > maxVal) System.err.println("Departamento inexistente"); 
+						}while(numDep <= 0 || numDep > maxVal);
 						s.nextLine();
 						System.out.println("Introduce el nombre del departamento");
 						String nombre = s.nextLine();
 						System.out.println("Introduce la localidad del departamento");
 						String loc = s.nextLine();
 						
+						System.out.println("Antiguos valores: \n");
+						System.out.println(registro.get(numDep-1).toString());
 						gestor.editarDepartamento(numDep, nombre, loc);
+						
+						System.out.println("Nuevos valores: \n");
+						System.out.println(registro.get(numDep-1).toString());
 						
 					}
 
-				}catch (FileNotFoundException e) {
-						System.out.println("Error, fichero no econtrado");
-						e.printStackTrace();
-				} catch (IOException e) {
-						System.out.println("Error, de escritura");
-						e.printStackTrace();
+				}catch (FileNotFoundException fnfe) {
+
+						fnfe.printStackTrace();
+				} catch (IOException ioe) {
+
+						ioe.printStackTrace();
 				}
 	}	
 

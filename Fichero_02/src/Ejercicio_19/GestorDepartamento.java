@@ -192,9 +192,7 @@ public class GestorDepartamento {
 			
 			dep.setNombre(nuevoNombre);
 			dep.setLocalidad(nuevaLoc);
-			
-			System.out.println(dep.getNombre());
-			System.out.println(dep.getLocalidad());
+
 			escribir(dep, numDep);
 		} catch (IOException ioe) {
 			// TODO Auto-generated catch block
@@ -227,22 +225,6 @@ public class GestorDepartamento {
 				}
 			}
 			return dep;
-		}
-	
-		/**
-		 * 
-		 * @param nombre
-		 * @param loc
-		 */
-		public void añadirDep(String nombre, String loc) {
-			try {
-				int pos = (int)fichero.length();
-				System.out.println(pos);
-				Departamento d = new Departamento(pos, nombre, loc);
-				escribir(d, pos);
-			}catch(Exception e){
-				e.printStackTrace();
-			}
 		}
 
 }
