@@ -1,7 +1,7 @@
 /**
  * 
  */
-package Ejercicio_18;
+package Ejercicio_19;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -66,20 +66,7 @@ public class Main {
 						gestor.editarDepartamento(numDep, nombre, loc);
 						
 					}
-				/*
-					System.out.println("\nQuiere añadir algun departamento?");
-					respuesta = s.nextLine();
-					
-					if(respuesta.equalsIgnoreCase("si")) {
-						System.out.println("Introduce el nombre del departamento");
-						String nombre = s.nextLine();
-						System.out.println("Introduce la localidad del departamento");
-						String loc = s.nextLine();
-						
-						gestor.añadirDep(nombre, loc);
-						
-					}
-				*/	
+
 				}catch (FileNotFoundException e) {
 						System.out.println("Error, fichero no econtrado");
 						e.printStackTrace();
