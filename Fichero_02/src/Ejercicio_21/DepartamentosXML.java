@@ -44,7 +44,6 @@ public class DepartamentosXML {
 			Document document = implementatio.createDocument(null, "Departamentos", null);
 			document.setXmlVersion("1.0");
 
-			System.out.println(registro.size());
 			for (Departamento d : registro) {
 				
 				String numeroDep = Integer.toString(d.getNum());
