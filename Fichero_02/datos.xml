@@ -4,42 +4,42 @@
 		<nombre>Jose María</nombre>
 		<apellidos>Terrer Navarro</apellidos>
 		<altura>1.87</altura>
-		<edad>24años, 5meses, 22dias</edad>
+		<edad>24 años, 5 meses, 22 dias</edad>
 		<telefono>654783433</telefono>
 	</persona>
 	<persona>
 		<nombre>Pilar</nombre>
 		<apellidos>Bayona Pérez</apellidos>
 		<altura>1.60</altura>
-		<edad>50años, 8meses, 4dias</edad>
+		<edad>50 años, 8 meses, 4 dias</edad>
 		<telefono>976585669</telefono>
 	</persona>
 	<persona>
 		<nombre>Ángel</nombre>
 		<apellidos>Piqueras Rodriguez</apellidos>
 		<altura>1.90</altura>
-		<edad>21años, 0meses, 29dias</edad>
+		<edad>21 años, 0 meses, 29 dias</edad>
 		<telefono>689887744</telefono>
 	</persona>
 	<persona>
 		<nombre>Pedro</nombre>
 		<apellidos>Duque Contreras</apellidos>
 		<altura>1.81</altura>
-		<edad>36años, 10meses, 28dias</edad>
+		<edad>36 años, 10 meses, 28 dias</edad>
 		<telefono>652369633</telefono>
 	</persona>
 	<persona>
 		<nombre>Maria Pilar</nombre>
 		<apellidos>García García</apellidos>
 		<altura>1.85</altura>
-		<edad>20años, 10meses, 24dias</edad>
+		<edad>20 años, 10 meses, 24 dias</edad>
 		<telefono>621350120</telefono>
 	</persona>
 	<persona>
 		<nombre>Josefa</nombre>
 		<apellidos>Bueno Vallés</apellidos>
 		<altura>1.73</altura>
-		<edad>48años, 1meses, 25dias</edad>
+		<edad>48 años, 1 meses, 25 dias</edad>
 		<telefono>976412141</telefono>
 	</persona>
 </Datos>
