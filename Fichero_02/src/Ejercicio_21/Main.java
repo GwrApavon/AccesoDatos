@@ -1,7 +1,7 @@
 /**
  * 
  */
-package Ejercicio_19;
+package Ejercicio_21;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -42,7 +42,6 @@ public class Main {
 					gestor.escribir(d3,3);
 					gestor.escribir(d4,4);
 					*/
-					Persona pLeoTodo = new Persona();
 					ArrayList <Departamento> registro = new ArrayList<Departamento>();
 					registro = gestor.leerTodo();
 					System.out.println("Departamentos existentes: \n");
