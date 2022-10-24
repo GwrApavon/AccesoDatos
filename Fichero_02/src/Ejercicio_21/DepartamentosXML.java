@@ -36,7 +36,7 @@ public class DepartamentosXML {
 		
 		
 		try {
-			
+			gestor.abrir();
 			ArrayList <Departamento> registro = new ArrayList<Departamento>();
 			registro = gestor.leerTodo();
 			DocumentBuilder builder = factoria.newDocumentBuilder();

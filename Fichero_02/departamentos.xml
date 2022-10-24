@@ -1,1 +1,23 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><Departamentos/>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Departamentos>
+	<departamento>
+		<numero>1</numero>
+		<nombre>Fisica</nombre>
+		<localidad>Zaragoza</localidad>
+	</departamento>
+	<departamento>
+		<numero>2</numero>
+		<nombre>Quimica</nombre>
+		<localidad>Zaragoza</localidad>
+	</departamento>
+	<departamento>
+		<numero>3</numero>
+		<nombre>Informática</nombre>
+		<localidad>Zaragoza</localidad>
+	</departamento>
+	<departamento>
+		<numero>4</numero>
+		<nombre>Matemáticas</nombre>
+		<localidad>Zaragoza</localidad>
+	</departamento>
+</Departamentos>
