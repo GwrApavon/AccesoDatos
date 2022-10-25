@@ -1,7 +1,7 @@
 /**
  * 
  */
-package Ejercicio_21;
+package EjerciciosDeparamentos;
 
 import java.io.*;
 import java.util.ArrayList;

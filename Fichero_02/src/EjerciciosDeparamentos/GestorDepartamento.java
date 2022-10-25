@@ -1,4 +1,4 @@
-package Ejercicio_21;
+package EjerciciosDeparamentos;
 
 import java.io.EOFException;
 import java.io.FileNotFoundException;
@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 
-import RandomFile.Persona;
 
 /**
  * Clase que gestiona un conjunto de departamentos en un fichero
@@ -188,11 +187,9 @@ public class GestorDepartamento {
 		Departamento dep = new Departamento();
 		
 		try {
-			dep = leer(numDep);
-			
+			dep = leer(numDep);	
 			dep.setNombre(nuevoNombre);
 			dep.setLocalidad(nuevaLoc);
-
 			escribir(dep, numDep);
 		} catch (IOException ioe) {
 			// TODO Auto-generated catch block

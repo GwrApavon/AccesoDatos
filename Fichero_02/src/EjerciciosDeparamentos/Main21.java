@@ -1,21 +1,18 @@
 /**
  * 
  */
-package Ejercicio_21;
+package EjerciciosDeparamentos;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import RandomFile.GestionaAgenda;
-import RandomFile.Persona;
+;
 
 /**
  * @author alu
  *
  */
-public class Main {
+public class Main21 {
 
 	/**
 	 * @param args
@@ -78,10 +75,12 @@ public class Main {
 				}catch (FileNotFoundException fnfe) {
 
 						fnfe.printStackTrace();
-				} catch (IOException ioe) {
+				}/* catch (IOException ioe) {
 
 						ioe.printStackTrace();
-				}
+				}*/
+				
+				s.close();
 	}	
 
 }
