@@ -35,33 +35,111 @@ try {
 			String sql;
 			
 			//Mostrar los socios existentes
-			sql = "Select Codigo, Nombre from Socio";
+			sql = "Select Codigo, Nombre from socio";
 			
 			pstm = conexion.prepareStatement(sql);
 			
-			ResultSet resultado = pstm.getResultSet();
+			ResultSet resultado = pstm.executeQuery();
 			
-			while (resultado.next()) {
-            	System.out.println(resultado.getInt(1) + "-"+ resultado.getString(2));
-            }
+			if(resultado != null) {
+				while (resultado.next()) {
+	            	System.out.println(resultado.getInt(1) + "-"+ resultado.getString(2));
+	            }
+			}
 			
+			int id;
 			//Comprobar si existe el socio  que se ha introducido
-//			do {
-//				System.out.println("Introduce el Socio que quieras editar:");
-//				//Sentencia SQL
-//				sql = "Select * from Socio where nombre = ?";
-//				
-//				pstm = conexion.prepareStatement(sql);
-//						
-//			}while(pstm.getMaxRows()<=0);
+			boolean vacio = true;
+			do {
+				System.out.println("Introduce el codigo del socio que quieras editar:");
+				id = s.nextInt();
+				s.nextLine();
+				//Sentencia SQL
+				sql = "Select Nombre from socio where Codigo = ?";
+				
+				pstm = conexion.prepareStatement(sql);
+				pstm.setInt(1, id);
+				resultado = pstm.executeQuery();
+				
+				while (resultado.next()) {
+		            	vacio = false;
+		            }
+				if(vacio) {
+					System.out.println("Socio no existente, introduzca un código válido");
+				}
+			}while(vacio);
 			
+			// Menu para modificar dependiendo de lo que quiera el usuario
+			System.out.println("Que quieres hacer:"
+								+ "1. Modificar Teléfono"
+								+ "2. Modificar Domicilio"
+								+ "3. Modificar ambos");
+			//Datos a modificar
+			int tel;
+			String dom = null;
 			
+			//Menu UPDATE `socio` SET `Domicilio` = 'C- La manzana2' WHERE `socio`.`Codigo` = 1
+
+			int opcion = s.nextInt();
+			s.nextLine();
 			
-			//int cantidad = pstm.executeUpdate();
+			switch(opcion) {
 			
-			//System.out.println("Se han insertado " + cantidad + " socios");
+				case 1: 
+					//OPCION TELEFONO
+					System.out.println("Introduzca el nuevo teléfono:");
+					do {
+						tel = s.nextInt();
+						s.nextLine();
+					}while(tel<0 && tel>999999999);
+					
+					//SENTENCIA SQL
+					sql = "UPDATE socio SET Telefono = ? WHERE socio.Codigo = ?";
+					pstm = conexion.prepareStatement(sql);
+					pstm.setInt(1, tel);
+					pstm.setInt(2, id);
+					
+					break;
+				case 2:
+					//OPCION DOMICILIO
+					System.out.println("Introduzca el nuevo domicilio");
+					do {
+						dom = s.nextLine();
+					}while(dom.length()<=0);
+					
+					//SENTENCIA SQL
+					sql = "UPDATE socio SET Domicilio = ? WHERE socio.Codigo = ?";
+					pstm = conexion.prepareStatement(sql);
+					pstm.setString(1, dom);
+					pstm.setInt(2, id);
+					
+					break;
+				case 3:
+					// OPCION AMBAS 
+					//UPDATE `socio` SET `Domicilio` = 'C- La manzanaa', `Telefono` = '33445555' WHERE `socio`.`Codigo` = 1
+
+
+					//TELEFONO
+					System.out.println("Introduzca el nuevo teléfono:");
+					do {
+						tel = s.nextInt();
+						s.nextLine();
+					}while(tel<0 && tel>999999999);
+					
+					//DOMICILIO
+					System.out.println("Introduzca el nuevo domicilio");
+					do {
+						dom = s.nextLine();
+					}while(dom.length()<=0);
+					
+					
+					break;
+				default:
+					//ELECCION NO VALIDA
+					System.out.println("Opcion no valida");
+			}
 			
-			//conexion.commit();
+			conexion.commit();
 			
 
 			s.close();
