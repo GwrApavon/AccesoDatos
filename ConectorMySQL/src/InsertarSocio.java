@@ -59,7 +59,7 @@ public class InsertarSocio {
 
 	private static Date pasarStringDate(String string) {
 		SimpleDateFormat formato = new SimpleDateFormat("yyyy-mm-dd"); 
-		Date fecha = formato.parse(string);
+		//Date fecha = formato.parse(string);
 		return null;
 	}
 
