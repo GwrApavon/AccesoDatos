@@ -26,7 +26,7 @@ try {
 			
 			//Conexión con la base de datos
 			Connection conexion = DriverManager.getConnection("jdbc:mysql://192.168.56.105:3306/biblioteca", "miusuario", "Pass!123456");
-			
+			conexion.setAutoCommit(false);
 			//Scanner
 			Scanner s = new Scanner(System.in);
 			
@@ -146,7 +146,7 @@ try {
 					//ELECCION NO VALIDA
 					System.out.println("Opcion no valida");
 			}
-
+			conexion.commit();
 			s.close();
 			}catch (SQLException | ClassNotFoundException ex) {
 				
