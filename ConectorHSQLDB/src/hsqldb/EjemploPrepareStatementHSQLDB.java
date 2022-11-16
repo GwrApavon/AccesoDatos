@@ -24,7 +24,7 @@ public class EjemploPrepareStatementHSQLDB {
             //Statement sentencia = (Statement) conexion.createStatement();
             String sql = "INSERT INTO socio VALUES (?,?,?,?,?,?)";
             PreparedStatement pstm = conexion.prepareStatement(sql);
-            pstm.setInt(1, 14);
+            pstm.setInt(1, 15);
             pstm.setString(2, "Pepe");
             pstm.setString(3, "Martinez");
             pstm.setString(4, "1970-11-09");
@@ -44,7 +44,7 @@ public class EjemploPrepareStatementHSQLDB {
             conexion.close();
             
         } catch (SQLException | ClassNotFoundException ex) {
-            System.out.println("Error en la conexi�n de la base de datos");
+            System.out.println("Error en la conexión de la base de datos");
             ex.printStackTrace();
         }
     }
