@@ -55,7 +55,7 @@ try {
 				id = s.nextInt();
 				s.nextLine();
 				//Sentencia SQL
-				sql = "Select Nombre from socio where Codigo = ?";
+				sql = "Select * from socio where Codigo = ?";
 				
 				pstm = conexion.prepareStatement(sql);
 				pstm.setInt(1, id);
@@ -63,6 +63,9 @@ try {
 				
 				while (resultado.next()) {
 		            	vacio = false;
+		            	System.out.println(resultado.getInt(1) + " " + resultado.getString(2) 
+		            						+ " " + resultado.getString(3) + ": " + resultado.getString(4) + " - " 
+		            						+ resultado.getString(5) + " - " + resultado.getString(6));
 		            }
 				if(vacio) {
 					System.out.println("Socio no existente, introduzca un código válido");
@@ -70,9 +73,9 @@ try {
 			}while(vacio);
 			
 			// Menu para modificar dependiendo de lo que quiera el usuario
-			System.out.println("Que quieres hacer:"
-								+ "1. Modificar Teléfono"
-								+ "2. Modificar Domicilio"
+			System.out.println("Que quieres hacer:\n"
+								+ "1. Modificar Teléfono\n"
+								+ "2. Modificar Domicilio\n"
 								+ "3. Modificar ambos");
 			//Datos a modificar
 			int tel;
@@ -82,7 +85,7 @@ try {
 
 			int opcion = s.nextInt();
 			s.nextLine();
-			
+			PreparedStatement pstm2;
 			switch(opcion) {
 			
 				case 1: 
@@ -95,10 +98,11 @@ try {
 					
 					//SENTENCIA SQL
 					sql = "UPDATE socio SET Telefono = ? WHERE socio.Codigo = ?";
-					pstm = conexion.prepareStatement(sql);
-					pstm.setInt(1, tel);
-					pstm.setInt(2, id);
-					
+					pstm2 = conexion.prepareStatement(sql);
+					pstm2.setInt(1, tel);
+					pstm2.setInt(2, id);
+					pstm2.executeUpdate();
+					System.out.println("Cambio realizado");
 					break;
 				case 2:
 					//OPCION DOMICILIO
@@ -109,16 +113,14 @@ try {
 					
 					//SENTENCIA SQL
 					sql = "UPDATE socio SET Domicilio = ? WHERE socio.Codigo = ?";
-					pstm = conexion.prepareStatement(sql);
-					pstm.setString(1, dom);
-					pstm.setInt(2, id);
-					
+					pstm2 = conexion.prepareStatement(sql);
+					pstm2.setString(1, dom);
+					pstm2.setInt(2, id);
+					pstm2.executeUpdate();
+					System.out.println("Cambio realizado");
 					break;
 				case 3:
 					// OPCION AMBAS 
-					//UPDATE `socio` SET `Domicilio` = 'C- La manzanaa', `Telefono` = '33445555' WHERE `socio`.`Codigo` = 1
-
-
 					//TELEFONO
 					System.out.println("Introduzca el nuevo teléfono:");
 					do {
@@ -132,15 +134,18 @@ try {
 						dom = s.nextLine();
 					}while(dom.length()<=0);
 					
-					
+					sql = "UPDATE socio SET Domicilio = ?, Telefono = ? WHERE socio.Codigo = ?";
+					pstm2 = conexion.prepareStatement(sql);
+					pstm2.setString(1, dom);
+					pstm2.setInt(2, tel);
+					pstm2.setInt(3, id);
+					pstm2.executeUpdate();
+					System.out.println("Cambio realizado");
 					break;
 				default:
 					//ELECCION NO VALIDA
 					System.out.println("Opcion no valida");
 			}
-			
-			conexion.commit();
-			
 
 			s.close();
 			}catch (SQLException | ClassNotFoundException ex) {
