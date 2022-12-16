@@ -36,8 +36,8 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		DocumentBuilderFactory factoria = DocumentBuilderFactory.newInstance();
 		
+		DocumentBuilderFactory factoria = DocumentBuilderFactory.newInstance();
 		
 		try {
 			
