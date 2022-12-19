@@ -28,8 +28,7 @@ public class Main {
 		// creamos la transacci�n de la sesi�n
 		Transaction tx = sesion.beginTransaction();
 	
-		menu(s);
-		System.out.println("FUNCIONO!!");
+		menu(s,sesion);
 		
 		tx.commit();
 		
@@ -42,7 +41,7 @@ public class Main {
 		
 	}
 	
-	public static void menu(Scanner s) {
+	public static void menu(Scanner s, Session sesion) {
 		int opcion = 0;
 		System.out.println("Que quieres hacer: "
 							+ "\n1. Modificar un departamento"
@@ -57,7 +56,7 @@ public class Main {
 		}
 		switch(opcion) {
 			case 1:
-				//modificarDep();
+				modificarDep(s, sesion);
 				break;
 			case 2:
 				//InsertarEmp();
@@ -77,10 +76,95 @@ public class Main {
 		
 	}
 	
-	public static void modificarDep() {
-		 	String qryString = "update departamento d set d.address='Hyderabad' where s.studentId=5";
-	        Query query = session.createQuery(qryString);
-	        int count = query.executeUpdate();
+	public static void modificarDep(Scanner sc, Session s) {
+		try {
+			mostrarDep(s);
+			System.out.println("Introduce el codigo del departamento que quiers modificar:");
+			int id = sc.nextInt();
+			sc.nextLine();
+			Departamento dep = (Departamento)s.get(Departamento.class, (byte)id);
+			System.out.println("Que desea modificar: "
+								+ "\n1. Nombre"
+								+ "\n2. Localidad");
+			int opcion = sc.nextInt();
+			sc.nextLine();
+			switch(opcion) {
+			
+				case 1:
+					System.out.print("Introduce el nuevo nombre que le quieras dar: ");
+					String name = sc.nextLine();
+					dep.setNombre(name);
+					break;
+				case 2: 
+					System.out.print("Introduce la nueva localidad que le quieras dar: ");
+					String loc = sc.nextLine();
+					dep.setLocalidad(loc);
+					break;
+				default:
+					System.err.println("Introduce un número válido");
+			}
+			s.update(dep);
+		}catch(InputMismatchException ime) {
+			ime.printStackTrace();
+		}
+
+	}
+	
+	public static void insertarEmpleado(Scanner sc, Session s) {
+		try {
+			short lastID = (short)lastID(s, true);
+		
+			System.out.println("Introduce los siguientes datos del empleado");
+			System.out.print("Apellido: ");
+			String ap = sc.nextLine();
+			System.out.print("Oficio: ");
+			String oficio = sc.nextLine();
+			Empleado emp = new Empleado(lastID,ap,oficio);
+			s.saveOrUpdate(emp);
+		}catch(InputMismatchException ime) {
+			ime.printStackTrace();
+		}
+	}
+	public static void mostrarDep(Session s) {
+		
+		Query<Departamento> q = s.createQuery("from Departamento");
+		List <Departamento> lista = q.list();
+		Iterator <Departamento> iter = lista.iterator();
+		
+		while (iter.hasNext())
+		{
+		   //extraer el objeto
+			Departamento dep = (Departamento) iter.next(); 
+			System.out.println("ID = " + dep.getIdDep() + " Nombre =" + dep.getNombre());		   
+		}
+	}
+	
+	public static int lastID(Session s, boolean choice) {
+		int n = 0;
+		if(choice) {
+			Query<Empleado> q = s.createQuery("from Empleado");
+			n = q.getMaxResults();
+			n++;
+		}
+		if(!choice) {
+			Query<Empleado> q = s.createQuery("from Departamento");
+			n = q.getMaxResults();
+			n++;
+		}
+		return n;
+	}
+	public static void mostrarEmp(Session s) {
+		
+		Query<Empleado> q = s.createQuery("from Empleado");
+		List <Empleado> lista = q.list();
+		Iterator <Empleado> iter = lista.iterator();
+		
+		while (iter.hasNext())
+		{
+		   //extraer el objeto
+			Empleado emp = (Empleado) iter.next(); 
+			System.out.println("ID = " + emp.getIdEmp() + " Nombre =" + emp.getApellido());		   
+		}
 	}
 
 }
