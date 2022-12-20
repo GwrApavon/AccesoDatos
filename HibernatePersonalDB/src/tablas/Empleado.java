@@ -8,6 +8,7 @@ import java.util.Date;
  */
 public class Empleado implements java.io.Serializable {
 
+
 	private short idEmp;
 	private Departamento departamento;
 	private String apellido;
@@ -89,5 +90,11 @@ public class Empleado implements java.io.Serializable {
 	public void setComision(Float comision) {
 		this.comision = comision;
 	}
+
+	@Override
+	public String toString() {
+		return "Empleado [idEmp=" + idEmp + ", departamento=" + departamento.getNombre() + ", apellido=" + apellido + ", oficio="
+				+ oficio + ", fechaAlta=" + fechaAlta + ", salario=" + salario + ", comision=" + comision + "]";
+	}	
 
 }

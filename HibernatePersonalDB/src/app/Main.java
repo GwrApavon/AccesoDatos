@@ -1,5 +1,8 @@
 package app;
 
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.List;
@@ -8,6 +11,7 @@ import java.util.Scanner;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.mapping.Set;
 import org.hibernate.query.Query;
 
 import controlador.HibernateUtil;
@@ -51,6 +55,7 @@ public class Main {
 							+ "\n5. Eliminar un departamento");
 		try {
 			opcion = s.nextInt();
+			s.nextLine();
 		}catch(InputMismatchException ime) {
 			
 		}
@@ -59,10 +64,10 @@ public class Main {
 				modificarDep(s, sesion);
 				break;
 			case 2:
-				//InsertarEmp();
+				insertarEmpleado(s,sesion);
 				break;
 			case 3:
-				//LeerEmp();
+				leerEmpleado(s,sesion);
 				break;
 			case 4:
 				//EliminarEmp();
@@ -112,18 +117,83 @@ public class Main {
 	
 	public static void insertarEmpleado(Scanner sc, Session s) {
 		try {
-			short lastID = (short)lastID(s, true);
+			short lastID = lastID(s, true);
 		
-			System.out.println("Introduce los siguientes datos del empleado");
-			System.out.print("Apellido: ");
+			System.out.println(lastID);
+			System.out.println("Introduce los siguientes datos del empleado:");
+			System.out.print("- Apellido: ");
 			String ap = sc.nextLine();
-			System.out.print("Oficio: ");
+			System.out.print("- Oficio: ");
 			String oficio = sc.nextLine();
-			Empleado emp = new Empleado(lastID,ap,oficio);
+			System.out.print("- Fecha de alta(AAAA/MM/DD): ");
+			String fechaAlta = sc.nextLine();
+			System.out.print("- Salario: ");
+			float salario = sc.nextFloat();
+			System.out.print("- Comision: ");
+			float comision = sc.nextFloat();
+			System.out.println("Lista de los departamentos disponibles:");
+			mostrarDep(s);
+			
+			int idDep;
+			System.out.print("- id departamento: ");
+			idDep = sc.nextInt();
+			sc.nextLine();
+			Departamento dep = (Departamento)s.get(Departamento.class, (byte)idDep);
+			
+			Empleado emp = new Empleado(lastID,dep,ap, oficio,stringToDate(fechaAlta), salario, comision);
 			s.saveOrUpdate(emp);
 		}catch(InputMismatchException ime) {
 			ime.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
 		}
+	}
+	
+	public static void leerEmpleado( Scanner sc, Session s) {
+		System.out.println("Elija el empleado del que quiere mostrar los datos:");
+		mostrarEmp(s);
+		short idEmp = sc.nextShort();
+		sc.nextLine();
+		
+		Empleado emp = (Empleado)s.get(Empleado.class, idEmp);
+		
+		System.out.println(emp + "\n" + emp.getDepartamento());
+	}
+	
+	public static void delEmpleado(Scanner sc, Session s) {
+		System.out.println("Que empleado desea borrar: ");
+		mostrarEmp(s);
+		
+		short idEmp = sc.nextShort();
+		sc.nextLine();
+		
+		Empleado emp = (Empleado)s.get(Empleado.class, idEmp);
+		
+		s.delete(emp);
+		System.out.println("Borrado con exito");
+		
+	}
+	
+	
+	public static void delEmpleado(Scanner sc, Session s, short idEmp) {
+		System.out.println("Que empleado desea borrar: ");
+		mostrarEmp(s);		
+		Empleado emp = (Empleado)s.get(Empleado.class, idEmp);
+		
+		s.delete(emp);		
+	}
+	
+	public static void delDepartamento(Scanner sc, Session s) {
+		System.out.println("Que departamento desea borrar: ");
+		mostrarDep(s);
+		
+		int idDep = sc.nextInt();
+		sc.nextLine();
+		Departamento dep = (Departamento)s.get(Departamento.class,(byte) idDep);
+		
+		//Set empleados = dep.getEmpleados();
+		
+		
 	}
 	public static void mostrarDep(Session s) {
 		
@@ -135,23 +205,26 @@ public class Main {
 		{
 		   //extraer el objeto
 			Departamento dep = (Departamento) iter.next(); 
-			System.out.println("ID = " + dep.getIdDep() + " Nombre =" + dep.getNombre());		   
+			System.out.println(dep.getIdDep() + ". " + dep.getNombre());		   
 		}
 	}
 	
-	public static int lastID(Session s, boolean choice) {
-		int n = 0;
+	public static short lastID(Session s, boolean choice) {
 		if(choice) {
-			Query<Empleado> q = s.createQuery("from Empleado");
-			n = q.getMaxResults();
-			n++;
+			Query<Short> q = s.createQuery("select max(id) from empleado");
+			Short res = q.getSingleResult();
+			short res1 = res.shortValue();
+			res1++;
+			return res1;
 		}
 		if(!choice) {
-			Query<Empleado> q = s.createQuery("from Departamento");
-			n = q.getMaxResults();
-			n++;
+			Query<Short> q = s.createQuery("select max(id) from departamento");
+			Short res = q.getSingleResult();
+			short res1 = res.shortValue();
+			res1++;
+			return res1;
 		}
-		return n;
+		return 0;
 	}
 	public static void mostrarEmp(Session s) {
 		
@@ -163,8 +236,15 @@ public class Main {
 		{
 		   //extraer el objeto
 			Empleado emp = (Empleado) iter.next(); 
-			System.out.println("ID = " + emp.getIdEmp() + " Nombre =" + emp.getApellido());		   
+			System.out.println(emp.getIdEmp() + ". " + emp.getApellido());		   
 		}
 	}
+	
+	 private static Date stringToDate(String fecha) throws ParseException {
+		 SimpleDateFormat formato = new SimpleDateFormat("yyyy/mm/dd");
+		 Date fechaDate = (Date) formato.parse(fecha);
+		
+		 return fechaDate;
+		}
 
 }
