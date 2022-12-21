@@ -7,11 +7,11 @@ import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.mapping.Set;
 import org.hibernate.query.Query;
 
 import controlador.HibernateUtil;
@@ -31,9 +31,13 @@ public class Main {
 		Session sesion = fabrica.openSession();	
 		// creamos la transacci�n de la sesi�n
 		Transaction tx = sesion.beginTransaction();
-	
-		menu(s,sesion);
 		
+		boolean salir = false;
+		do {
+			
+			salir = menu(s,sesion);
+			
+		}while(!salir);
 		tx.commit();
 		
 		
@@ -45,14 +49,15 @@ public class Main {
 		
 	}
 	
-	public static void menu(Scanner s, Session sesion) {
+	public static boolean menu(Scanner s, Session sesion) {
 		int opcion = 0;
 		System.out.println("Que quieres hacer: "
 							+ "\n1. Modificar un departamento"
 							+ "\n2. Insertar un empleado"
 							+ "\n3. Leer un empleado, y además, su departamento correspondiente"
 							+ "\n4. Eliminar un empleado"
-							+ "\n5. Eliminar un departamento");
+							+ "\n5. Eliminar un departamento"
+							+ "\nElse. salir");
 		try {
 			opcion = s.nextInt();
 			s.nextLine();
@@ -70,14 +75,16 @@ public class Main {
 				leerEmpleado(s,sesion);
 				break;
 			case 4:
-				//EliminarEmp();
+				delEmpleado(s,sesion);
 				break;
 			case 5:
-				//EliminarDep();
+				delDepartamento(s,sesion);
 				break;
 			default:
-				System.out.println("Opcion no valida.");
+				System.out.println("Saliendo...");
+				return true;
 		}
+		return false;
 		
 	}
 	
@@ -125,8 +132,6 @@ public class Main {
 			String ap = sc.nextLine();
 			System.out.print("- Oficio: ");
 			String oficio = sc.nextLine();
-			System.out.print("- Fecha de alta(AAAA/MM/DD): ");
-			String fechaAlta = sc.nextLine();
 			System.out.print("- Salario: ");
 			float salario = sc.nextFloat();
 			System.out.print("- Comision: ");
@@ -140,12 +145,10 @@ public class Main {
 			sc.nextLine();
 			Departamento dep = (Departamento)s.get(Departamento.class, (byte)idDep);
 			
-			Empleado emp = new Empleado(lastID,dep,ap, oficio,stringToDate(fechaAlta), salario, comision);
+			Empleado emp = new Empleado(lastID,dep,ap, oficio,stringToDate(sc), salario, comision);
 			s.saveOrUpdate(emp);
 		}catch(InputMismatchException ime) {
 			ime.printStackTrace();
-		} catch (ParseException e) {
-			e.printStackTrace();
 		}
 	}
 	
@@ -169,18 +172,22 @@ public class Main {
 		
 		Empleado emp = (Empleado)s.get(Empleado.class, idEmp);
 		
-		s.delete(emp);
-		System.out.println("Borrado con exito");
+		if(emp != null) {
+			System.out.println("Borrado: " + emp.getApellido());
+			s.delete(emp);
+		}
+		else {
+			System.err.println("Id de empleado no válido");
+		}
 		
 	}
 	
 	
-	public static void delEmpleado(Scanner sc, Session s, short idEmp) {
-		System.out.println("Que empleado desea borrar: ");
-		mostrarEmp(s);		
+	public static void delEmpleado(Session s, short idEmp) {
 		Empleado emp = (Empleado)s.get(Empleado.class, idEmp);
 		
-		s.delete(emp);		
+			System.out.println("Borrado: " + emp.getApellido());
+			s.delete(emp);		
 	}
 	
 	public static void delDepartamento(Scanner sc, Session s) {
@@ -190,8 +197,21 @@ public class Main {
 		int idDep = sc.nextInt();
 		sc.nextLine();
 		Departamento dep = (Departamento)s.get(Departamento.class,(byte) idDep);
+		if(dep != null) {
+			Set empleados = dep.getEmpleados();
+			
+			for (Object e : empleados) {
+				Empleado em = (Empleado)e;
+				
+				delEmpleado(s, em.getIdEmp());
+			}
+			System.out.println("Empleados borrados con exito");
 		
-		//Set empleados = dep.getEmpleados();
+			s.delete(dep);
+		}
+		else {
+			System.err.println("Id de departamento no válida");
+		}
 		
 		
 	}
@@ -240,10 +260,23 @@ public class Main {
 		}
 	}
 	
-	 private static Date stringToDate(String fecha) throws ParseException {
+	 private static Date stringToDate(Scanner s){
+		 boolean salir = false;
+		 System.out.print("- Fecha de alta(AAAA/MM/DD): ");		 
 		 SimpleDateFormat formato = new SimpleDateFormat("yyyy/mm/dd");
-		 Date fechaDate = (Date) formato.parse(fecha);
-		
+		 Date fechaDate = null;
+		 
+		 while(!salir) {
+			 try {
+			 fechaDate = formato.parse(s.nextLine());
+			 salir = true;
+			
+			 }catch(ParseException pe) {
+				 System.err.println("Error al convertir la fecha, repita por favor: ");
+			 }catch(Exception e) {
+				 System.err.println("Error al convertir la fecha, repita por favor: ");
+			 }
+		 }
 		 return fechaDate;
 		}
 
