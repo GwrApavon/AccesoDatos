@@ -35,11 +35,10 @@ public class Main {
 		boolean salir = false;
 		do {
 			
-			salir = menu(s,sesion);
+			System.out.println("Recuerda guardar los cambios usando \"Commit\"");
+			salir = menu(s,sesion,tx);
 			
 		}while(!salir);
-		tx.commit();
-		
 		
 		
 		sesion.close();
@@ -49,7 +48,7 @@ public class Main {
 		
 	}
 	
-	public static boolean menu(Scanner s, Session sesion) {
+	public static boolean menu(Scanner s, Session sesion, Transaction tx) {
 		int opcion = 0;
 		System.out.println("Que quieres hacer: "
 							+ "\n1. Modificar un departamento"
@@ -57,13 +56,13 @@ public class Main {
 							+ "\n3. Leer un empleado, y además, su departamento correspondiente"
 							+ "\n4. Eliminar un empleado"
 							+ "\n5. Eliminar un departamento"
+							+ "\n6. Commit"
 							+ "\nElse. salir");
+
+		
+		opcion = sacarIntValido(s);
+		
 		try {
-			opcion = s.nextInt();
-			s.nextLine();
-		}catch(InputMismatchException ime) {
-			
-		}
 		switch(opcion) {
 			case 1:
 				modificarDep(s, sesion);
@@ -80,83 +79,73 @@ public class Main {
 			case 5:
 				delDepartamento(s,sesion);
 				break;
+			case 6:
+				tx.commit();
 			default:
 				System.out.println("Saliendo...");
 				return true;
+		}
+		}catch(Exception e) {
+			tx.rollback();
 		}
 		return false;
 		
 	}
 	
 	public static void modificarDep(Scanner sc, Session s) {
-		try {
-			mostrarDep(s);
-			System.out.println("Introduce el codigo del departamento que quiers modificar:");
-			int id = sc.nextInt();
-			sc.nextLine();
-			Departamento dep = (Departamento)s.get(Departamento.class, (byte)id);
-			System.out.println("Que desea modificar: "
-								+ "\n1. Nombre"
-								+ "\n2. Localidad");
-			int opcion = sc.nextInt();
-			sc.nextLine();
-			switch(opcion) {
-			
-				case 1:
-					System.out.print("Introduce el nuevo nombre que le quieras dar: ");
-					String name = sc.nextLine();
-					dep.setNombre(name);
-					break;
-				case 2: 
-					System.out.print("Introduce la nueva localidad que le quieras dar: ");
-					String loc = sc.nextLine();
-					dep.setLocalidad(loc);
-					break;
-				default:
-					System.err.println("Introduce un número válido");
-			}
-			s.update(dep);
-		}catch(InputMismatchException ime) {
-			ime.printStackTrace();
+		mostrarDep(s);
+		System.out.println("Introduce el codigo del departamento que quiers modificar:");
+		int id = sacarIntValido(sc);
+		Departamento dep = (Departamento)s.get(Departamento.class, (byte)id);
+		System.out.println("Que desea modificar: "
+							+ "\n1. Nombre"
+							+ "\n2. Localidad");
+		int opcion = sacarIntValido(sc);
+		switch(opcion) {
+		
+			case 1:
+				System.out.print("Introduce el nuevo nombre que le quieras dar: ");
+				String name = sc.nextLine();
+				dep.setNombre(name);
+				break;
+			case 2: 
+				System.out.print("Introduce la nueva localidad que le quieras dar: ");
+				String loc = sc.nextLine();
+				dep.setLocalidad(loc);
+				break;
+			default:
+				System.err.println("Introduce un número válido");
 		}
-
+		s.update(dep);
 	}
 	
 	public static void insertarEmpleado(Scanner sc, Session s) {
-		try {
-			short lastID = lastID(s, true);
-		
-			System.out.println(lastID);
-			System.out.println("Introduce los siguientes datos del empleado:");
-			System.out.print("- Apellido: ");
-			String ap = sc.nextLine();
-			System.out.print("- Oficio: ");
-			String oficio = sc.nextLine();
-			System.out.print("- Salario: ");
-			float salario = sc.nextFloat();
-			System.out.print("- Comision: ");
-			float comision = sc.nextFloat();
-			System.out.println("Lista de los departamentos disponibles:");
-			mostrarDep(s);
 			
-			int idDep;
-			System.out.print("- id departamento: ");
-			idDep = sc.nextInt();
-			sc.nextLine();
-			Departamento dep = (Departamento)s.get(Departamento.class, (byte)idDep);
+		short lastID = lastID(s, true);
+		System.out.println("Introduce los siguientes datos del empleado:");
+		System.out.print("- Apellido: ");
+		String ap = sc.nextLine();
+		System.out.print("- Oficio: ");
+		String oficio = sc.nextLine();
+		System.out.print("- Salario: ");
+		float salario = sc.nextFloat();
+		System.out.print("- Comision: ");
+		float comision = sc.nextFloat();
+		System.out.println("Lista de los departamentos disponibles:");
+		mostrarDep(s);
 			
-			Empleado emp = new Empleado(lastID,dep,ap, oficio,stringToDate(sc), salario, comision);
-			s.saveOrUpdate(emp);
-		}catch(InputMismatchException ime) {
-			ime.printStackTrace();
-		}
+		int idDep;			System.out.print("- id departamento: ");
+		idDep = sacarIntValido(sc);
+		Departamento dep = (Departamento)s.get(Departamento.class, (byte)idDep);
+			
+		Empleado emp = new Empleado(lastID,dep,ap, oficio,stringToDate(sc), salario, comision);
+		s.saveOrUpdate(emp);
 	}
 	
 	public static void leerEmpleado( Scanner sc, Session s) {
 		System.out.println("Elija el empleado del que quiere mostrar los datos:");
 		mostrarEmp(s);
-		short idEmp = sc.nextShort();
-		sc.nextLine();
+		short idEmp = (short)sacarIntValido(sc);
 		
 		Empleado emp = (Empleado)s.get(Empleado.class, idEmp);
 		
@@ -167,8 +156,7 @@ public class Main {
 		System.out.println("Que empleado desea borrar: ");
 		mostrarEmp(s);
 		
-		short idEmp = sc.nextShort();
-		sc.nextLine();
+		short idEmp = (short)sacarIntValido(sc);
 		
 		Empleado emp = (Empleado)s.get(Empleado.class, idEmp);
 		
@@ -194,8 +182,7 @@ public class Main {
 		System.out.println("Que departamento desea borrar: ");
 		mostrarDep(s);
 		
-		int idDep = sc.nextInt();
-		sc.nextLine();
+		int idDep = sacarIntValido(sc);
 		Departamento dep = (Departamento)s.get(Departamento.class,(byte) idDep);
 		if(dep != null) {
 			Set empleados = dep.getEmpleados();
@@ -231,14 +218,14 @@ public class Main {
 	
 	public static short lastID(Session s, boolean choice) {
 		if(choice) {
-			Query<Short> q = s.createQuery("select max(id) from empleado");
+			Query<Short> q = s.createQuery("select max(id) from Empleado");
 			Short res = q.getSingleResult();
 			short res1 = res.shortValue();
 			res1++;
 			return res1;
 		}
 		if(!choice) {
-			Query<Short> q = s.createQuery("select max(id) from departamento");
+			Query<Short> q = s.createQuery("select max(id) from Departamento");
 			Short res = q.getSingleResult();
 			short res1 = res.shortValue();
 			res1++;
@@ -279,5 +266,20 @@ public class Main {
 		 }
 		 return fechaDate;
 		}
+	 
+	 private static int sacarIntValido(Scanner s){
+		 boolean salir = false;
+		 int i = 0;
+		 while(!salir || i < 0) {
+			 try {
+				 i = s.nextInt();
+				 s.nextLine();
+				 salir = true;
+			 }catch(InputMismatchException ime) {
+				 System.err.println("Introduzca un número por favor");
+			 }
+		 }
+		 return i;
+	 }
 
 }
