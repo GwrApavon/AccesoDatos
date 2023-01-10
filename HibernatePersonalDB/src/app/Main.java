@@ -86,6 +86,7 @@ public class Main {
 				return true;
 		}
 		}catch(Exception e) {
+			e.printStackTrace();
 			tx.rollback();
 		}
 		return false;
