@@ -135,7 +135,8 @@ public class Main {
 		System.out.println("Lista de los departamentos disponibles:");
 		mostrarDep(s);
 			
-		int idDep;			System.out.print("- id departamento: ");
+		int idDep;		
+		System.out.print("- id departamento: ");
 		idDep = sacarIntValido(sc);
 		Departamento dep = (Departamento)s.get(Departamento.class, (byte)idDep);
 			
