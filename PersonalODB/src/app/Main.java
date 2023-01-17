@@ -32,7 +32,7 @@ public class Main {
 	public static void main(String[] args) {
 		
 		Scanner sc = new Scanner (System.in);
-		ODB bd = ODBFactory.open("D:\\Ángel Pavón\\BBDD\\NeonDatis\\NeoDatis DDBB\\personal.db", "miusuario", "Pass!123456");
+		ODB bd = ODBFactory.open("D:\\Ángel Pavón\\WS - Acceso a Datos\\AccesoDatos\\BBDD\\NeonDatis\\NeoDatis DDBB\\personal.db", "miusuario", "Pass!123456");
 
 		boolean salir = false;
 		
@@ -47,9 +47,9 @@ public class Main {
 		
 		System.out.println("Que quieres hacer: "
 							+ "\n1. Insertar departamento"
-							+ "n\2. Insertar empleado"
-							+ "n\3. Visualizar departamentos"
-							+ "n\4. Visualizar emlpeados");
+							+ "\n2. Insertar empleado"
+							+ "\n3. Visualizar departamentos"
+							+ "\n4. Visualizar emlpeados");
 		int opc = sc.nextInt();
 		sc.nextLine();
 		
@@ -94,7 +94,7 @@ public class Main {
 	public static Departamento crearDep(ODB bd, Scanner sc) {
 		Values val = bd.getValues(new ValuesCriteriaQuery(Departamento.class).max("id_dep"));
 		BigDecimal id = (BigDecimal) val.nextValues();
-		
+
 		System.out.println("Introduce los siguientes datos del departamento:");
 		System.out.print("- Nombre: ");
 		String nombre = sc.nextLine();
@@ -156,7 +156,7 @@ public class Main {
 		int i = 0;
 		for (Empleado e : emp) {
 			if(e.getJefe() != null) {
-				System.out.println((i + 1) + ". "+ e + " / Jefe: " + e.getJefe() + " / Departamento: " + e.getDepartamento().getNombre());
+				System.out.println((i + 1) + ". "+ e + " / Jefe: " + e.getJefe().getApellido() + " / Departamento: " + e.getDepartamento().getNombre());
 			}
 			else {
 				System.out.println((i + 1) + ". "+ e + "/ Departamento: " + e.getDepartamento().getNombre());
@@ -169,7 +169,7 @@ public class Main {
 		
 		int i = 0;
 		for (Empleado e : emp) {
-			System.out.println((i + 1) + ". "+ e + "/ Departamento: " + e.getDepartamento().getNombre());
+			System.out.println((i+1) + e.toString());
             i++;
 		}
 	}
@@ -177,10 +177,11 @@ public class Main {
 		Objects <Departamento> dep = bd.getObjects(Departamento.class);
 		
 		int i = 0;
-		while(dep.hasNext()) {
-            System.out.println((i + 1) + ". "+ dep.next());
+		for (Departamento d : dep) {
+			System.out.println((i + 1) + ". "+ d.toString());
             i++;
-        }
+			
+		}
 	}
 	
 	public static Departamento getDep(ODB bd, int ident) {

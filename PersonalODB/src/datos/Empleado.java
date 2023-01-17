@@ -139,6 +139,14 @@ public class Empleado {
 	public void setDepartamento(Departamento departamento) {
 		this.departamento = departamento;
 	}
+	@Override
+	public String toString() {
+		return "Empleado [id_empleado=" + id_empleado + ", " + (apellido != null ? "apellido=" + apellido + ", " : "")
+				+ (oficio != null ? "oficio=" + oficio + ", " : "")
+				+ (fecha_alta != null ? "fecha_alta=" + fecha_alta + ", " : "") + "sueldo=" + sueldo + ", comision="
+				+ comision + ", " + (jefe != null ? "jefe=" + jefe.getApellido() + ", " : "")
+				+ (departamento != null ? "departamento=" + departamento.getNombre() : "") + "]";
+	}
 	
 	
 	

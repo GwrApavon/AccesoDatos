@@ -60,5 +60,11 @@ public class Departamento {
 	public void setLocalidad(String localidad) {
 		this.localidad = localidad;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Departamento [id_dep=" + id_dep + ", nombre=" + nombre + ", localidad=" + localidad + "]";
+	}
 	
 }
