@@ -55,16 +55,16 @@ public class EjercicioExistDB {
 				salir = menu(sc ,servicio);
 			}while(!salir);
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		} catch (XMLDBException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 	}
@@ -94,7 +94,7 @@ public class EjercicioExistDB {
 				libros50Mas(srv);
 				break;	
 			case 4:
-				System.out.println("Accion 3");
+				datosLibroAutor(srv);
 				break;	
 			default:
 				System.out.println("Saliendo...");
@@ -108,7 +108,7 @@ public class EjercicioExistDB {
 	}
 	
 	public static void obtenerApellidos(XPathQueryService srv) {
-		String query = "for $a in doc(\"/db/pruebas/libros.xml\")//libro/autor order by $a/apellido return $a/apellido/text()";
+		String query = "for $a in distinct-values(doc(\"/db/pruebas/libros.xml\")//libro/autor/apellido) return data($a)";
 		ResourceSet resultado;
 		try {
 			resultado = srv.query(query);
@@ -132,7 +132,7 @@ public class EjercicioExistDB {
 	}
 	
 	public static void librosEditor(XPathQueryService srv) {
-		String query = "for $a in doc(\"/db/pruebas/libros.xml\")//libro where //editor return $a";
+		String query = "for $a in doc(\"/db/pruebas/libros.xml\")//libro where //editor return data($a)";
 		ResourceSet resultado;
 		try {
 			resultado = srv.query(query);
@@ -176,6 +176,43 @@ public class EjercicioExistDB {
 			e.printStackTrace();
 		}
 	}
+	
+	public static void datosLibroAutor(XPathQueryService srv) {
+		String query = "for $l in doc(\"/db/pruebas/libros.xml\")//libro"
+				+ " return data(if (exists($l/autor))"
+				+ "   then <libro>{"
+				+ "         <titulo>{data($l/titulo)}</titulo>,"
+				+ "         <autor>{data($l//apellido)}</autor>"
+				+ "    }"
+				+ "    </libro>"
+				+ "    else <libro>{"
+				+ "         <titulo>{data($l/titulo)}</titulo>,"
+				+ "         <afiliacion>{data($l//afiliacion)}</afiliacion>"
+				+ "    }"
+				+ "    </libro>)";
+		ResourceSet resultado;
+		try {
+			resultado = srv.query(query);
+		
+        ResourceIterator itera = resultado.getIterator();
+        System.out.println("=========================================");
+        if (!itera.hasMoreResources()) {
+        	System.out.println("No hay resultados");
+        } else {
+        	while (itera.hasMoreResources()) {
+        		Resource elemento = itera.nextResource();
+        		System.out.println("+++++++++++++++++++++++++++++++++++++++");
+        		System.out.println(elemento.getContent());
+        	}
+        	System.out.println("+++++++++++++++++++++++++++++++++++++++");
+        }
+        System.out.println("=========================================");
+		} catch (XMLDBException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public static int sacarIntValido(Scanner sc) {
 		boolean salir = false;
 		int i = 0;
