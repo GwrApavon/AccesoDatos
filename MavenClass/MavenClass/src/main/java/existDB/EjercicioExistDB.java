@@ -107,6 +107,7 @@ public class EjercicioExistDB {
 
 	}
 	
+	//Obtiene los diferentes apellidos de los autores
 	public static void obtenerApellidos(XPathQueryService srv) {
 		String query = "for $a in distinct-values(doc(\"/db/pruebas/libros.xml\")//libro/autor/apellido) return data($a)";
 		ResourceSet resultado;
@@ -116,6 +117,7 @@ public class EjercicioExistDB {
         ResourceIterator itera = resultado.getIterator();
        
         System.out.println("=========================================");
+        
         if (!itera.hasMoreResources()) {
         	System.out.println("No hay resultados");
         } else {
@@ -124,6 +126,7 @@ public class EjercicioExistDB {
         		System.out.println(elemento.getContent());
         	}
         }
+        
         System.out.println("=========================================");
 		} catch (XMLDBException e) {
 			// TODO Auto-generated catch block
@@ -131,6 +134,7 @@ public class EjercicioExistDB {
 		}
 	}
 	
+	//Obtiene los datos del libro que tenga editor
 	public static void librosEditor(XPathQueryService srv) {
 		String query = "for $a in doc(\"/db/pruebas/libros.xml\")//libro where //editor return data($a)";
 		ResourceSet resultado;
@@ -140,6 +144,7 @@ public class EjercicioExistDB {
         ResourceIterator itera = resultado.getIterator();
        
         System.out.println("=========================================");
+        
         if (!itera.hasMoreResources()) {
         	System.out.println("No hay resultados");
         } else {
@@ -148,6 +153,7 @@ public class EjercicioExistDB {
         		System.out.println(elemento.getContent());
         	}
         }
+        
         System.out.println("=========================================");
 		} catch (XMLDBException e) {
 			// TODO Auto-generated catch block
@@ -162,6 +168,7 @@ public class EjercicioExistDB {
 		
         ResourceIterator itera = resultado.getIterator();
         System.out.println("=========================================");
+        
         if (!itera.hasMoreResources()) {
         	System.out.println("No hay resultados");
         } else {
@@ -170,6 +177,7 @@ public class EjercicioExistDB {
         		System.out.println(elemento.getContent());
         	}
         }
+        
         System.out.println("=========================================");
 		} catch (XMLDBException e) {
 			// TODO Auto-generated catch block
@@ -178,24 +186,30 @@ public class EjercicioExistDB {
 	}
 	
 	public static void datosLibroAutor(XPathQueryService srv) {
-		String query = "for $l in doc(\"/db/pruebas/libros.xml\")//libro"
-				+ " return data(if (exists($l/autor))"
-				+ "   then <libro>{"
-				+ "         <titulo>{data($l/titulo)}</titulo>,"
-				+ "         <autor>{data($l//apellido)}</autor>"
-				+ "    }"
-				+ "    </libro>"
-				+ "    else <libro>{"
-				+ "         <titulo>{data($l/titulo)}</titulo>,"
-				+ "         <afiliacion>{data($l//afiliacion)}</afiliacion>"
-				+ "    }"
-				+ "    </libro>)";
+		String query = "for $l in doc(\"/pruebas/libros.xml\")//libro"
+				+ "    return data(if (exists($l/autor))"
+				+ "      then <libro>{"
+				+ "                <li>"
+				+ "                    <titulo>{data($l/titulo)}</titulo>,"
+				+ "                     --Autor:\r\n"
+				+ "                    <autor>{data($l//apellido)}</autor>"
+				+ "                </li>"
+				+ "           }</libro>"
+				+ "       else <libro>{"
+				+ "                <li>"
+				+ "                    <titulo>{data($l/titulo)}</titulo>,"
+				+ "                     --Afiliacion:"
+				+ "                    <afiliacion>{data($l//afiliacion)}</afiliacion>"
+				+ "                </li>"
+				+ "       }"
+				+ "       </libro>)";
 		ResourceSet resultado;
 		try {
 			resultado = srv.query(query);
 		
         ResourceIterator itera = resultado.getIterator();
         System.out.println("=========================================");
+        
         if (!itera.hasMoreResources()) {
         	System.out.println("No hay resultados");
         } else {
@@ -206,6 +220,7 @@ public class EjercicioExistDB {
         	}
         	System.out.println("+++++++++++++++++++++++++++++++++++++++");
         }
+        
         System.out.println("=========================================");
 		} catch (XMLDBException e) {
 			// TODO Auto-generated catch block
