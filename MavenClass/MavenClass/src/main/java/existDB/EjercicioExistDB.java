@@ -123,7 +123,8 @@ public class EjercicioExistDB {
         } else {
         	while (itera.hasMoreResources()) {
         		Resource elemento = itera.nextResource();
-        		System.out.println(elemento.getContent());
+        		String recibir = (String) elemento.getContent();
+        		System.out.println(recibir.replace(" ",""));
         	}
         }
         
@@ -150,7 +151,8 @@ public class EjercicioExistDB {
         } else {
         	while (itera.hasMoreResources()) {
         		Resource elemento = itera.nextResource();
-        		System.out.println(elemento.getContent());
+        		String recibir = (String) elemento.getContent();
+        		System.out.println(recibir.replace(" ",""));
         	}
         }
         
@@ -174,7 +176,8 @@ public class EjercicioExistDB {
         } else {
         	while (itera.hasMoreResources()) {
         		Resource elemento = itera.nextResource();
-        		System.out.println(elemento.getContent());
+        		String recibir = (String) elemento.getContent();
+        		System.out.println(recibir.replace(" ",""));
         	}
         }
         
@@ -191,14 +194,14 @@ public class EjercicioExistDB {
 				+ "      then <libro>{"
 				+ "                <li>"
 				+ "                    <titulo>{data($l/titulo)}</titulo>,"
-				+ "                     --Autor:\r\n"
+				+ "                     \r\nAutor:"
 				+ "                    <autor>{data($l//apellido)}</autor>"
 				+ "                </li>"
 				+ "           }</libro>"
 				+ "       else <libro>{"
 				+ "                <li>"
 				+ "                    <titulo>{data($l/titulo)}</titulo>,"
-				+ "                     --Afiliacion:"
+				+ "                     \r\nAfiliacion:"
 				+ "                    <afiliacion>{data($l//afiliacion)}</afiliacion>"
 				+ "                </li>"
 				+ "       }"
@@ -216,7 +219,8 @@ public class EjercicioExistDB {
         	while (itera.hasMoreResources()) {
         		Resource elemento = itera.nextResource();
         		System.out.println("+++++++++++++++++++++++++++++++++++++++");
-        		System.out.println(elemento.getContent());
+        		String recibir = (String) elemento.getContent();
+        		System.out.println(recibir.replace(" ",""));
         	}
         	System.out.println("+++++++++++++++++++++++++++++++++++++++");
         }
