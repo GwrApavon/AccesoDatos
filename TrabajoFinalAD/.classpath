@@ -12,7 +12,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="drivers/mysql-connector-java-5.1.49.jar"/>
-	<classpathentry kind="lib" path="drivers/neodatis-odb-1.9.30.689.jar"/>
+	<classpathentry kind="lib" path="drivers/neodatis-odb-1.9.30.689.jar" sourcepath="C:/Users/alu/.m2/repository/org/neodatis/odb/neodatis-odb/1.9.30.689/neodatis-odb-1.9.30.689-sources.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/hibernateLib5.6"/>
 	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
 		<attributes>

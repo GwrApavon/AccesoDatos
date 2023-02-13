@@ -12,8 +12,9 @@ import com.modelo.Difunto;
 public interface DifuntoDAO {
 
 	public List <Difunto> getAll();
-	public Difunto create();
-	public Difunto modify(int id);
-	public Difunto delete(int id);
+	public boolean create(Difunto dif);
+	public boolean modify(int id, Difunto dif);
+	public boolean delete(int id);
+	public Difunto query(int o, int id);
 	
 }

@@ -7,8 +7,8 @@ import java.util.List;
 
 import com.dao.DifuntoDAO;
 import com.dao.impl.DifuntoDAOImpHibernate;
-import com.dao.impl.DifuntoDAOImpNoSQL;
-import com.dao.impl.DifuntoDAOImpOO;
+import com.dao.impl.DifuntoDAOImpExistDB;
+import com.dao.impl.DifuntoDAOImpNeondatis;
 import com.modelo.Difunto;
 
 /**
@@ -17,17 +17,17 @@ import com.modelo.Difunto;
  */
 public class DifuntoControler {
 	
-	DifuntoDAO difunto;
+	private DifuntoDAO difunto;
 	
 	public DifuntoControler(String tipo) {
 		if(tipo.equals("OO")){
-			difunto = new DifuntoDAOImpOO("cementerio.db");
+			difunto = new DifuntoDAOImpNeondatis("cementerio.db");
 		}
 		if(tipo.equals("Hibernate")){
 			difunto = new DifuntoDAOImpHibernate();
 		}
-		if(tipo.equals("NoSQL")){
-			difunto = new DifuntoDAOImpNoSQL();
+		if(tipo.equals("ExistDB")){
+			difunto = new DifuntoDAOImpExistDB();
 		}
 	}
 
@@ -35,15 +35,15 @@ public class DifuntoControler {
 		return difunto.getAll();
 	}
 	
-	public void	crearDifunto(Difunto d) {
-		d = difunto.create();
+	public boolean crearDifunto(Difunto d) {
+		return difunto.create(d);
 	}
 	
-	public void modificarDifunto(Difunto d, int id) {
-		d = difunto.modify(id);
+	public boolean modificarDifunto(Difunto d, int id) {
+		return difunto.modify(id, d);
 	}
 	
-	public void borrarDifunto(Difunto d, int id) {
-		d = difunto.delete(id);
+	public boolean borrarDifunto(Difunto d, int id) {
+		return difunto.delete(id);
 	}
 }

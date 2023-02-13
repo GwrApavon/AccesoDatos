@@ -5,29 +5,27 @@ package com.dao.impl;
 
 import java.util.List;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-
+import org.xmldb.api.base.Collection;
+import org.xmldb.api.base.Database;
+import org.xmldb.api.base.XMLDBException;
+import org.xmldb.api.modules.XPathQueryService;
+import org.xmldb.api.DatabaseManager;
 import com.dao.DifuntoDAO;
 import com.modelo.Difunto;
-
-//import controlador.HibernateUtil;
 
 /**
  * @author alu
  *
  */
-public class DifuntoDAOImpHibernate implements DifuntoDAO{
+public class DifuntoDAOImpExistDB implements DifuntoDAO{
 	
-	SessionFactory fabrica;
-	Session sesion;	
-	Transaction tx;
-
-	public DifuntoDAOImpHibernate() {
-		//fabrica = HibernateUtil.getSessionFactory();
-		sesion  = fabrica.openSession();
-		tx= sesion.beginTransaction();
+	String driver = "org.exist.xmldb.DatabaseImpl";
+	Class cl;
+	Database BD;
+	String URI;
+	
+	@SuppressWarnings("deprecation")
+	public DifuntoDAOImpExistDB() {	
 	}
 
 	@Override
@@ -39,7 +37,7 @@ public class DifuntoDAOImpHibernate implements DifuntoDAO{
 	@Override
 	public boolean create(Difunto dif) {
 		// TODO Auto-generated method stub
-		return true;
+		return false;
 	}
 
 	@Override
