@@ -58,4 +58,10 @@ public class DifuntoDAOImpExistDB implements DifuntoDAO{
 		return null;
 	}
 
+	@Override
+	public int lastID() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

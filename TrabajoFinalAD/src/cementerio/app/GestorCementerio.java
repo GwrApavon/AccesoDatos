@@ -1,8 +1,13 @@
+
 /**
  * 
  */
 package cementerio.app;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import com.controlador.DifuntoControler;
@@ -67,6 +72,7 @@ public class GestorCementerio {
 	}
 	
 	private static boolean subMenuDifunto(Scanner sc, String db) {
+		int id, opcion;
 		//Hacer bucle hasta que se quiera salir 
 		System.out.println("En que tabla de la base de datos quieres trabajar:"
 				+ "1. Crear Difunto"
@@ -74,7 +80,7 @@ public class GestorCementerio {
 				+ "3. Borrar Difunto"
 				+ "4. Hacer Consulta"
 				+ "0. Atrás");
-		int opcion;
+		
 		opcion = sc.nextInt();
 		sc.nextLine();
 		
@@ -82,15 +88,26 @@ public class GestorCementerio {
 		
 		switch(opcion){
 			case 1:
-				dif.crearDifunto(pedirDatosDifunto(sc));
+				dif.crearDifunto(pedirDatosDifunto(sc, dif.lastID()));
+				break;
+			case 2: 
+				id = sacarIntValido(sc);
+				//dif.modificarDifunto(,id);
+				break;
+			case 3:
+				break;
+			case 4:
+				break;
+			default:
 		}
 		return false;
 	}
 	
-	public static Difunto pedirDatosDifunto(Scanner sc) {
+	public static Difunto pedirDatosDifunto(Scanner sc, int lastID) {
 		Difunto dif = new Difunto();
 		
 		System.out.println("Introduce los siguientes datos del difunto:");
+		dif.setIdDifunto(lastID);
 		System.out.print("\nNombre: ");
 		String nombre = sc.nextLine();
 		dif.setNombre(nombre);
@@ -100,17 +117,57 @@ public class GestorCementerio {
 		System.out.print("\nSegundo apellido: ");
 		String ap2 = sc.nextLine();
 		dif.setApellido2(ap2);
-		System.out.println("El formato de las siguientes fechas debe ser MM/DD/YY");
+		
+		System.out.println("El formato de las siguientes fechas debe ser YY/MM/DD");
 		System.out.print("\nFecha de nacimiento:");
-		dif.setFechaNacimiento(dif.getFechaNacimiento());
+		Date fNacimiento = stringToDate(sc);
+		dif.setFechaNacimiento(fNacimiento);
 		System.out.print("\nFecha de defunción: ");
-		dif.setFechaDefuncion(dif.getFechaDefuncion());
+		Date fDefuncion = stringToDate(sc);
+		dif.setFechaDefuncion(fDefuncion);
 		System.out.print("\nFecha de enterramiento: ");
-		dif.setFechaEnterramiento(dif.getFechaEnterramiento());
+		Date fEnterramiento = stringToDate(sc);
+		dif.setFechaEnterramiento(fEnterramiento);
+		
 		System.out.print("\nSepultura:");
+		//pedir sepultura
 		dif.setSepultura(dif.getSepultura());
 		
 		return dif;
 		
 	}
+	
+	private static int sacarIntValido(Scanner s){
+		 boolean salir = false;
+		 int i = 0;
+		 while(!salir || i < 0) {
+			 try {
+				 i = s.nextInt();
+				 s.nextLine();
+				 salir = true;
+			 }catch(InputMismatchException ime) {
+				 System.err.println("Introduzca un número por favor");
+			 }
+		 }
+		 return i;
+	 }
+	
+	private static Date stringToDate(Scanner s){
+		 boolean salir = false; 
+		 SimpleDateFormat formato = new SimpleDateFormat("yyyy/mm/dd");
+		 Date fechaDate = null;
+		 
+		 while(!salir) {
+			 try {
+			 fechaDate = formato.parse(s.nextLine());
+			 salir = true;
+			
+			 }catch(ParseException pe) {
+				 System.err.println("Error al convertir la fecha, repita por favor: ");
+			 }catch(Exception e) {
+				 System.err.println("Error al convertir la fecha, repita por favor: ");
+			 }
+		 }
+		 return fechaDate;
+		}
 }

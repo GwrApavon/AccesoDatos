@@ -7,6 +7,6 @@ package com.dao.impl;
  * @author alu
  *
  */
-public class ResponsableDAOImpNoSQL {
+public class ResponsableDAOImpNeodatis {
 
 }

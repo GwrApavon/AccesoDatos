@@ -46,4 +46,8 @@ public class DifuntoControler {
 	public boolean borrarDifunto(Difunto d, int id) {
 		return difunto.delete(id);
 	}
+	
+	public int lastID() {
+		return difunto.lastID();
+	}
 }

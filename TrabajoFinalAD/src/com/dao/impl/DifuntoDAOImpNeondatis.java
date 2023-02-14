@@ -13,8 +13,10 @@ import org.neodatis.odb.ODB;
 import org.neodatis.odb.ODBFactory;
 import org.neodatis.odb.Objects;
 import org.neodatis.odb.core.query.IQuery;
+import org.neodatis.odb.core.query.IValuesQuery;
 import org.neodatis.odb.core.query.criteria.Where;
 import org.neodatis.odb.impl.core.query.criteria.CriteriaQuery;
+import org.neodatis.odb.impl.core.query.values.ValuesCriteriaQuery;
 
 /**
  * @author alu
@@ -72,20 +74,9 @@ public class DifuntoDAOImpNeondatis implements DifuntoDAO{
 	 */
 	@Override
 	public boolean modify(int id, Difunto dif) {
-		
 		boolean valor =false;
-		IQuery query = new CriteriaQuery(Difunto.class, Where.equal("idDep", dif));
-		Objects<Difunto> objetos = odb.getObjects(query);
 		try {
-			Difunto difunto = (Difunto) objetos.getFirst();
-			difunto.setNombre(dif.getNombre());
-			difunto.setApellido1(dif.getApellido1());
-			difunto.setApellido2(dif.getApellido2());
-			difunto.setFechaNacimiento(dif.getFechaNacimiento());
-			difunto.setFechaDefuncion(dif.getFechaDefuncion());
-			difunto.setFechaEnterramiento(dif.getFechaEnterramiento());
-			difunto.setSepultura(dif.getSepultura());
-			odb.store(difunto);
+			odb.store(dif);
 			odb.commit();
 			valor = true;
 			System.out.println("Difunto modificado");
@@ -185,5 +176,20 @@ public class DifuntoDAOImpNeondatis implements DifuntoDAO{
 		}
 		
 		return d;
+	}
+
+	@Override
+	public int lastID() {
+		int res = 0;
+		IValuesQuery query = new ValuesCriteriaQuery(Difunto.class).max("id");
+		try {
+			Difunto dif = (Difunto) odb.getObjects(query).getFirst();
+			res = dif.getIdDifunto();
+		}catch(IndexOutOfBoundsException iobe) {
+			iobe.printStackTrace();
+		}
+		
+		res++;
+		return res;
 	}
 }
