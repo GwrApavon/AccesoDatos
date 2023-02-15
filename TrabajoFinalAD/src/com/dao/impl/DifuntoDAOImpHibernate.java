@@ -37,33 +37,29 @@ public class DifuntoDAOImpHibernate implements DifuntoDAO{
 	}
 
 	@Override
-	public boolean create(Difunto dif) {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public boolean modify(int id, Difunto dif) {
+	public boolean create(Difunto element) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean delete(int id) {
+	public boolean modify(Integer idn, Difunto element) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public Difunto query(int o, int id) {
+	public boolean delete(Integer idn) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Difunto query(Integer option, Integer idn) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public int lastID() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+
 
 }

@@ -17,11 +17,12 @@ public class Difunto implements java.io.Serializable {
 
 	public Difunto() {
 	}
-
-	public Difunto(int idDifunto) {
-		this.idDifunto = idDifunto;
+	
+	public Difunto(String nombre, String apellido1, Sepultura sepultura) {
+		this.nombre = nombre;
+		this.apellido1 = apellido1;
+		this.sepultura = sepultura;
 	}
-
 	public Difunto(Sepultura sepultura, String nombre, String apellido1, String apellido2,
 			Date fechaNacimiento, Date fechaDefuncion, Date fechaEnterramiento) {
 		this.sepultura = sepultura;

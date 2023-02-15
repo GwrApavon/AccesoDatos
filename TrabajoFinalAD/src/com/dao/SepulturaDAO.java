@@ -8,10 +8,5 @@ import com.modelo.Sepultura;
  *
  */
 
-public interface SepulturaDAO {
-	
-	public List <Sepultura> getAll();
-	public Sepultura create();
-	public Sepultura modify(int id);
-	public Sepultura delete(int id);
+public interface SepulturaDAO extends GenericDAO<Sepultura, Integer>{
 }

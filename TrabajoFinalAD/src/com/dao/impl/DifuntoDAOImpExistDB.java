@@ -23,9 +23,23 @@ public class DifuntoDAOImpExistDB implements DifuntoDAO{
 	Class cl;
 	Database BD;
 	String URI;
-	
-	@SuppressWarnings("deprecation")
-	public DifuntoDAOImpExistDB() {	
+
+	@Override
+	public boolean modify(Integer idn, Difunto element) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean delete(Integer idn) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Difunto query(Integer option, Integer idn) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
@@ -35,33 +49,9 @@ public class DifuntoDAOImpExistDB implements DifuntoDAO{
 	}
 
 	@Override
-	public boolean create(Difunto dif) {
+	public boolean create(Difunto element) {
 		// TODO Auto-generated method stub
 		return false;
-	}
-
-	@Override
-	public boolean modify(int id, Difunto dif) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean delete(int id) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public Difunto query(int o, int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int lastID() {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 }

@@ -1,31 +1,33 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Generated 8 feb 2023 10:44:45 by Hibernate Tools 5.6.12.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<hibernate-mapping>
-    <class catalog="Cementerio" name="Difunto" optimistic-lock="none" table="difunto">
-        <id name="idDifunto" type="int">
-            <column name="id_difunto"/>
-            <generator class="assigned"/>
-        </id>
-        <many-to-one class="Sepultura" fetch="select" name="sepultura">
-            <column name="id_sepultura" unique="true"/>
-        </many-to-one>
-        <property name="nombre" type="string">
-            <column length="30" name="nombre"/>
-        </property>
-        <property name="apellido1" type="string">
-            <column length="30" name="apellido1"/>
-        </property>
-        <property name="apellido2" type="string">
-            <column length="30" name="apellido2"/>
-        </property>
-        <property name="fechaNacimiento" type="date">
-            <column length="10" name="fecha_nacimiento"/>
-        </property>
-        <property name="fechaDefuncion" type="date">
-            <column length="10" name="fecha_defuncion"/>
-        </property>
-        <property name="fechaEnterramiento" type="date">
-            <column length="10" name="fecha_enterramiento"/>
-        </property>
-    </class>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 8 feb 2023 10:44:45 by Hibernate Tools 5.6.12.Final -->
+<hibernate-mapping auto-import="false">
+ <class catalog="Cementerio" name="Difunto" optimistic-lock="none" table="difunto">
+  <id name="idDifunto" type="int">
+   <column name="id_difunto"/>
+   <generator class="assigned"/>
+  </id>
+  <many-to-one class="Sepultura" fetch="select" name="sepultura">
+   <column name="id_sepultura" not-null="true" unique="true"/>
+  </many-to-one>
+  <property generated="never" lazy="false" name="nombre" type="string">
+   <column length="30" name="nombre" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="apellido1" type="string">
+   <column length="30" name="apellido1" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="apellido2" type="string">
+   <column length="30" name="apellido2" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="fechaNacimiento" type="date">
+   <column length="10" name="fecha_nacimiento"/>
+  </property>
+  <property generated="never" lazy="false" name="fechaDefuncion" type="date">
+   <column length="10" name="fecha_defuncion"/>
+  </property>
+  <property generated="never" lazy="false" name="fechaEnterramiento" type="date">
+   <column length="10" name="fecha_enterramiento"/>
+  </property>
+ </class>
 </hibernate-mapping>

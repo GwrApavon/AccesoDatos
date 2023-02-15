@@ -34,7 +34,6 @@ public class DifuntoDAOImpNeondatis implements DifuntoDAO{
 		return odb;
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Override 
 	protected void finalize() throws Throwable{
 		if (odb != null) {
@@ -43,7 +42,12 @@ public class DifuntoDAOImpNeondatis implements DifuntoDAO{
 		super.finalize();
 	}
 	
-	@SuppressWarnings({"unchecked"})
+	
+	
+	/*
+	 * Devuelve todos los elementos de la tabla
+	 */
+	
 	@Override
 	public List <Difunto> getAll(){
 		Objects<Difunto> objetos = odb.getObjects(Difunto.class);
@@ -52,19 +56,24 @@ public class DifuntoDAOImpNeondatis implements DifuntoDAO{
 		return difuntos;
 	}
 
+	
+	
 	/** Creador difuntos
 	 * Crea un difunto con el objeto que recibe
 	 * @param dif Objeto difunto que se va a guardar
 	 * @return boolean
 	 */
+	
 	@Override
 	public boolean create(Difunto dif) {
 		odb.store(dif);
 		odb.commit();
-		System.out.println("Departamento insertado");
+		System.out.println("Difunto insertado");
 		return true;
 	}
 
+	
+	
 	/** Modificador difuntos
 	 * Modifica un difunto ya existente con nuevos datos
 	 * @param id identificador del difunto
@@ -72,8 +81,9 @@ public class DifuntoDAOImpNeondatis implements DifuntoDAO{
 	 * @return boolean
 	 * @exception IndexOutOfBoundsException
 	 */
+	
 	@Override
-	public boolean modify(int id, Difunto dif) {
+	public boolean modify(Integer idn, Difunto dif) {
 		boolean valor =false;
 		try {
 			odb.store(dif);
@@ -86,20 +96,23 @@ public class DifuntoDAOImpNeondatis implements DifuntoDAO{
 		return valor;
 	}
 
+	
+	
 	/** Borrador difuntos
 	 * Borra un difunto existente cuya id sea la que se pasa por parámetro
 	 * @param id identificador del difunto
 	 * @return boolean
 	 * @exception IndexOutOfBoundsException
 	*/
+	
 	@Override
-	public boolean delete(int id) {
+	public boolean delete(Integer idn) {
 		boolean valor =false;
-		IQuery query = new CriteriaQuery(Difunto.class, Where.equal("idDep", id));
+		IQuery query = new CriteriaQuery(Difunto.class, Where.equal("idDep", idn));
 		Objects<Difunto> objetos = odb.getObjects(query);
 		try {
-			Difunto departamento = (Difunto) objetos.getFirst();
-			odb.delete(departamento);
+			Difunto difunto = (Difunto) objetos.getFirst();
+			odb.delete(difunto);
 			odb.commit();
 			valor = true;
 			System.out.println("Difunto eliminado");
@@ -110,23 +123,26 @@ public class DifuntoDAOImpNeondatis implements DifuntoDAO{
 		return valor;
 	}
 	
+	
+	
 	/** Consultas difuntos
 	 * Hace una consulta dependiendo del número que se le pase por parámetro 
-	 * Consulta 1 --> Muestra un departamento dependiendo de la id que reciba de parámetro
+	 * Consulta 1 --> Muestra un difunto dependiendo de la id que reciba de parámetro
 	 * Consulta 2 -->
 	 * Consulta 3 --> 
 	 * @param id identificador del difunto
 	 * @return boolean
 	 * @exception IndexOutOfBoundsException
 	*/
+	
 	@Override
-	public Difunto query(int o, int idDif) {
+	public Difunto query(Integer option, Integer idn) {
 		Difunto d = new Difunto();
 		IQuery query;
 		Objects<Difunto> objetos;
-		switch(o) {
+		switch(option) {
 			case 1:
-				query = new CriteriaQuery(Difunto.class, Where.equal("idDep", idDif));
+				query = new CriteriaQuery(Difunto.class, Where.equal("idDep", idn));
 				objetos = odb.getObjects(query);
 				
 				if (objetos != null) {
@@ -134,14 +150,14 @@ public class DifuntoDAOImpNeondatis implements DifuntoDAO{
 						d = (Difunto) objetos.getFirst();
 					} catch (IndexOutOfBoundsException i) {
 						i.printStackTrace();
-						System.out.println("No se ha encontrado ningun difunto con identificador" + idDif);
+						System.out.println("No se ha encontrado ningun difunto con identificador" + idn);
 						d = null;
 					}
 				}
 				break;
 			case 2:
 				//Consulta compleja 1
-				query = new CriteriaQuery(Difunto.class, Where.equal("idDep", idDif));
+				query = new CriteriaQuery(Difunto.class, Where.equal("idDep", idn));
 				objetos = odb.getObjects(query);
 				
 				if (objetos != null) {
@@ -149,14 +165,14 @@ public class DifuntoDAOImpNeondatis implements DifuntoDAO{
 						d = (Difunto) objetos.getFirst();
 					} catch (IndexOutOfBoundsException i) {
 						i.printStackTrace();
-						System.out.println("No se ha encontrado ningun difunto con identificador" + idDif);
+						System.out.println("No se ha encontrado ningun difunto con identificador" + idn);
 						d = null;
 					}
 				}
 				break;
 			case 3:
 				//Consulta compleja 2
-				query = new CriteriaQuery(Difunto.class, Where.equal("idDep", idDif));
+				query = new CriteriaQuery(Difunto.class, Where.equal("idDep", idn));
 				objetos = odb.getObjects(query);
 				
 				if (objetos != null) {
@@ -164,7 +180,7 @@ public class DifuntoDAOImpNeondatis implements DifuntoDAO{
 						d = (Difunto) objetos.getFirst();
 					} catch (IndexOutOfBoundsException ioobe) {
 						ioobe.printStackTrace();
-						System.out.println("No se ha encontrado ningun difunto con identificador" + idDif);
+						System.out.println("No se ha encontrado ningun difunto con identificador" + idn);
 						d = null;
 					}
 				}
@@ -176,20 +192,5 @@ public class DifuntoDAOImpNeondatis implements DifuntoDAO{
 		}
 		
 		return d;
-	}
-
-	@Override
-	public int lastID() {
-		int res = 0;
-		IValuesQuery query = new ValuesCriteriaQuery(Difunto.class).max("id");
-		try {
-			Difunto dif = (Difunto) odb.getObjects(query).getFirst();
-			res = dif.getIdDifunto();
-		}catch(IndexOutOfBoundsException iobe) {
-			iobe.printStackTrace();
-		}
-		
-		res++;
-		return res;
 	}
 }
