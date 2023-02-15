@@ -5,14 +5,14 @@
         <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.password">Pass!123456</property>
-        <property name="hibernate.connection.url">jdbc:mysql://192.168.56.105/Cementerio</property>
+        <property name="hibernate.connection.url">jdbc:mysql://192.168.56.101/Discografica</property>
         <property name="hibernate.connection.username">miusuario</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.hbm2ddl.auto">none</property>
         <property name="hibernate.search.autoregister_listeners">true</property>
         <property name="hibernate.validator.apply_to_ddl">false</property>
-        <mapping resource="Sepultura.hbm.xml"/>
-        <mapping resource="Responsable.hbm.xml"/>
-        <mapping resource="Difunto.hbm.xml"/>
+        <mapping resource="Cancion.hbm.xml"/>
+        <mapping resource="Cantante.hbm.xml"/>
+        <mapping resource="Disco.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

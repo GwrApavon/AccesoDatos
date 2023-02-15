@@ -88,11 +88,10 @@ public class GestorCementerio {
 		
 		switch(opcion){
 			case 1:
-				dif.crearDifunto(pedirDatosDifunto(sc, dif.lastID()));
+				//dif.crearDifunto(pedirDatosDifunto(sc, dif.lastID()));
 				break;
 			case 2: 
-				id = sacarIntValido(sc);
-				//dif.modificarDifunto(,id);
+				//dif.modificarDifunto(difuntoUpdate());
 				break;
 			case 3:
 				break;
@@ -103,6 +102,7 @@ public class GestorCementerio {
 		return false;
 	}
 	
+	/*
 	public static Difunto pedirDatosDifunto(Scanner sc, int lastID) {
 		Difunto dif = new Difunto();
 		
@@ -133,10 +133,9 @@ public class GestorCementerio {
 		//pedir sepultura
 		dif.setSepultura(dif.getSepultura());
 		
-		return dif;
-		
+		return dif;	
 	}
-	
+	*/
 	private static int sacarIntValido(Scanner s){
 		 boolean salir = false;
 		 int i = 0;
@@ -153,11 +152,11 @@ public class GestorCementerio {
 	 }
 	
 	private static Date stringToDate(Scanner s){
-		 boolean salir = false; 
-		 SimpleDateFormat formato = new SimpleDateFormat("yyyy/mm/dd");
-		 Date fechaDate = null;
+		boolean salir = false; 
+		SimpleDateFormat formato = new SimpleDateFormat("yyyy/mm/dd");
+		Date fechaDate = null;
 		 
-		 while(!salir) {
+		while(!salir) {
 			 try {
 			 fechaDate = formato.parse(s.nextLine());
 			 salir = true;
@@ -168,6 +167,11 @@ public class GestorCementerio {
 				 System.err.println("Error al convertir la fecha, repita por favor: ");
 			 }
 		 }
-		 return fechaDate;
-		}
+		return fechaDate;
+	}
+	
+	private static Difunto difuntoUpdate() {
+		return null;
+	}
+	
 }

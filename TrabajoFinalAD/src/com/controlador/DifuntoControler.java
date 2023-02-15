@@ -39,15 +39,11 @@ public class DifuntoControler {
 		return difunto.create(d);
 	}
 	
-	public boolean modificarDifunto(Difunto d, int id) {
-		return difunto.modify(id, d);
+	public boolean modificarDifunto(int d, Difunto dif) {
+		return difunto.modify(d,dif);
 	}
 	
-	public boolean borrarDifunto(Difunto d, int id) {
+	public boolean borrarDifunto(int id) {
 		return difunto.delete(id);
-	}
-	
-	public int lastID() {
-		return difunto.lastID();
 	}
 }

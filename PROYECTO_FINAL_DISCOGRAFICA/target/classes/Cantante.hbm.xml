@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 8 feb 2023 10:45:21 by Hibernate Tools 5.6.12.Final -->
+<hibernate-mapping>
+ <class catalog="Discografica" name="com.modelo.Cantante"
+  optimistic-lock="none" table="cantante">
+  <id name="idCantante" type="java.lang.Integer">
+   <column name="id_cantante"/>
+   <generator class="identity"/>
+  </id>
+  <property generated="never" lazy="false" name="nombre" type="string">
+   <column length="250" name="nombre" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="edad" type="int">
+   <column name="edad" not-null="true"/>
+  </property>
+  <property generated="never" lazy="false" name="nacionalidad" type="string">
+   <column length="250" name="nacionalidad"/>
+  </property>
+  <property generated="never" lazy="false" name="numeroDiscosPlatinos" type="int">
+   <column name="numero_discos_platinos" not-null="true"/>
+  </property>
+  <set fetch="select" inverse="true" lazy="true" name="cancions"
+   sort="unsorted" table="cancion">
+   <key>
+    <column name="id_cantante" not-null="true"/>
+   </key>
+   <one-to-many class="com.modelo.Cancion"/>
+  </set>
+ </class>
+</hibernate-mapping>

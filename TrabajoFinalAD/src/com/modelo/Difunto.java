@@ -22,9 +22,8 @@ public class Difunto implements java.io.Serializable {
 		this.idDifunto = idDifunto;
 	}
 
-	public Difunto(int idDifunto, Sepultura sepultura, String nombre, String apellido1, String apellido2,
+	public Difunto(Sepultura sepultura, String nombre, String apellido1, String apellido2,
 			Date fechaNacimiento, Date fechaDefuncion, Date fechaEnterramiento) {
-		this.idDifunto = idDifunto;
 		this.sepultura = sepultura;
 		this.nombre = nombre;
 		this.apellido1 = apellido1;
