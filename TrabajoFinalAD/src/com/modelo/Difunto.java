@@ -98,4 +98,15 @@ public class Difunto implements java.io.Serializable {
 		this.fechaEnterramiento = fechaEnterramiento;
 	}
 
+	@Override
+	public String toString() {
+		return "Difunto [idDifunto=" + idDifunto + ", " + (sepultura != null ? "sepultura=" + sepultura.getIdSepultura() + ", " : "")
+				+ (nombre != null ? "nombre=" + nombre + ", " : "")
+				+ (apellido1 != null ? "apellido1=" + apellido1 + ", " : "")
+				+ (apellido2 != null ? "apellido2=" + apellido2 + ", " : "")
+				+ (fechaNacimiento != null ? "fechaNacimiento=" + fechaNacimiento.toString() + ", " : "")
+				+ (fechaDefuncion != null ? "fechaDefuncion=" + fechaDefuncion.toString() + ", " : "")
+				+ (fechaEnterramiento != null ? "fechaEnterramiento=" + fechaEnterramiento.toString() : "") + "]";
+	}
+
 }

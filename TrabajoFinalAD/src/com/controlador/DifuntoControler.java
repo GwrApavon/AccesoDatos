@@ -8,7 +8,7 @@ import java.util.List;
 import com.dao.DifuntoDAO;
 import com.dao.impl.DifuntoDAOImpHibernate;
 import com.dao.impl.DifuntoDAOImpExistDB;
-import com.dao.impl.DifuntoDAOImpNeondatis;
+import com.dao.impl.DifuntoDAOImpNeodatis;
 import com.modelo.Difunto;
 
 /**
@@ -20,8 +20,8 @@ public class DifuntoControler {
 	private DifuntoDAO difunto;
 	
 	public DifuntoControler(String tipo) {
-		if(tipo.equals("OO")){
-			difunto = new DifuntoDAOImpNeondatis("cementerio.db");
+		if(tipo.equals("Neodatis")){
+			difunto = new DifuntoDAOImpNeodatis("cementerio.db");
 		}
 		if(tipo.equals("Hibernate")){
 			difunto = new DifuntoDAOImpHibernate();

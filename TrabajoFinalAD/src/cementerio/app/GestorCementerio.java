@@ -4,174 +4,261 @@
  */
 package cementerio.app;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.InputMismatchException;
-import java.util.Scanner;
 
+import java.util.Scanner;
 import com.controlador.DifuntoControler;
-import com.modelo.Difunto;
+import com.controlador.ResponsableControler;
+import com.controlador.SepulturaControler;
+
 
 /**
  * @author alu
  *
  */
 public class GestorCementerio {
-
+	
+	private static String db = "MySQL";
+	private static Scanner sc = new Scanner(System.in);
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		
+		boolean salir = false;
+		System.out.println("/n/tBienvenido a la aplicación de Gestion de Cementerio");
+		
+		do {
+			salir = menuPrincipal();
+		}while(!salir);
+		
+		System.out.println("/n/tGracias por usar nuestro servicio");
 	}
 
-	private static boolean menu(Scanner sc) {
+	/*
+	 * Menu principal
+	 * Se podrá elegir entre las siguientes opcines:
+	 * 		- Cambiar de base de datos
+	 * 		- Trabajar en la base de datos
+	 * 		- Salir
+	 * 
+	 * @param sc Scanner para poder recibir input
+	 */
+	private static boolean menuPrincipal() {
+		
+		System.out.println("Que desea hacer:"
+				
+							+ "/n1. Cambiar base de datos utilizada (actual: " + db +")"
+							
+							+ "/n2. Trabajar en la base de datos"
+							
+							+ "/n/n0. Salir");
+		
+		int opcion = Utilities.sacarIntValido(sc);
+		sc.nextLine();
+		switch(opcion) {
+			case 1: 
+					if(subMenuDB()) System.out.println("Base de datos cambiada a " + db);
+					else System.out.println("Error al cambiar de base de datos");
+				break;
+			case 2: 
+					boolean salidaSubMenu = false;
+					do {
+						salidaSubMenu = subMenuTablas();
+					}while(!salidaSubMenu);
+				break;
+			default: 
+					System.out.println("Saliendo...");
+					return true;
+		}
+		return false;		
+	}
+	
+	/*
+	 * Submenu Eleccion DB
+	 * Se podrá elegir entre las siguientes opcines:
+	 * 		- Cambiar db a Hibernate
+	 * 		- Cambiar db a Neodatis
+	 * 		- Cambiar db a ExistDB
+	 * 		- Salir
+	 * 
+	 * @param sc Scanner para poder recibir input
+	 */
+	private static boolean subMenuDB() {
 	
 		System.out.println("En que tipo de base de datos quieres trabajar:"
-							+ "1. MySQL"
-							+ "2. Neodatis"
-							+ "3. ExistDB"
-							+ "0. Salir");
-		int opcion = sc.nextInt();
+				
+							+ "/n1. Hibernate"
+				
+							+ "/n2. Neodatis"
+							
+							+ "/n3. ExistDB"
+							
+							+ "/n/n0. Salir");
+		
+		int opcion = Utilities.sacarIntValido(sc);
 		sc.nextLine();
-		String db;
 		switch(opcion) {
-			case 1: db = "MySQL";
+			case 1: db = "Hibernate";
 				break;
 			case 2: db = "Neodatis";
 				break;
 			case 3: db = "ExistDB";
 				break;
-			default: return true;
-		}
-		boolean salir = subMenu (sc, db);
-		return salir;
-	}
-	
-	private static boolean subMenu(Scanner sc, String db) {
-		//Hacer bucle hasta que se quiera salir
-		System.out.println("En que tabla de la base de datos quieres trabajar:"
-							+ "1. Difunto"
-							+ "2. Sepultura"
-							+ "3. Responsable"
-							+ "0. Atrás");
-		int op = sc.nextInt();
-		sc.nextLine();
-		
-		switch(op) {
-			case 1:
-					subMenuDifunto(sc, db);
-			case 2:
-					//subMenuSepultura
-			case 3:
-					//subMenuResponsable
-			default: return true;
-		}
-	}
-	
-	private static boolean subMenuDifunto(Scanner sc, String db) {
-		int id, opcion;
-		//Hacer bucle hasta que se quiera salir 
-		System.out.println("En que tabla de la base de datos quieres trabajar:"
-				+ "1. Crear Difunto"
-				+ "2. Modificar Difunto"
-				+ "3. Borrar Difunto"
-				+ "4. Hacer Consulta"
-				+ "0. Atrás");
-		
-		opcion = sc.nextInt();
-		sc.nextLine();
-		
-		DifuntoControler dif = new DifuntoControler(db);
-		
-		switch(opcion){
-			case 1:
-				//dif.crearDifunto(pedirDatosDifunto(sc, dif.lastID()));
-				break;
-			case 2: 
-				//dif.modificarDifunto(difuntoUpdate());
-				break;
-			case 3:
-				break;
-			case 4:
-				break;
 			default:
+					System.out.println("Saliendo...");
+					return true;
 		}
 		return false;
 	}
 	
 	/*
-	public static Difunto pedirDatosDifunto(Scanner sc, int lastID) {
-		Difunto dif = new Difunto();
+	 * Submenu Eleccion de tabla en la que trabajar
+	 * Se podrá elegir entre las siguientes opcines:
+	 * 		- Trabajar en Difunto
+	 * 		- Trabajar en Sepultura
+	 * 		- Trabajar en Responsable
+	 * 		- Salir
+	 * 
+	 * @param sc Scanner para poder recibir input
+	 */
+	private static boolean subMenuTablas() {
+		boolean salirSubMenuTabla = false;
 		
-		System.out.println("Introduce los siguientes datos del difunto:");
-		dif.setIdDifunto(lastID);
-		System.out.print("\nNombre: ");
-		String nombre = sc.nextLine();
-		dif.setNombre(nombre);
-		System.out.print("\nPrimer Apellido: ");
-		String ap1 = sc.nextLine();
-		dif.setApellido1(ap1);
-		System.out.print("\nSegundo apellido: ");
-		String ap2 = sc.nextLine();
-		dif.setApellido2(ap2);
+		System.out.println("En que tabla de la base de datos quieres trabajar:"
+							
+							+ "/n1. Difunto"
+				
+							+ "/n2. Sepultura"
+							
+							+ "/n3. Responsable"
+							
+							+ "/n/n0. Atrás");
 		
-		System.out.println("El formato de las siguientes fechas debe ser YY/MM/DD");
-		System.out.print("\nFecha de nacimiento:");
-		Date fNacimiento = stringToDate(sc);
-		dif.setFechaNacimiento(fNacimiento);
-		System.out.print("\nFecha de defunción: ");
-		Date fDefuncion = stringToDate(sc);
-		dif.setFechaDefuncion(fDefuncion);
-		System.out.print("\nFecha de enterramiento: ");
-		Date fEnterramiento = stringToDate(sc);
-		dif.setFechaEnterramiento(fEnterramiento);
+		int op = Utilities.sacarIntValido(sc);
+		sc.nextLine();
 		
-		System.out.print("\nSepultura:");
-		//pedir sepultura
-		dif.setSepultura(dif.getSepultura());
+		if(op == 0) {
+			return true;
+		}
 		
-		return dif;	
-	}
-	*/
-	private static int sacarIntValido(Scanner s){
-		 boolean salir = false;
-		 int i = 0;
-		 while(!salir || i < 0) {
-			 try {
-				 i = s.nextInt();
-				 s.nextLine();
-				 salir = true;
-			 }catch(InputMismatchException ime) {
-				 System.err.println("Introduzca un número por favor");
-			 }
-		 }
-		 return i;
-	 }
-	
-	private static Date stringToDate(Scanner s){
-		boolean salir = false; 
-		SimpleDateFormat formato = new SimpleDateFormat("yyyy/mm/dd");
-		Date fechaDate = null;
-		 
-		while(!salir) {
-			 try {
-			 fechaDate = formato.parse(s.nextLine());
-			 salir = true;
-			
-			 }catch(ParseException pe) {
-				 System.err.println("Error al convertir la fecha, repita por favor: ");
-			 }catch(Exception e) {
-				 System.err.println("Error al convertir la fecha, repita por favor: ");
-			 }
-		 }
-		return fechaDate;
+		do {
+			salirSubMenuTabla = subMenuTabla(op);
+		}while(!salirSubMenuTabla);
+		
+		
+		return false;
 	}
 	
-	private static Difunto difuntoUpdate() {
-		return null;
+	/*
+	 * Submenu acciones sobre la tabla
+	 * Se podrá elegir entre las siguientes opcines:
+	 * 		- Crear
+	 * 		- Modificar
+	 * 		- Borrar
+	 * 		- Consulta 1
+	 * 		- Consulta 2
+	 * 		- Salir
+	 * 
+	 * @param sc Scanner para poder recibir input
+	 */
+	private static boolean subMenuTabla(int option) {
+		int id, op;
+		
+		//Diferentes controladores disponibles
+		DifuntoControler dif = null;
+		SepulturaControler sep = null;
+		ResponsableControler res = null;
+		//Hacer bucle hasta que se quiera salir 
+		System.out.println("En que tabla de la base de datos quieres trabajar:"
+				
+				+ "/n1. Crear"
+				
+				+ "/n2. Modificar"
+				
+				+ "/n3. Borrar"
+				
+				+ "/n4. Hacer Consulta"
+				
+				+ "/n5. Hacer Consulta"
+				
+				+ "/n/n0. Atrás");
+		
+		op = Utilities.sacarIntValido(sc);
+		sc.nextLine();
+		
+		switch(option) {
+		
+			case 1:
+					dif = new DifuntoControler(db);
+				break;
+			case 2:
+					sep = new SepulturaControler(db);
+				break;
+			case 3:
+					res = new ResponsableControler(db);
+				break;
+		}
+		
+		switch(op){
+			case 1:
+					if(option == 1) {
+						dif.crearDifunto(null);
+					}
+					if(option == 2) {
+						//sep.crearSepultura(null);		
+					}
+					if(option == 3) {
+						//res.crearResponsable(null);
+					}
+				break;
+			case 2: 
+//					if(option == 1) {
+//						dif.modificarDifunto(id, null);
+//					}
+//					if(option == 2) {
+//						sep.modificarSepultura(id, null);
+//					}
+//					if(option == 3) {
+//						res.modificarResponsable(id, null);	
+//					}
+				break;
+			case 3:
+					if(option == 1) {
+//						dif.modificarDifunto(id, null);
+					}
+					if(option == 2) {
+//						sep.modificarSepultura(id, null);	
+					}
+					if(option == 3) {
+//						res.modificarResponsable(id, null);
+					}
+				break;
+			case 4:
+					if(option == 1) {
+//						dif.modificarDifunto(id, null);
+					}
+					if(option == 2) {
+//						sep.modificarSepultura(id, null);	
+					}
+					if(option == 3) {
+//						res.modificarResponsable(id, null);
+					}
+				break;
+			case 5:
+					if(option == 1) {
+//						dif.modificarDifunto(id, null);
+					}
+					if(option == 2) {
+//						sep.modificarSepultura(id, null);	
+					}
+					if(option == 3) {
+//						res.modificarResponsable(id, null);
+					}
+				break;
+			default: 
+					System.out.println("Saliendo...");
+					return true;
+		}
+		return false;
 	}
-	
 }

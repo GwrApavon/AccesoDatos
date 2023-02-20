@@ -22,11 +22,11 @@ import org.neodatis.odb.impl.core.query.values.ValuesCriteriaQuery;
  * @author alu
  *
  */
-public class DifuntoDAOImpNeondatis implements DifuntoDAO{
+public class DifuntoDAOImpNeodatis implements DifuntoDAO{
 
 	private static ODB odb;
 	
-	public DifuntoDAOImpNeondatis(String db) {
+	public DifuntoDAOImpNeodatis(String db) {
 		odb = ODBFactory.open(db);
 	}
 	
