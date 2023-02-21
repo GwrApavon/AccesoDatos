@@ -17,6 +17,7 @@ import com.modelo.Sepultura;
 public class SepulturaDAOImpExistDB implements SepulturaDAO{
 
 	String driver = "org.exist.xmldb.DatabaseImpl";
+	@SuppressWarnings("rawtypes")
 	Class cl;
 	Database BD;
 	String URI;

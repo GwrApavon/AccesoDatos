@@ -32,6 +32,7 @@ private static ODB odb;
 		return odb;
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override 
 	protected void finalize() throws Throwable{
 		if (odb != null) {

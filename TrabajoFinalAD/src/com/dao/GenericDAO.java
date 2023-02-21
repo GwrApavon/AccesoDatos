@@ -3,8 +3,6 @@ package com.dao;
 import java.io.Serializable;
 import java.util.List;
 
-import com.modelo.Difunto;
-
 public interface GenericDAO<T, ID extends Serializable>{
 
 	public List <T> getAll();

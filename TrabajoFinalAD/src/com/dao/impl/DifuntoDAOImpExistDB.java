@@ -5,11 +5,8 @@ package com.dao.impl;
 
 import java.util.List;
 
-import org.xmldb.api.base.Collection;
+
 import org.xmldb.api.base.Database;
-import org.xmldb.api.base.XMLDBException;
-import org.xmldb.api.modules.XPathQueryService;
-import org.xmldb.api.DatabaseManager;
 import com.dao.DifuntoDAO;
 import com.modelo.Difunto;
 
@@ -20,6 +17,7 @@ import com.modelo.Difunto;
 public class DifuntoDAOImpExistDB implements DifuntoDAO{
 	
 	String driver = "org.exist.xmldb.DatabaseImpl";
+	@SuppressWarnings("rawtypes")
 	Class cl;
 	Database BD;
 	String URI;

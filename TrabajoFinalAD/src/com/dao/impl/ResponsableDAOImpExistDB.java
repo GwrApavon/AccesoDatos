@@ -17,6 +17,7 @@ import com.modelo.Responsable;
 public class ResponsableDAOImpExistDB implements ResponsableDAO{
 
 	String driver = "org.exist.xmldb.DatabaseImpl";
+	@SuppressWarnings("rawtypes")
 	Class cl;
 	Database BD;
 	String URI;

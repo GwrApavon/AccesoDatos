@@ -11,7 +11,7 @@ public class Sepultura implements java.io.Serializable {
 	private Responsable responsable;
 	private String codigoContable;
 	private String calle;
-	private Short numSepultura;
+	private int numSepultura;
 	private String nombreTitular;
 	private String apellido1Titular;
 	private String apellido2Titular;
@@ -74,12 +74,12 @@ public class Sepultura implements java.io.Serializable {
 		this.calle = calle;
 	}
 
-	public Short getNumSepultura() {
+	public int getNumSepultura() {
 		return this.numSepultura;
 	}
 
-	public void setNumSepultura(Short numSepultura) {
-		this.numSepultura = numSepultura;
+	public void setNumSepultura(int i) {
+		this.numSepultura = i;
 	}
 
 	public String getNombreTitular() {
