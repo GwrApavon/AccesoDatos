@@ -58,7 +58,7 @@ public class Utilities {
 	 * @return
 	 */
 	static String pedirCuentaDomiciliacion(Scanner sc) {
-		System.out.print("\nCuenta Domiciliacion: ");
+		System.out.print("Cuenta Domiciliacion: ");
 		String cuentaDomiciliacion = sc.nextLine();
 		return cuentaDomiciliacion;
 	}
@@ -68,7 +68,7 @@ public class Utilities {
 	 */
 	static Sepultura pedirSepultura(Scanner sc) {
 		//TODO
-		System.out.print("\n Id Sepultura:");
+		System.out.print("Id Sepultura:");
 		Sepultura sep = new Sepultura();
 		return sep;
 	}
@@ -77,7 +77,7 @@ public class Utilities {
 	 * @return
 	 */
 	static Date pedirFechaEntr(Scanner sc) {
-		System.out.print("\nFecha de enterramiento: ");
+		System.out.print("Fecha de enterramiento: ");
 		Date fEnterramiento = stringToDate(sc);
 		return fEnterramiento;
 	}
@@ -86,7 +86,7 @@ public class Utilities {
 	 * @return
 	 */
 	static Date pedirFechaDef(Scanner sc) {
-		System.out.print("\nFecha de defunción: ");
+		System.out.print("Fecha de defunción: ");
 		Date fDefuncion = stringToDate(sc);
 		return fDefuncion;
 	}
@@ -96,7 +96,7 @@ public class Utilities {
 	 * @return
 	 */
 	static Date pedirBDate(Scanner sc) {
-		System.out.print("\nFecha de nacimiento:");
+		System.out.print("Fecha de nacimiento:");
 		Date fNacimiento = stringToDate(sc);
 		return fNacimiento;
 	}
@@ -106,7 +106,7 @@ public class Utilities {
 	 * @return
 	 */
 	static String pedirApellido2(Scanner sc) {
-		System.out.print("\nSegundo apellido: ");
+		System.out.print("Segundo apellido: ");
 		String ap2 = sc.nextLine();
 		return ap2;
 	}
@@ -116,7 +116,7 @@ public class Utilities {
 	 * @return
 	 */
 	static String pedirApellido1(Scanner sc) {
-		System.out.print("\nPrimer Apellido: ");
+		System.out.print("Primer Apellido: ");
 		String ap1 = sc.nextLine();
 		return ap1;
 	}
@@ -126,7 +126,7 @@ public class Utilities {
 	 * @return
 	 */
 	static String pedirNombre(Scanner sc) {
-		System.out.print("\nNombre: ");
+		System.out.print("Nombre: ");
 		String nombre = sc.nextLine();
 		return nombre;
 	}
@@ -136,7 +136,7 @@ public class Utilities {
 	 * @return
 	 */
 	static int pedirNumSepultura(Scanner sc) {
-		System.out.print("\nNumero de sepultura: ");
+		System.out.print("Numero de sepultura: ");
 		int num = sc.nextInt();
 		sc.nextLine();
 		return num;
@@ -147,7 +147,7 @@ public class Utilities {
 	 * @return
 	 */
 	static String pedirCalle(Scanner sc) {
-		System.out.print("\nCalle: ");
+		System.out.print("Calle: ");
 		String calle = sc.nextLine();
 		return calle;
 	}
@@ -156,7 +156,7 @@ public class Utilities {
 	 * @return
 	 */
 	static String pedirCodContable(Scanner sc) {
-		System.out.print("\nCodigo de contable: ");
+		System.out.print("Codigo de contable: ");
 		String cdContable = sc.nextLine();
 		return cdContable;
 	}
@@ -166,7 +166,7 @@ public class Utilities {
 	 * @return
 	 */
 	static String pedirTipoContrato(Scanner sc) {
-		System.out.print("\nTipo de Contrato: ");
+		System.out.print("Tipo de Contrato: ");
 		String contrato = sc.nextLine();
 		return contrato;
 	}
@@ -176,7 +176,7 @@ public class Utilities {
 	 * @return
 	 */
 	static String pedirObservaciones(Scanner sc) {
-		System.out.print("\nObservaciones: ");
+		System.out.print("Observaciones: ");
 		String observaciones = sc.nextLine();
 		return observaciones;
 	}
@@ -187,7 +187,7 @@ public class Utilities {
 	 */
 	static Responsable pedirResponsable(Scanner sc) {
 		//TODO
-		System.out.print("\n Id Responsable:");
+		System.out.print("Id Responsable:");
 		Responsable res = new Responsable();
 		return res;
 	}
