@@ -82,13 +82,13 @@ public class SepulturaDAOImpHibernate implements SepulturaDAO{
 	 * @exception IndexOutOfBoundsException
 	*/
 	@Override
-	public Sepultura query(Integer option, Integer idn) {
+	public Sepultura query(Integer idn) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Sepultura query2(Integer option, Integer idn) {
+	public Sepultura query2(Integer idn) {
 		// TODO Auto-generated method stub
 		return null;
 	}

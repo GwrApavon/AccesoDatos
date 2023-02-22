@@ -137,7 +137,7 @@ private static ODB odb;
 	 * @exception IndexOutOfBoundsException
 	*/
 	@Override
-	public Responsable query(Integer option, Integer idn) {
+	public Responsable query(Integer idn) {
 		Responsable d = new Responsable();
 		IQuery query;
 		Objects<Responsable> objetos;
@@ -158,7 +158,7 @@ private static ODB odb;
 	}
 	
 	@Override
-	public Responsable query2(Integer option, Integer idn) {
+	public Responsable query2(Integer idn) {
 		Responsable d = new Responsable();
 		IQuery query;
 		Objects<Responsable> objetos;

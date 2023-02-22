@@ -92,12 +92,12 @@ public class DifuntoDAOImpHibernate implements DifuntoDAO{
 	 * @exception IndexOutOfBoundsException
 	*/
 	@Override
-	public Difunto query(Integer option, Integer idn) {
+	public Difunto query(Integer idn) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	@Override
-	public Difunto query2(Integer option, Integer idn) {
+	public Difunto query2(Integer idn) {
 		// TODO Auto-generated method stub
 		return null;
 	}

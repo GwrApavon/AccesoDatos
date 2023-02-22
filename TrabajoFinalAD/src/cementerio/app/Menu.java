@@ -8,7 +8,9 @@ import java.util.Scanner;
 import com.controlador.DifuntoControler;
 import com.controlador.ResponsableControler;
 import com.controlador.SepulturaControler;
+import com.modelo.Difunto;
 import com.modelo.Responsable;
+import com.modelo.Sepultura;
 
 /**
  * @author Angel Pavon Fraile
@@ -149,10 +151,12 @@ public class Menu {
 	 * 
 	 * @param sc Scanner para poder recibir input
 	 */
-	@SuppressWarnings("unused")
 	private static boolean subMenuTabla(int option) {
 		int id, op;
 		
+		Responsable res;
+		Difunto dif;
+		Sepultura sep;
 		//Diferentes controladores disponibles
 		DifuntoControler difc = null;
 		SepulturaControler sepc = null;
@@ -191,63 +195,77 @@ public class Menu {
 			//CREAR
 			case 1:
 					if(option == 1) {
-						difc.crearDifunto(Interacciones.pedirDatosDifunto());
+						dif = Interacciones.pedirDatosDifunto();
+						difc.crearDifunto(dif);
 					}
 					else if(option == 2) {
-						sepc.crearSepultura(Interacciones.pedirDatosSepultura());		
+						sep = Interacciones.pedirDatosSepultura();
+						sepc.crearSepultura(sep);		
 					}
 					else if(option == 3) {
-						Responsable responsable = Interacciones.pedirDatosResponsable();
-						resc.crearResponsable(responsable);
+						res = Interacciones.pedirDatosResponsable();
+						resc.crearResponsable(res);
 					}
 				break;
 			//MODIFICAR
 			case 2: 
 					if(option == 1) {
-						difc.modificarDifunto(Utilities.pedirIDObjeto(sc, 1), Interacciones.modificarDifunto(db));
+						dif = Interacciones.modificarDifunto(db);
+						difc.modificarDifunto(Utilities.pedirIDObjeto(sc, 1), dif);
 					}
 					else if(option == 2) {
-						sepc.modificarSepultura(Utilities.pedirIDObjeto(sc, 1), Interacciones.modificarSepultura(db));
+						sep = Interacciones.modificarSepultura(db);
+						sepc.modificarSepultura(Utilities.pedirIDObjeto(sc, 1), sep);
 					}
 					else if(option == 3) {
-						resc.modificarResponsable(Utilities.pedirIDObjeto(sc, 1), Interacciones.modificarResponsable(db));	
+						res = Interacciones.modificarResponsable(db);
+						resc.modificarResponsable(Utilities.pedirIDObjeto(sc, 1), res);	
 					}
 				break;
 			//BORRAR
 			case 3:
 					if(option == 1) {
-						difc.borrarDifunto(Utilities.pedirIDObjeto(sc, 2));
+						id = Utilities.pedirIDObjeto(sc, 2);
+						difc.borrarDifunto(id);
 					}
 					else if(option == 2) {
-						sepc.borrarSepultura(Utilities.pedirIDObjeto(sc, 2));	
+						id = Utilities.pedirIDObjeto(sc, 3);
+						sepc.borrarSepultura(id);	
 					}
 					else if(option == 3) {
-						resc.borrarResponsable(Utilities.pedirIDObjeto(sc, 2));
+						id = Utilities.pedirIDObjeto(sc, 3);
+						resc.borrarResponsable(id);
 					}
 				break;
 			//CONSULTA 1
 			case 4:
 					if(option == 1) {
-//						dif.modificarDifunto(id, null);
+						id = Utilities.pedirIDObjeto(sc, 3);
+						difc.query(id);
 					}
 					else if(option == 2) {
-//						sep.modificarSepultura(id, null);	
+						id = Utilities.pedirIDObjeto(sc, 3);
+						sepc.query(id);
 					}
 					else if(option == 3) {
-//						res.modificarResponsable(id, null);
+						id = Utilities.pedirIDObjeto(sc, 3);
+						resc.query(id);
 					}
 				break;
 			//CONSULTA 2
 			case 5:
-					if(option == 1) {
-//						dif.modificarDifunto(id, null);
-					}
-					else if(option == 2) {
-//						sep.modificarSepultura(id, null);	
-					}
-					else if(option == 3) {
-//						res.modificarResponsable(id, null);
-					}
+				if(option == 1) {
+					id = Utilities.pedirIDObjeto(sc, 3);
+					difc.query2(id);
+				}
+				else if(option == 2) {
+					id = Utilities.pedirIDObjeto(sc, 3);
+					sepc.query2(id);
+				}
+				else if(option == 3) {
+					id = Utilities.pedirIDObjeto(sc, 3);
+					resc.query2(id);
+				}
 				break;
 			default: 
 					System.out.println("Saliendo...");

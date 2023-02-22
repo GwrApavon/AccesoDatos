@@ -232,6 +232,12 @@ public class Utilities {
 			int id = sacarIntValido(sc);
 			return id;
 		}
+		//NOTE: creo que no se va a utilizar
+		if(op == 3) {
+			System.out.println("Introduzca la id de lo que quiera consultar:");
+			int id = sacarIntValido(sc);
+			return id;
+		}
 		return 0;
 	}
 }

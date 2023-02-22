@@ -17,6 +17,6 @@ public interface GenericDAO<T, ID extends Serializable>{
 	public boolean create(T element);
 	public boolean modify(ID idn, T element);
 	public boolean delete(ID idn);
-	public T query(ID option, ID idn);
-	public T query2(ID option, ID idn);
+	public T query(ID idn);
+	public T query2(ID idn);
 }

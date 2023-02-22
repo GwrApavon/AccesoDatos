@@ -9,6 +9,7 @@ import com.dao.SepulturaDAO;
 import com.dao.impl.SepulturaDAOImpExistDB;
 import com.dao.impl.SepulturaDAOImpHibernate;
 import com.dao.impl.SepulturaDAOImpNeodatis;
+import com.modelo.Difunto;
 import com.modelo.Sepultura;
 
 /**
@@ -68,5 +69,22 @@ public class SepulturaControler {
 	 */
 	public boolean borrarSepultura(int id) {
 		return sepultura.delete(id);
+	}
+	
+	/**
+	 * LLaman al metodo sepultura.query()
+	 * @param id identificador de la sepultura
+	 * @return El obejto (Por ver si es esto lo que devuelve o un array)
+	 */
+	public Sepultura query(int idn) {
+		return sepultura.query(idn);
+	}
+	/**
+	 * LLaman al metodo sepultura.query2()
+	 * @param id identificador de la sepultura
+	 * @return El obejto (Por ver si es esto lo que devuelve o un array)
+	 */
+	public Sepultura query2(int idn) {
+		return sepultura.query( idn);
 	}
 }

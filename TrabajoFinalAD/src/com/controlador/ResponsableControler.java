@@ -9,6 +9,7 @@ import com.dao.ResponsableDAO;
 import com.dao.impl.ResponsableDAOImpExistDB;
 import com.dao.impl.ResponsableDAOImpHibernate;
 import com.dao.impl.ResponsableDAOImpNeodatis;
+import com.modelo.Difunto;
 import com.modelo.Responsable;
 
 /**
@@ -69,5 +70,22 @@ public class ResponsableControler {
 	 */
 	public boolean borrarResponsable(int id) {
 		return responsable.delete(id);
+	}
+	
+	/**
+	 * LLaman al metodo responsable.query()
+	 * @param id identificador del responsable
+	 * @return El obejto (Por ver si es esto lo que devuelve o un array)
+	 */
+	public Responsable query(int idn) {
+		return responsable.query(idn);
+	}
+	/**
+	 * LLaman al metodo responsable.query2()
+	 * @param id identificador del responsable
+	 * @return El obejto (Por ver si es esto lo que devuelve o un array)
+	 */
+	public Responsable query2(int idn) {
+		return responsable.query(idn);
 	}
 }

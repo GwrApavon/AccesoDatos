@@ -83,12 +83,12 @@ public class ResponsableDAOImpHibernate implements ResponsableDAO{
 	 * @exception IndexOutOfBoundsException
 	*/
 	@Override
-	public Responsable query(Integer option, Integer idn) {
+	public Responsable query(Integer idn) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	@Override
-	public Responsable query2(Integer option, Integer idn) {
+	public Responsable query2(Integer idn) {
 		// TODO Auto-generated method stub
 		return null;
 	}

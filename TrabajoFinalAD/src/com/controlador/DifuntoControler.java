@@ -69,4 +69,21 @@ public class DifuntoControler {
 	public boolean borrarDifunto(int id) {
 		return difunto.delete(id);
 	}
+	
+	/**
+	 * LLaman al metodo difunto.query()
+	 * @param id identificador del difunto
+	 * @return El obejto (Por ver si es esto lo que devuelve o un array)
+	 */
+	public Difunto query(int idn) {
+		return difunto.query(idn);
+	}
+	/**
+	 * LLaman al metodo difunto.query2()
+	 * @param id identificador del difunto
+	 * @return El obejto (Por ver si es esto lo que devuelve o un array)
+	 */
+	public Difunto query2(int idn) {
+		return difunto.query(idn);
+	}
 }

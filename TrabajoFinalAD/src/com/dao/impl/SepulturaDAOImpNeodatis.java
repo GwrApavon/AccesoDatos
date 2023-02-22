@@ -3,6 +3,7 @@
  */
 package com.dao.impl;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,11 +11,14 @@ import org.neodatis.odb.ODB;
 import org.neodatis.odb.ODBFactory;
 import org.neodatis.odb.Objects;
 import org.neodatis.odb.core.query.IQuery;
+import org.neodatis.odb.core.query.IValuesQuery;
 import org.neodatis.odb.core.query.criteria.Where;
 import org.neodatis.odb.impl.core.query.criteria.CriteriaQuery;
+import org.neodatis.odb.impl.core.query.values.ValuesCriteriaQuery;
 
 import com.dao.SepulturaDAO;
 import com.modelo.Difunto;
+import com.modelo.Responsable;
 import com.modelo.Sepultura;
 
 /**
@@ -65,6 +69,8 @@ private static ODB odb;
 	
 	@Override
 	public boolean create(Sepultura sep) {
+		int id = maxID();
+		sep.setIdSepultura(id);
 		odb.store(sep);
 		odb.commit();
 		System.out.println("Responsable insertado");
@@ -132,7 +138,7 @@ private static ODB odb;
 	 * @exception IndexOutOfBoundsException
 	*/
 	@Override
-	public Sepultura query(Integer option, Integer idn) {
+	public Sepultura query(Integer idn) {
 		Sepultura d = new Sepultura();
 		IQuery query;
 		Objects<Sepultura> objetos;
@@ -153,7 +159,7 @@ private static ODB odb;
 		return d;
 	}
 	@Override
-	public Sepultura query2(Integer option, Integer idn) {
+	public Sepultura query2(Integer idn) {
 		Sepultura d = new Sepultura();
 		IQuery query;
 		Objects<Sepultura> objetos;
@@ -172,6 +178,23 @@ private static ODB odb;
 		}
 		
 		return d;
+	}
+	
+	/**
+	 * Obtiene la ultima id le suma uno y la devuelve
+	 * @return int 
+	 */
+	public int maxID() {
+		int id = 0;
+		IValuesQuery query;
+		try {
+			query = new ValuesCriteriaQuery(Responsable.class).max("idResponsable");
+			id = ((BigDecimal) odb.getValues(query).getFirst().getByIndex(0)).intValue();
+		}catch(IndexOutOfBoundsException i) {
+			i.printStackTrace();
+		}
+		id++;
+		return id;
 	}
 
 }

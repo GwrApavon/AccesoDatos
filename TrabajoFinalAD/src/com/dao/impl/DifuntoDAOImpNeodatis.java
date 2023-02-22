@@ -3,6 +3,7 @@
  */
 package com.dao.impl;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,8 +15,10 @@ import org.neodatis.odb.ODB;
 import org.neodatis.odb.ODBFactory;
 import org.neodatis.odb.Objects;
 import org.neodatis.odb.core.query.IQuery;
+import org.neodatis.odb.core.query.IValuesQuery;
 import org.neodatis.odb.core.query.criteria.Where;
 import org.neodatis.odb.impl.core.query.criteria.CriteriaQuery;
+import org.neodatis.odb.impl.core.query.values.ValuesCriteriaQuery;
 
 /**
  * @author Angel Pavon Fraile
@@ -66,6 +69,8 @@ public class DifuntoDAOImpNeodatis implements DifuntoDAO{
 	
 	@Override
 	public boolean create(Difunto dif) {
+		int id = maxID();
+		dif.setIdDifunto(id);
 		odb.store(dif);
 		odb.commit();
 		System.out.println("Difunto insertado");
@@ -133,7 +138,7 @@ public class DifuntoDAOImpNeodatis implements DifuntoDAO{
 	*/
 	
 	@Override
-	public Difunto query(Integer option, Integer idn) {
+	public Difunto query(Integer idn) {
 		Difunto d = new Difunto();
 		IQuery query;
 		Objects<Difunto> objetos;
@@ -152,7 +157,8 @@ public class DifuntoDAOImpNeodatis implements DifuntoDAO{
 		}
 		return d;
 	}
-	public Difunto query2(Integer option, Integer idn) {
+	@Override
+	public Difunto query2(Integer idn) {
 		Difunto d = new Difunto();
 		IQuery query;
 		Objects<Difunto> objetos;
@@ -170,5 +176,22 @@ public class DifuntoDAOImpNeodatis implements DifuntoDAO{
 			}
 		}
 		return d;
+	}
+	
+	/**
+	 * Obtiene la ultima id le suma uno y la devuelve
+	 * @return int 
+	 */
+	public int maxID() {
+		int id = 0;
+		IValuesQuery query;
+		try {
+			query = new ValuesCriteriaQuery(Responsable.class).max("idResponsable");
+			id = ((BigDecimal) odb.getValues(query).getFirst().getByIndex(0)).intValue();
+		}catch(IndexOutOfBoundsException i) {
+			i.printStackTrace();
+		}
+		id++;
+		return id;
 	}
 }
