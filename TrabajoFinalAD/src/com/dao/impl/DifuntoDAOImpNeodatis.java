@@ -1,5 +1,5 @@
 /**
- * 
+ *  Implementacion de neodatis para Difunto
  */
 package com.dao.impl;
 
@@ -18,7 +18,7 @@ import org.neodatis.odb.core.query.criteria.Where;
 import org.neodatis.odb.impl.core.query.criteria.CriteriaQuery;
 
 /**
- * @author alu
+ * @author Angel Pavon Fraile
  *
  */
 public class DifuntoDAOImpNeodatis implements DifuntoDAO{

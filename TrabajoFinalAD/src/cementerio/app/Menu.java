@@ -1,11 +1,9 @@
 /**
- * 
+ *  Menu para la aplicacion
  */
 package cementerio.app;
 
-import java.util.HashSet;
 import java.util.Scanner;
-import java.util.Set;
 
 import com.controlador.DifuntoControler;
 import com.controlador.ResponsableControler;
@@ -13,7 +11,7 @@ import com.controlador.SepulturaControler;
 import com.modelo.Responsable;
 
 /**
- * @author alu
+ * @author Angel Pavon Fraile
  *
  */
 public class Menu {

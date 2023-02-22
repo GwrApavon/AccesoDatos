@@ -1,5 +1,5 @@
 /**
- * 
+ *  Implementacion de hibernate para Difunto
  */
 package com.dao.impl;
 
@@ -14,11 +14,9 @@ import com.controlador.HibernateUtil;
 import com.dao.DifuntoDAO;
 import com.modelo.Difunto;
 
-//import controlador.HibernateUtil;
 
 /**
- * @author alu
- *
+ * @author Angel Pavon Fraile
  */
 public class DifuntoDAOImpHibernate implements DifuntoDAO{
 	

@@ -1,5 +1,5 @@
 /**
- * 
+ *  Implementacion de hibernate para Responsable
  */
 package com.dao.impl;
 
@@ -14,7 +14,7 @@ import com.dao.ResponsableDAO;
 import com.modelo.Responsable;
 
 /**
- * @author alu
+ * @author Angel Pavon Fraile
  *
  */
 public class ResponsableDAOImpHibernate implements ResponsableDAO{

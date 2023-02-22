@@ -1,5 +1,5 @@
 /**
- * 
+ *  Implementacion de ExistDb para Sepultura
  */
 package com.dao.impl;
 
@@ -11,7 +11,7 @@ import com.dao.SepulturaDAO;
 import com.modelo.Sepultura;
 
 /**
- * @author alu
+ * @author Angel Pavon Fraile
  *
  */
 public class SepulturaDAOImpExistDB implements SepulturaDAO{

@@ -1,5 +1,5 @@
 /**
- * 
+ *  Implementacion de hibernate para Sepultura
  */
 package com.dao.impl;
 
@@ -13,7 +13,7 @@ import com.dao.SepulturaDAO;
 import com.modelo.Sepultura;
 
 /**
- * @author alu
+ * @author Angel Pavon Fraile
  *
  */
 public class SepulturaDAOImpHibernate implements SepulturaDAO{

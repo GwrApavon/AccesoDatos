@@ -1,5 +1,5 @@
 /**
- * 
+ *  Interacciones que puede tener con la base de datos
  */
 package cementerio.app;
 
@@ -15,7 +15,7 @@ import com.modelo.Responsable;
 import com.modelo.Sepultura;
 
 /**
- * @author alu
+ * @author Angel Pavon Fraile
  *
  */
 public class Interacciones {

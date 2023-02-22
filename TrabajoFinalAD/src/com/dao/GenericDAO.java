@@ -1,7 +1,15 @@
+/**
+ * Clase generica para DAO
+ */
 package com.dao;
 
 import java.io.Serializable;
 import java.util.List;
+
+/**
+ * @author Angel Pavon Fraile
+ *
+ */
 
 public interface GenericDAO<T, ID extends Serializable>{
 

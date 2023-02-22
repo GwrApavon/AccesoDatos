@@ -5,7 +5,7 @@ package com.dao;
 import com.modelo.Difunto;
 
 /**
- * @author alu
+ * @author Angel Pavon Fraile
  *
  */
 public interface DifuntoDAO extends GenericDAO <Difunto, Integer>{

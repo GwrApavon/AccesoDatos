@@ -1,5 +1,5 @@
 /**
- * 
+ *  Implementacion de ExistDb para difunto
  */
 package com.dao.impl;
 
@@ -11,7 +11,7 @@ import com.dao.DifuntoDAO;
 import com.modelo.Difunto;
 
 /**
- * @author alu
+ * @author Angel Pavon Fraile
  *
  */
 public class DifuntoDAOImpExistDB implements DifuntoDAO{

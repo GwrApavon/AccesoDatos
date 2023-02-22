@@ -1,5 +1,5 @@
 /**
- * 
+ *  Implementacion de neodatis para Sepultura
  */
 package com.dao.impl;
 
@@ -18,7 +18,7 @@ import com.modelo.Difunto;
 import com.modelo.Sepultura;
 
 /**
- * @author alu
+ * @author Angel Pavon Fraile
  *
  */
 public class SepulturaDAOImpNeodatis implements SepulturaDAO{
