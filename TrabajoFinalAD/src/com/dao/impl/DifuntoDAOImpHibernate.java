@@ -10,10 +10,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import com.controlador.HibernateUtil;
 import com.dao.DifuntoDAO;
 import com.modelo.Difunto;
-
-import cementerio.cfg.HibernateUtil;
 
 //import controlador.HibernateUtil;
 
@@ -34,6 +33,9 @@ public class DifuntoDAOImpHibernate implements DifuntoDAO{
 		
 	}
 
+	/*
+	 * Devuelve todos los elementos de la tabla
+	 */
 	@Override
 	public List<Difunto> getAll() {
 		Query<Difunto> q = sesion.createQuery("from Difunto");
@@ -41,6 +43,11 @@ public class DifuntoDAOImpHibernate implements DifuntoDAO{
 		return lista;
 	}
 
+	/** Creador difuntos
+	 * Crea un difunto con el objeto que recibe
+	 * @param dif Objeto difunto que se va a guardar
+	 * @return boolean
+	 */
 	@Override
 	public boolean create(Difunto element) {
 		tx= sesion.beginTransaction();
@@ -49,6 +56,13 @@ public class DifuntoDAOImpHibernate implements DifuntoDAO{
 		return false;
 	}
 
+	/** Modificador difuntos
+	 * Modifica un difunto ya existente con nuevos datos
+	 * @param id identificador del difunto
+	 * @param dif Objeto difunto con nuevos datos
+	 * @return boolean
+	 * @exception IndexOutOfBoundsException
+	 */
 	@Override
 	public boolean modify(Integer idn, Difunto element) {
 		tx= sesion.beginTransaction();
@@ -57,6 +71,12 @@ public class DifuntoDAOImpHibernate implements DifuntoDAO{
 		return false;
 	}
 
+	/** Borrador difuntos
+	 * Borra un difunto existente cuya id sea la que se pasa por parámetro
+	 * @param id identificador del difunto
+	 * @return boolean
+	 * @exception IndexOutOfBoundsException
+	*/
 	@Override
 	public boolean delete(Integer idn) {
 		tx= sesion.beginTransaction();
@@ -65,8 +85,21 @@ public class DifuntoDAOImpHibernate implements DifuntoDAO{
 		return false;
 	}
 
+	/** Consultas difuntos
+	 * Hace una consulta dependiendo del número que se le pase por parámetro 
+	 * Consulta 1 -->
+	 * Consulta 2 -->
+	 * @param id identificador del difunto
+	 * @return Difunto
+	 * @exception IndexOutOfBoundsException
+	*/
 	@Override
 	public Difunto query(Integer option, Integer idn) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Difunto query2(Integer option, Integer idn) {
 		// TODO Auto-generated method stub
 		return null;
 	}

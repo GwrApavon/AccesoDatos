@@ -20,6 +20,7 @@ import com.modelo.Sepultura;
  */
 public class Interacciones {
 	
+	//Scanner
 	static Scanner sc = new Scanner(System.in);
 	
 	/**
@@ -228,6 +229,7 @@ public class Interacciones {
 	 * @param db Base de datos que se utiliza
 	 * @return objeto del tipo que se utilice (Difunto, Responsable, Sepultura)
 	 */
+	//Difunto
 	public static Difunto mostrarDifuntos(String db) {
 		DifuntoControler difc = new DifuntoControler(db);
 		ArrayList<Difunto> adif = (ArrayList<Difunto>) difc.listarTodos();
@@ -241,6 +243,7 @@ public class Interacciones {
 		
 		return adif.get(election);
 	}
+	//Sepultura
 	public static Sepultura mostrarSepulturas(String db) {
 		SepulturaControler sepc = new SepulturaControler(db);
 		ArrayList<Sepultura> asep = (ArrayList<Sepultura>) sepc.listarTodos();
@@ -255,6 +258,7 @@ public class Interacciones {
 		return asep.get(election);
 		
 	}
+	//Responsable
 	public static Responsable mostrarResponsable(String db) {
 		ResponsableControler resc = new ResponsableControler(db);
 		ArrayList<Responsable> ares = (ArrayList<Responsable>) resc.listarTodos();

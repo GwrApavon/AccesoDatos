@@ -14,6 +14,7 @@ import org.neodatis.odb.core.query.criteria.Where;
 import org.neodatis.odb.impl.core.query.criteria.CriteriaQuery;
 
 import com.dao.SepulturaDAO;
+import com.modelo.Difunto;
 import com.modelo.Sepultura;
 
 /**
@@ -122,13 +123,12 @@ private static ODB odb;
 
 	
 	
-	/* Consultas responsables
+	/** Consultas responsables
 	 * Hace una consulta dependiendo del número que se le pase por parámetro 
-	 * Consulta 1 --> Muestra un responsable dependiendo de la id que reciba de parámetro
+	 * Consulta 1 -->
 	 * Consulta 2 -->
-	 * Consulta 3 --> 
 	 * @param id identificador del difunto
-	 * @return boolean
+	 * @return Sepultura
 	 * @exception IndexOutOfBoundsException
 	*/
 	@Override
@@ -136,31 +136,39 @@ private static ODB odb;
 		Sepultura d = new Sepultura();
 		IQuery query;
 		Objects<Sepultura> objetos;
-		switch(option) {
-			case 1:
-				query = new CriteriaQuery(Sepultura.class, Where.equal("idDep", idn));
-				objetos = odb.getObjects(query);
-				
-				if (objetos != null) {
-					try {
-						d = (Sepultura) objetos.getFirst();
-					} catch (IndexOutOfBoundsException i) {
-						i.printStackTrace();
-						System.out.println("No se ha encontrado ningun difunto con identificador" + idn);
-						d = null;
-					}
-				}
-				break;
-			case 2:
-				//Consulta compleja 1
-				break;
-			case 3:
-				//Consulta compleja 2
-				break;
-			default:
-				d = null;
-				System.out.println("Elija una opción valida");
 		
+		query = new CriteriaQuery(Sepultura.class, Where.equal("idResponsable", idn));
+		objetos = odb.getObjects(query);
+				
+		if (objetos != null) {
+			try {
+				d = (Sepultura) objetos.getFirst();
+			} catch (IndexOutOfBoundsException i) {
+				i.printStackTrace();
+				System.out.println("No se ha encontrado ningun difunto con identificador" + idn);
+				d = null;
+			}
+		}
+		
+		return d;
+	}
+	@Override
+	public Sepultura query2(Integer option, Integer idn) {
+		Sepultura d = new Sepultura();
+		IQuery query;
+		Objects<Sepultura> objetos;
+		
+		query = new CriteriaQuery(Sepultura.class, Where.equal("idResponsable", idn));
+		objetos = odb.getObjects(query);
+				
+		if (objetos != null) {
+			try {
+				d = (Sepultura) objetos.getFirst();
+			} catch (IndexOutOfBoundsException i) {
+				i.printStackTrace();
+				System.out.println("No se ha encontrado ningun difunto con identificador" + idn);
+				d = null;
+			}
 		}
 		
 		return d;

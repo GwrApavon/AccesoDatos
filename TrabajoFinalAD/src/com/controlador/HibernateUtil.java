@@ -1,4 +1,4 @@
-package cementerio.cfg;
+package com.controlador;
 
 
 import org.hibernate.SessionFactory;

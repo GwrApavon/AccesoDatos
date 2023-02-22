@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.dao.DifuntoDAO;
 import com.modelo.Difunto;
+import com.modelo.Responsable;
 
 import org.neodatis.odb.ODB;
 import org.neodatis.odb.ODBFactory;
@@ -95,8 +96,6 @@ public class DifuntoDAOImpNeodatis implements DifuntoDAO{
 		return valor;
 	}
 
-	
-	
 	/** Borrador difuntos
 	 * Borra un difunto existente cuya id sea la que se pasa por parámetro
 	 * @param id identificador del difunto
@@ -126,9 +125,8 @@ public class DifuntoDAOImpNeodatis implements DifuntoDAO{
 	
 	/** Consultas difuntos
 	 * Hace una consulta dependiendo del número que se le pase por parámetro 
-	 * Consulta 1 --> Muestra un difunto dependiendo de la id que reciba de parámetro
+	 * Consulta 1 -->
 	 * Consulta 2 -->
-	 * Consulta 3 --> 
 	 * @param id identificador del difunto
 	 * @return boolean
 	 * @exception IndexOutOfBoundsException
@@ -139,57 +137,38 @@ public class DifuntoDAOImpNeodatis implements DifuntoDAO{
 		Difunto d = new Difunto();
 		IQuery query;
 		Objects<Difunto> objetos;
-		switch(option) {
-			case 1:
-				query = new CriteriaQuery(Difunto.class, Where.equal("idDep", idn));
-				objetos = odb.getObjects(query);
+		
+		query = new CriteriaQuery(Difunto.class, Where.equal("idResponsable", idn));
+		objetos = odb.getObjects(query);
 				
-				if (objetos != null) {
-					try {
-						d = (Difunto) objetos.getFirst();
-					} catch (IndexOutOfBoundsException i) {
-						i.printStackTrace();
-						System.out.println("No se ha encontrado ningun difunto con identificador" + idn);
-						d = null;
-					}
-				}
-				break;
-			case 2:
-				//Consulta compleja 1
-				query = new CriteriaQuery(Difunto.class, Where.equal("idDep", idn));
-				objetos = odb.getObjects(query);
-				
-				if (objetos != null) {
-					try {
-						d = (Difunto) objetos.getFirst();
-					} catch (IndexOutOfBoundsException i) {
-						i.printStackTrace();
-						System.out.println("No se ha encontrado ningun difunto con identificador" + idn);
-						d = null;
-					}
-				}
-				break;
-			case 3:
-				//Consulta compleja 2
-				query = new CriteriaQuery(Difunto.class, Where.equal("idDep", idn));
-				objetos = odb.getObjects(query);
-				
-				if (objetos != null) {
-					try {
-						d = (Difunto) objetos.getFirst();
-					} catch (IndexOutOfBoundsException ioobe) {
-						ioobe.printStackTrace();
-						System.out.println("No se ha encontrado ningun difunto con identificador" + idn);
-						d = null;
-					}
-				}
-				break;
-			default:
+		if (objetos != null) {
+			try {
+				d = (Difunto) objetos.getFirst();
+			} catch (IndexOutOfBoundsException i) {
+				i.printStackTrace();
+				System.out.println("No se ha encontrado ningun difunto con identificador" + idn);
 				d = null;
-				System.out.println("Elija una opción valida");
-		
+			}
 		}
+		return d;
+	}
+	public Difunto query2(Integer option, Integer idn) {
+		Difunto d = new Difunto();
+		IQuery query;
+		Objects<Difunto> objetos;
 		
+		query = new CriteriaQuery(Difunto.class, Where.equal("idResponsable", idn));
+		objetos = odb.getObjects(query);
+				
+		if (objetos != null) {
+			try {
+				d = (Difunto) objetos.getFirst();
+			} catch (IndexOutOfBoundsException i) {
+				i.printStackTrace();
+				System.out.println("No se ha encontrado ningun difunto con identificador" + idn);
+				d = null;
+			}
+		}
 		return d;
 	}
 }

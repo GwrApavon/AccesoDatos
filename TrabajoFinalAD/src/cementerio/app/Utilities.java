@@ -18,6 +18,12 @@ import com.modelo.Sepultura;
  */
 public class Utilities {
 
+	/**
+	 * Pide un int y comprueba que sea mayor que 0 
+	 * @param s
+	 * @return int validado
+	 * @exception InputMismatchException si lo que se introduce no es un numero
+	 */
 	public static int sacarIntValido(Scanner s){
 		 boolean salir = false;
 		 int i = 0;
@@ -33,6 +39,12 @@ public class Utilities {
 		 return i;
 	 }
 	
+	/**
+	 * Pide una fecha en un formato en específico y devuelve un elemento Date
+	 * @param s
+	 * @return Date validado
+	 * @exception ParseException si la fecha no tiene el formato correspondiente
+	 */
 	public static Date stringToDate(Scanner s){
 		boolean salir = false; 
 		SimpleDateFormat formato = new SimpleDateFormat("yyyy/mm/dd");
@@ -54,8 +66,9 @@ public class Utilities {
 	
 	
 	/**
+	 * Pide una Cuenta Domiciliacion y la devuelve
 	 * @param sc
-	 * @return
+	 * @return String 
 	 */
 	static String pedirCuentaDomiciliacion(Scanner sc) {
 		System.out.print("Cuenta Domiciliacion: ");
@@ -73,8 +86,9 @@ public class Utilities {
 		return sep;
 	}
 	/**
+	 * Pide la fecha de enterramiento y la devuelve
 	 * @param sc
-	 * @return
+	 * @return Date
 	 */
 	static Date pedirFechaEntr(Scanner sc) {
 		System.out.print("Fecha de enterramiento: ");
@@ -82,8 +96,9 @@ public class Utilities {
 		return fEnterramiento;
 	}
 	/**
+	 * Pide la fecha de defuncion y la devuelve
 	 * @param sc
-	 * @return
+	 * @return Date
 	 */
 	static Date pedirFechaDef(Scanner sc) {
 		System.out.print("Fecha de defunción: ");
@@ -92,8 +107,9 @@ public class Utilities {
 	}
 
 	/**
+	 * Pide la fecha de nacimiento y la devuelve
 	 * @param sc
-	 * @return
+	 * @return Date
 	 */
 	static Date pedirBDate(Scanner sc) {
 		System.out.print("Fecha de nacimiento:");
@@ -102,8 +118,9 @@ public class Utilities {
 	}
 
 	/**
+	 * Pide el segundo apellido y lo devuelve
 	 * @param sc
-	 * @return
+	 * @return String
 	 */
 	static String pedirApellido2(Scanner sc) {
 		System.out.print("Segundo apellido: ");
@@ -112,8 +129,9 @@ public class Utilities {
 	}
 
 	/**
+	 * Pide el primer apellido y lo devuelve
 	 * @param sc
-	 * @return
+	 * @return String
 	 */
 	static String pedirApellido1(Scanner sc) {
 		System.out.print("Primer Apellido: ");
@@ -122,8 +140,9 @@ public class Utilities {
 	}
 
 	/**
+	 * Pide el nombre y lo devuelve 
 	 * @param sc
-	 * @return
+	 * @return String
 	 */
 	static String pedirNombre(Scanner sc) {
 		System.out.print("Nombre: ");
@@ -132,19 +151,20 @@ public class Utilities {
 	}
 
 	/**
+	 * Pide el numero de la sepultura y lo devuelve
 	 * @param sc
-	 * @return
+	 * @return int
 	 */
 	static int pedirNumSepultura(Scanner sc) {
 		System.out.print("Numero de sepultura: ");
-		int num = sc.nextInt();
-		sc.nextLine();
+		int num = sacarIntValido(sc);
 		return num;
 	}
 
 	/**
+	 * Pide la calle de la sepultura y lo devuelve
 	 * @param sc
-	 * @return
+	 * @return String
 	 */
 	static String pedirCalle(Scanner sc) {
 		System.out.print("Calle: ");
@@ -152,8 +172,9 @@ public class Utilities {
 		return calle;
 	}
 	/**
+	 * Pide el codigo del contable y lo devuelve
 	 * @param sc
-	 * @return
+	 * @return String
 	 */
 	static String pedirCodContable(Scanner sc) {
 		System.out.print("Codigo de contable: ");
@@ -162,8 +183,9 @@ public class Utilities {
 	}
 	
 	/**
+	 * Pide el tipo de contrato y lo devuelve
 	 * @param sc
-	 * @return
+	 * @return String
 	 */
 	static String pedirTipoContrato(Scanner sc) {
 		System.out.print("Tipo de Contrato: ");
@@ -172,8 +194,9 @@ public class Utilities {
 	}
 	
 	/**
+	 * Pide las observaciones y las devuelve
 	 * @param sc
-	 * @return
+	 * @return String
 	 */
 	static String pedirObservaciones(Scanner sc) {
 		System.out.print("Observaciones: ");
@@ -192,6 +215,12 @@ public class Utilities {
 		return res;
 	}
 	
+	/**
+	 * Pide el id de un objeto y lo devuelve
+	 * @param sc
+	 * @param op identifica si es para modificar o borrar
+	 * @return int 
+	 */
 	static int pedirIDObjeto(Scanner sc, int op) {
 		if(op == 1) {
 			System.out.println("Introduzca la id de lo que quiera modificar:");

@@ -10,8 +10,12 @@ import org.neodatis.odb.ODB;
 import org.neodatis.odb.ODBFactory;
 import org.neodatis.odb.Objects;
 import org.neodatis.odb.core.query.IQuery;
+import org.neodatis.odb.core.query.IValuesQuery;
 import org.neodatis.odb.core.query.criteria.Where;
 import org.neodatis.odb.impl.core.query.criteria.CriteriaQuery;
+import org.neodatis.odb.impl.core.query.values.ValuesCriteriaQuery;
+
+import java.math.BigDecimal;
 
 import com.dao.ResponsableDAO;
 import com.modelo.Responsable;
@@ -64,6 +68,8 @@ private static ODB odb;
 	
 	@Override
 	public boolean create(Responsable res) {
+		int id = maxID();
+		res.setIdResponsable(id);
 		odb.store(res);
 		odb.commit();
 		System.out.println("Responsable insertado");
@@ -105,7 +111,7 @@ private static ODB odb;
 	@Override
 	public boolean delete(Integer idn) {
 		boolean valor =false;
-		IQuery query = new CriteriaQuery(Responsable.class, Where.equal("idDep", idn));
+		IQuery query = new CriteriaQuery(Responsable.class, Where.equal("idResponsable", idn));
 		Objects<Responsable> objetos = odb.getObjects(query);
 		try {
 			Responsable responsable = (Responsable) objetos.getFirst();
@@ -124,11 +130,10 @@ private static ODB odb;
 	
 	/* Consultas responsables
 	 * Hace una consulta dependiendo del número que se le pase por parámetro 
-	 * Consulta 1 --> Muestra un responsable dependiendo de la id que reciba de parámetro
+	 * Consulta 1 --> 
 	 * Consulta 2 -->
-	 * Consulta 3 --> 
 	 * @param id identificador del difunto
-	 * @return boolean
+	 * @return Responsable
 	 * @exception IndexOutOfBoundsException
 	*/
 	@Override
@@ -136,35 +141,58 @@ private static ODB odb;
 		Responsable d = new Responsable();
 		IQuery query;
 		Objects<Responsable> objetos;
-		switch(option) {
-			case 1:
-				query = new CriteriaQuery(Responsable.class, Where.equal("idDep", idn));
-				objetos = odb.getObjects(query);
+		
+		query = new CriteriaQuery(Responsable.class, Where.equal("idResponsable", idn));
+		objetos = odb.getObjects(query);
 				
-				if (objetos != null) {
-					try {
-						d = (Responsable) objetos.getFirst();
-					} catch (IndexOutOfBoundsException i) {
-						i.printStackTrace();
-						System.out.println("No se ha encontrado ningun difunto con identificador" + idn);
-						d = null;
-					}
-				}
-				break;
-			case 2:
-				//Consulta compleja 1
-				
-				break;
-			case 3:
-				//Consulta compleja 2
-				break;
-			default:
+		if (objetos != null) {
+			try {
+				d = (Responsable) objetos.getFirst();
+			} catch (IndexOutOfBoundsException i) {
+				i.printStackTrace();
+				System.out.println("No se ha encontrado ningun difunto con identificador" + idn);
 				d = null;
-				System.out.println("Elija una opción valida");
-		
+			}
 		}
-		
 		return d;
+	}
+	
+	@Override
+	public Responsable query2(Integer option, Integer idn) {
+		Responsable d = new Responsable();
+		IQuery query;
+		Objects<Responsable> objetos;
+		
+		query = new CriteriaQuery(Responsable.class, Where.equal("idResponsable", idn));
+		objetos = odb.getObjects(query);
+				
+		if (objetos != null) {
+			try {
+				d = (Responsable) objetos.getFirst();
+			} catch (IndexOutOfBoundsException i) {
+				i.printStackTrace();
+				System.out.println("No se ha encontrado ningun difunto con identificador" + idn);
+				d = null;
+			}
+		}
+		return d;
+	}
+	
+	/**
+	 * Obtiene la ultima id le suma uno y la devuelve
+	 * @return int 
+	 */
+	public int maxID() {
+		int id = 0;
+		IValuesQuery query;
+		try {
+			query = new ValuesCriteriaQuery(Responsable.class).max("idResponsable");
+			id = ((BigDecimal) odb.getValues(query).getFirst().getByIndex(0)).intValue();
+		}catch(IndexOutOfBoundsException i) {
+			i.printStackTrace();
+		}
+		id++;
+		return id;
 	}
 
 }

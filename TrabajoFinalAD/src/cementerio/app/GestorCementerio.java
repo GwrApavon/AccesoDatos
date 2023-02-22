@@ -1,16 +1,19 @@
 
 /**
- * 
+ *  Main del gestor cementerio
  */
 package cementerio.app;
 
 /**
- * @author alu
+ * @author Angel Pavon Fraile
  *
  */
 public class GestorCementerio {
 	
 	/**
+	 * Mensaje de bienvenida 
+	 * Inicia bucle infinito con el menu principal
+	 * Mensaje de salida
 	 * @param args
 	 */
 	public static void main(String[] args) {

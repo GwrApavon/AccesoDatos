@@ -22,6 +22,9 @@ public class SepulturaDAOImpExistDB implements SepulturaDAO{
 	Database BD;
 	String URI;
 	
+	/*
+	 * Devuelve todos los elementos de la tabla
+	 */
 	@Override
 	public List<Sepultura> getAll() {
 		// TODO Auto-generated method stub
@@ -46,8 +49,22 @@ public class SepulturaDAOImpExistDB implements SepulturaDAO{
 		return false;
 	}
 
+	/** Consultas responsables
+	 * Hace una consulta dependiendo del número que se le pase por parámetro 
+	 * Consulta 1 -->
+	 * Consulta 2 -->
+	 * @param id identificador del difunto
+	 * @return Sepultura
+	 * @exception IndexOutOfBoundsException
+	*/
 	@Override
 	public Sepultura query(Integer option, Integer idn) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Sepultura query2(Integer option, Integer idn) {
 		// TODO Auto-generated method stub
 		return null;
 	}
