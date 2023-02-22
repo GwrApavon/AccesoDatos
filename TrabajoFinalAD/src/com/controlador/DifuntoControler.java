@@ -21,7 +21,7 @@ public class DifuntoControler {
 	
 	public DifuntoControler(String tipo) {
 		if(tipo.equals("Neodatis")){
-			difunto = new DifuntoDAOImpNeodatis("cementerio.db");
+			difunto = new DifuntoDAOImpNeodatis(NeodatisUtils.buildODBConection("Cementerio.db"));
 		}
 		if(tipo.equals("Hibernate")){
 			difunto = new DifuntoDAOImpHibernate();

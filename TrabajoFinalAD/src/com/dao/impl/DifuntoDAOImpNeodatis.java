@@ -24,8 +24,8 @@ public class DifuntoDAOImpNeodatis implements DifuntoDAO{
 
 	private static ODB odb;
 	
-	public DifuntoDAOImpNeodatis(String db) {
-		odb = ODBFactory.open(db);
+	public DifuntoDAOImpNeodatis(ODB odb) {
+		this.odb = odb;
 	}
 	
 	public static ODB crearConexion() {

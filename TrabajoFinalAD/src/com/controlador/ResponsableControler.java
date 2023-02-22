@@ -20,6 +20,7 @@ public class ResponsableControler {
 	private ResponsableDAO responsable;
 		
 		public ResponsableControler(String tipo) {
+			System.out.println(tipo);
 			if(tipo.equals("Neodatis")){
 				responsable = new ResponsableDAOImpNeodatis("cementerio.db");
 			}
@@ -35,15 +36,15 @@ public class ResponsableControler {
 			return responsable.getAll();
 		}
 		
-		public boolean crearDifunto(Responsable d) {
+		public boolean crearResponsable(Responsable d) {
 			return responsable.create(d);
 		}
 		
-		public boolean modificarDifunto(int d, Responsable dif) {
+		public boolean modificarResponsable(int d, Responsable dif) {
 			return responsable.modify(d,dif);
 		}
 		
-		public boolean borrarDifunto(int id) {
+		public boolean borrarResponsable(int id) {
 			return responsable.delete(id);
 		}
 }

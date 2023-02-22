@@ -8,9 +8,12 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import com.dao.DifuntoDAO;
 import com.modelo.Difunto;
+
+import cementerio.cfg.HibernateUtil;
 
 //import controlador.HibernateUtil;
 
@@ -25,32 +28,40 @@ public class DifuntoDAOImpHibernate implements DifuntoDAO{
 	Transaction tx;
 
 	public DifuntoDAOImpHibernate() {
-		//fabrica = HibernateUtil.getSessionFactory();
+		fabrica = HibernateUtil.getSessionFactory();
 		sesion  = fabrica.openSession();
-		tx= sesion.beginTransaction();
+		
+		
 	}
 
 	@Override
 	public List<Difunto> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		Query<Difunto> q = sesion.createQuery("from Difunto");
+		List <Difunto> lista = q.list();
+		return lista;
 	}
 
 	@Override
 	public boolean create(Difunto element) {
-		// TODO Auto-generated method stub
+		tx= sesion.beginTransaction();
+		sesion.saveOrUpdate(element);
+		tx.commit();
 		return false;
 	}
 
 	@Override
 	public boolean modify(Integer idn, Difunto element) {
-		// TODO Auto-generated method stub
+		tx= sesion.beginTransaction();
+		sesion.saveOrUpdate(element);
+		tx.commit();
 		return false;
 	}
 
 	@Override
 	public boolean delete(Integer idn) {
-		// TODO Auto-generated method stub
+		tx= sesion.beginTransaction();
+		sesion.delete(idn);
+		tx.commit();
 		return false;
 	}
 

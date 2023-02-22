@@ -4,6 +4,7 @@
 package cementerio.app;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 import com.controlador.DifuntoControler;
@@ -31,16 +32,23 @@ public class Interacciones {
 	public static Difunto pedirDatosDifunto() {
 		Difunto dif = new Difunto();
 		
-		dif.setNombre(Utilities.pedirNombre(sc));
-		dif.setApellido1(Utilities.pedirApellido1(sc));
-		dif.setApellido2(Utilities.pedirApellido2(sc));
+		String nombre = Utilities.pedirNombre(sc);
+		dif.setNombre(nombre);
+		String apellido1 = Utilities.pedirApellido1(sc);
+		dif.setApellido1(apellido1);
+		String apellido2 = Utilities.pedirApellido2(sc);
+		dif.setApellido2(apellido2);
 		
 		System.out.println("El formato de las siguientes fechas debe ser YY/MM/DD");
-		dif.setFechaNacimiento(Utilities.pedirBDate(sc));
-		dif.setFechaDefuncion(Utilities.pedirFechaDef(sc));
-		dif.setFechaEnterramiento(Utilities.pedirFechaEntr(sc));
+		Date bDate = Utilities.pedirBDate(sc);
+		dif.setFechaNacimiento(bDate);
+		Date fechaDef = Utilities.pedirFechaDef(sc);
+		dif.setFechaDefuncion(fechaDef);
+		Date fechaEntr = Utilities.pedirFechaEntr(sc);
+		dif.setFechaEnterramiento(fechaEntr);
 		
-		dif.setSepultura(Utilities.pedirSepultura(sc));
+		Sepultura sepultura = Utilities.pedirSepultura(sc);
+		dif.setSepultura(sepultura);
 		
 		return dif;	
 	}
@@ -55,13 +63,15 @@ public class Interacciones {
 	public static Responsable pedirDatosResponsable() {
 		Responsable  res = new Responsable();
 		
-		res.setNombre(Utilities.pedirNombre(sc));
-		res.setApellido1(Utilities.pedirApellido1(sc));
-		res.setApellido2(Utilities.pedirApellido2(sc));		
-		res.setCuentaDomiciliacion(Utilities.pedirCuentaDomiciliacion(sc));
+		String nombre = Utilities.pedirNombre(sc);
+		res.setNombre(nombre);
+		String apellido1 = Utilities.pedirApellido1(sc);
+		res.setApellido1(apellido1);
+		String apellido2 = Utilities.pedirApellido2(sc);
+		res.setApellido2(apellido2);		
+		String cuentaDomiciliacion = Utilities.pedirCuentaDomiciliacion(sc);
+		res.setCuentaDomiciliacion(cuentaDomiciliacion);
 		
-		//TODO
-		res.setSepulturas(null);
 		return res;	
 	}
 	
@@ -111,7 +121,8 @@ public class Interacciones {
 			sc.nextLine();
 			
 			switch(op) {
-				case 1: dif.setNombre(Utilities.pedirNombre(sc));
+				case 1: String nombre = Utilities.pedirNombre(sc);
+						dif.setNombre(nombre);
 					break;
 				case 2: dif.setApellido1(Utilities.pedirApellido1(sc));
 					break;
@@ -185,9 +196,9 @@ public class Interacciones {
 			sc.nextLine();
 			
 			switch(op) {
-				case 1: 
+				case 1: sep.setNumSepultura(Utilities.pedirNumSepultura(sc));
 					break;
-				case 2: 
+				case 2: sep.setCalle(Utilities.pedirCalle(sc));
 					break;
 				case 3: sep.setNombreTitular(Utilities.pedirNombre(sc));
 					break;
@@ -195,16 +206,14 @@ public class Interacciones {
 					break;
 				case 5: sep.setApellido2Titular(Utilities.pedirApellido1(sc));
 					break;
-				case 6: 
+				case 6: sep.setCodigoContable(Utilities.pedirCodContable(sc));
 					break;
-				case 7: 
+				case 7: sep.setTipoContrato(Utilities.pedirTipoContrato(sc));
 					break;
-				case 8: 
+				case 8: sep.setObservaciones(Utilities.pedirObservaciones(sc));
 					break;
-				case 9: 
-				break;
-				//TODO
-				case 10: 
+				case 9: //TODO
+						sep.setDifuntos(null);
 					break;
 				default: System.out.println("Saliendo...");
 						 salir = true;
@@ -212,6 +221,7 @@ public class Interacciones {
 		}while(!salir);
 		return sep;	
 	}
+	
 	/**
 	 * Mostrar todos los valores de cada tabla
 	 * Pregunta el valor que quieres leer de la tabla y devuelve el objeto

@@ -17,8 +17,16 @@ public class Responsable implements java.io.Serializable {
 	public Responsable() {
 	}
 
-	public Responsable(String nombre, String apellido1, String apellido2, String cuentaDomiciliacion,
-			Set sepulturas) {
+	public Responsable(String nombre, String apellido1, String apellido2, String cuentaDomiciliacion,Set sepulturas) {
+		this.nombre = nombre;
+		this.apellido1 = apellido1;
+		this.apellido2 = apellido2;
+		this.cuentaDomiciliacion = cuentaDomiciliacion;
+		this.sepulturas = sepulturas;
+	}
+	
+	public Responsable(int id, String nombre, String apellido1, String apellido2, String cuentaDomiciliacion,Set sepulturas) {
+		this.idResponsable = id;
 		this.nombre = nombre;
 		this.apellido1 = apellido1;
 		this.apellido2 = apellido2;

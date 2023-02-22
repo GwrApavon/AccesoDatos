@@ -26,7 +26,7 @@ public class Sepultura implements java.io.Serializable {
 		this.idSepultura = idSepultura;
 	}
 
-	public Sepultura(int idSepultura, Responsable responsable, String codigoContable, String calle, Short numSepultura,
+	public Sepultura(int idSepultura, Responsable responsable, String codigoContable, String calle, int numSepultura,
 			String nombreTitular, String apellido1Titular, String apellido2Titular, String tipoContrato,
 			String observaciones, Set difuntos) {
 		this.idSepultura = idSepultura;

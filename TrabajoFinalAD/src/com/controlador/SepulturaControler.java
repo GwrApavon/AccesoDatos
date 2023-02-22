@@ -35,15 +35,15 @@ public class SepulturaControler {
 		return sepultura.getAll();
 	}
 	
-	public boolean crearDifunto(Sepultura d) {
+	public boolean crearSepultura(Sepultura d) {
 		return sepultura.create(d);
 	}
 	
-	public boolean modificarDifunto(int d, Sepultura dif) {
+	public boolean modificarSepultura(int d, Sepultura dif) {
 		return sepultura.modify(d,dif);
 	}
 	
-	public boolean borrarDifunto(int id) {
+	public boolean borrarSepultura(int id) {
 		return sepultura.delete(id);
 	}
 }

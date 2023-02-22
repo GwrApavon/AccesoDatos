@@ -12,6 +12,8 @@ import org.hibernate.Transaction;
 import com.dao.ResponsableDAO;
 import com.modelo.Responsable;
 
+import cementerio.cfg.HibernateUtil;
+
 /**
  * @author alu
  *
@@ -23,7 +25,7 @@ public class ResponsableDAOImpHibernate implements ResponsableDAO{
 	Transaction tx;
 
 	public ResponsableDAOImpHibernate() {
-		//fabrica = HibernateUtil.getSessionFactory();
+		fabrica = HibernateUtil.getSessionFactory();
 		sesion  = fabrica.openSession();
 		tx= sesion.beginTransaction();
 	}

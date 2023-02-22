@@ -187,10 +187,22 @@ public class Utilities {
 	 */
 	static Responsable pedirResponsable(Scanner sc) {
 		//TODO
-		System.out.print("\n Id Sepultura:");
+		System.out.print("\n Id Responsable:");
 		Responsable res = new Responsable();
 		return res;
 	}
 	
-	
+	static int pedirIDObjeto(Scanner sc, int op) {
+		if(op == 1) {
+			System.out.println("Introduzca la id de lo que quiera modificar:");
+			int id = sacarIntValido(sc);
+			return id;
+		}
+		if(op == 2) {
+			System.out.println("Introduzca la id de lo que quiera borrar:");
+			int id = sacarIntValido(sc);
+			return id;
+		}
+		return 0;
+	}
 }

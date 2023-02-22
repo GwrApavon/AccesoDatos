@@ -22,7 +22,7 @@ public class Menu {
 	 * Base de datos seleccionada 
 	 * Default: MySQL
 	 */
-	private static String db = "MySQL";
+	private static String db = "Hibernate";
 	
 	//Scanner
 	static Scanner sc = new Scanner(System.in);
@@ -38,16 +38,15 @@ public class Menu {
 	 */
 	static boolean menuPrincipal() {
 		
-		System.out.println("Que desea hacer:"
+		System.out.println("Que desea hacer:\n"
 				
-							+ "/n1. Cambiar base de datos utilizada (actual: " + db +")"
+							+ "\n\t1. Cambiar base de datos utilizada (actual: " + db +")"
 							
-							+ "/n2. Trabajar en la base de datos"
+							+ "\n\t2. Trabajar en la base de datos"
 							
-							+ "/n/n0. Salir");
+							+ "\n\n0. Salir");
 		
 		int opcion = Utilities.sacarIntValido(sc);
-		sc.nextLine();
 		switch(opcion) {
 			case 1: 
 					if(subMenuDB()) System.out.println("Base de datos cambiada a " + db);
@@ -78,18 +77,17 @@ public class Menu {
 	 */
 	private static boolean subMenuDB() {
 	
-		System.out.println("En que tipo de base de datos quieres trabajar:"
+		System.out.println("En que tipo de base de datos quieres trabajar:\n"
 				
-							+ "/n1. Hibernate"
+							+ "\n\t1. Hibernate"
 				
-							+ "/n2. Neodatis"
+							+ "\n\t2. Neodatis"
 							
-							+ "/n3. ExistDB"
+							+ "\n\t3. ExistDB"
 							
-							+ "/n/n0. Salir");
+							+ "\n\n0. Salir");
 		
 		int opcion = Utilities.sacarIntValido(sc);
-		sc.nextLine();
 		switch(opcion) {
 			case 1: db = "Hibernate";
 				break;
@@ -99,9 +97,9 @@ public class Menu {
 				break;
 			default:
 					System.out.println("Saliendo...");
-					return true;
+					return false;
 		}
-		return false;
+		return true;
 	}
 	
 	/*
@@ -117,18 +115,17 @@ public class Menu {
 	private static boolean subMenuTablas() {
 		boolean salirSubMenuTabla = false;
 		
-		System.out.println("En que tabla de la base de datos quieres trabajar:"
+		System.out.println("En que tabla de la base de datos quieres trabajar:\n"
 							
-							+ "/n1. Difunto"
+							+ "\n\t1. Difunto"
 				
-							+ "/n2. Sepultura"
+							+ "\n\t2. Sepultura"
 							
-							+ "/n3. Responsable"
+							+ "\n\t3. Responsable"
 							
-							+ "/n/n0. Atrás");
+							+ "\n\n0. Atrás");
 		
 		int op = Utilities.sacarIntValido(sc);
-		sc.nextLine();
 		
 		if(op == 0) {
 			return true;
@@ -159,93 +156,98 @@ public class Menu {
 		int id, op;
 		
 		//Diferentes controladores disponibles
-		DifuntoControler dif = null;
-		SepulturaControler sep = null;
-		ResponsableControler res = null;
+		DifuntoControler difc = null;
+		SepulturaControler sepc = null;
+		ResponsableControler resc = null;
 		//Hacer bucle hasta que se quiera salir 
-		System.out.println("En que tabla de la base de datos quieres trabajar:"
+		System.out.println("Que acción quieres hacer:\n"
 				
-				+ "/n1. Crear"
+				+ "\n\t1. Crear"
 				
-				+ "/n2. Modificar"
+				+ "\n\t2. Modificar"
 				
-				+ "/n3. Borrar"
+				+ "\n\t3. Borrar"
 				
-				+ "/n4. Hacer Consulta"
+				+ "\n\t4. Hacer Consulta"
 				
-				+ "/n5. Hacer Consulta"
+				+ "\n\t5. Hacer Consulta"
 				
-				+ "/n/n0. Atrás");
+				+ "\n\n0. Atrás");
 		
 		op = Utilities.sacarIntValido(sc);
-		sc.nextLine();
 		
 		switch(option) {
 		
 			case 1:
-					dif = new DifuntoControler(db);
+					difc = new DifuntoControler(db);
 				break;
 			case 2:
-					sep = new SepulturaControler(db);
+					sepc = new SepulturaControler(db);
 				break;
 			case 3:
-					res = new ResponsableControler(db);
+					resc = new ResponsableControler(db);
 				break;
 		}
 		
 		switch(op){
+			//CREAR
 			case 1:
 					if(option == 1) {
-						dif.crearDifunto(null);
+						difc.crearDifunto(Interacciones.pedirDatosDifunto());
 					}
-					if(option == 2) {
-						//sep.crearSepultura(null);		
+					else if(option == 2) {
+						sepc.crearSepultura(Interacciones.pedirDatosSepultura());		
 					}
-					if(option == 3) {
-						//res.crearResponsable(null);
+					else if(option == 3) {
+						Responsable responsable = Interacciones.pedirDatosResponsable();
+						resc.crearResponsable(responsable);
 					}
 				break;
+			//MODIFICAR
 			case 2: 
-//					if(option == 1) {
-//						dif.modificarDifunto(id, null);
-//					}
-//					if(option == 2) {
-//						sep.modificarSepultura(id, null);
-//					}
-//					if(option == 3) {
-//						res.modificarResponsable(id, null);	
-//					}
+					if(option == 1) {
+						difc.modificarDifunto(Utilities.pedirIDObjeto(sc, 1), Interacciones.modificarDifunto(db));
+					}
+					else if(option == 2) {
+						sepc.modificarSepultura(Utilities.pedirIDObjeto(sc, 1), Interacciones.modificarSepultura(db));
+					}
+					else if(option == 3) {
+						resc.modificarResponsable(Utilities.pedirIDObjeto(sc, 1), Interacciones.modificarResponsable(db));	
+					}
 				break;
+			//BORRAR
 			case 3:
 					if(option == 1) {
-//						dif.modificarDifunto(id, null);
+						difc.borrarDifunto(Utilities.pedirIDObjeto(sc, 2));
 					}
-					if(option == 2) {
-//						sep.modificarSepultura(id, null);	
+					else if(option == 2) {
+						sepc.borrarSepultura(Utilities.pedirIDObjeto(sc, 2));	
 					}
-					if(option == 3) {
-//						res.modificarResponsable(id, null);
+					else if(option == 3) {
+						resc.borrarResponsable(Utilities.pedirIDObjeto(sc, 2));
 					}
 				break;
+			//CONSULTA 1
 			case 4:
 					if(option == 1) {
 //						dif.modificarDifunto(id, null);
 					}
-					if(option == 2) {
+					else if(option == 2) {
 //						sep.modificarSepultura(id, null);	
 					}
-					if(option == 3) {
+					else if(option == 3) {
 //						res.modificarResponsable(id, null);
 					}
 				break;
+			//CONSULTA 2
 			case 5:
 					if(option == 1) {
 //						dif.modificarDifunto(id, null);
 					}
-					if(option == 2) {
+					else if(option == 2) {
 //						sep.modificarSepultura(id, null);	
 					}
-					if(option == 3) {
+					else if(option == 3) {
 //						res.modificarResponsable(id, null);
 					}
 				break;
