@@ -8,7 +8,7 @@
    <column name="id_difunto"/>
    <generator class="assigned"/>
   </id>
-  <many-to-one class="Sepultura" fetch="select" name="sepultura">
+  <many-to-one class="com.modelo.Sepultura" fetch="select" name="sepultura">
    <column name="id_sepultura" not-null="true" unique="true"/>
   </many-to-one>
   <property generated="never" lazy="false" name="nombre" type="string">

@@ -8,6 +8,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import com.controlador.HibernateUtil;
 import com.dao.ResponsableDAO;
@@ -26,7 +27,6 @@ public class ResponsableDAOImpHibernate implements ResponsableDAO{
 	public ResponsableDAOImpHibernate() {
 		fabrica = HibernateUtil.getSessionFactory();
 		sesion  = fabrica.openSession();
-		tx= sesion.beginTransaction();
 	}
 	
 	/*
@@ -34,8 +34,9 @@ public class ResponsableDAOImpHibernate implements ResponsableDAO{
 	 */
 	@Override
 	public List<Responsable> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		Query<Responsable> q = sesion.createQuery("from Responsable");
+		List <Responsable> lista = q.list();
+		return lista;
 	}
 
 	/** Creador responsables
@@ -45,8 +46,10 @@ public class ResponsableDAOImpHibernate implements ResponsableDAO{
 	 */
 	@Override
 	public boolean create(Responsable element) {
-		// TODO Auto-generated method stub
-		return false;
+		tx= sesion.beginTransaction();
+		sesion.saveOrUpdate(element);
+		tx.commit();
+		return true;
 	}
 
 	/** Modificador responsables
@@ -58,8 +61,10 @@ public class ResponsableDAOImpHibernate implements ResponsableDAO{
 	 */
 	@Override
 	public boolean modify(Integer idn, Responsable element) {
-		// TODO Auto-generated method stub
-		return false;
+		tx= sesion.beginTransaction();
+		sesion.saveOrUpdate(element);
+		tx.commit();
+		return true;
 	}
 
 	/** Borrador responsables
@@ -70,8 +75,10 @@ public class ResponsableDAOImpHibernate implements ResponsableDAO{
 	*/
 	@Override
 	public boolean delete(Integer idn) {
-		// TODO Auto-generated method stub
-		return false;
+		tx= sesion.beginTransaction();
+		sesion.delete(idn);
+		tx.commit();
+		return true;
 	}
 
 	/** Consultas responsables

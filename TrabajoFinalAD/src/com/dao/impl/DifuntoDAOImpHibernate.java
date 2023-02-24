@@ -51,7 +51,7 @@ public class DifuntoDAOImpHibernate implements DifuntoDAO{
 		tx= sesion.beginTransaction();
 		sesion.saveOrUpdate(element);
 		tx.commit();
-		return false;
+		return true;
 	}
 
 	/** Modificador difuntos
@@ -66,7 +66,7 @@ public class DifuntoDAOImpHibernate implements DifuntoDAO{
 		tx= sesion.beginTransaction();
 		sesion.saveOrUpdate(element);
 		tx.commit();
-		return false;
+		return true;
 	}
 
 	/** Borrador difuntos
@@ -80,7 +80,7 @@ public class DifuntoDAOImpHibernate implements DifuntoDAO{
 		tx= sesion.beginTransaction();
 		sesion.delete(idn);
 		tx.commit();
-		return false;
+		return true;
 	}
 
 	/** Consultas difuntos

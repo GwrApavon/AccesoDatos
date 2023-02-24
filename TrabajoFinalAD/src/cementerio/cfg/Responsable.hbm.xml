@@ -25,7 +25,7 @@
    <key>
     <column name="id_responsable" not-null="true" unique="true"/>
    </key>
-   <one-to-many class="Sepultura"/>
+   <one-to-many class="com.modelo.Sepultura"/>
   </set>
  </class>
 </hibernate-mapping>

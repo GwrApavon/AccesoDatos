@@ -25,7 +25,6 @@ public class ResponsableControler {
 	 * @param tipo de base de datos a utilizar
 	 */
 	public ResponsableControler(String tipo) {
-		System.out.println(tipo);
 		if(tipo.equals("Neodatis")){
 			responsable = new ResponsableDAOImpNeodatis("cementerio.db");
 		}

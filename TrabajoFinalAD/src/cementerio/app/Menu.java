@@ -196,7 +196,12 @@ public class Menu {
 			case 1:
 					if(option == 1) {
 						dif = Interacciones.pedirDatosDifunto();
-						difc.crearDifunto(dif);
+						if (difc.crearDifunto(dif)) {
+							System.out.println("Difunto insertado con exito");
+						}
+						else {
+							System.out.println("Error al insertar Difunto");
+						}
 					}
 					else if(option == 2) {
 						sep = Interacciones.pedirDatosSepultura();
