@@ -12,6 +12,7 @@ import org.hibernate.query.Query;
 
 import com.controlador.HibernateUtil;
 import com.dao.ResponsableDAO;
+import com.modelo.Difunto;
 import com.modelo.Responsable;
 
 /**
@@ -26,7 +27,6 @@ public class ResponsableDAOImpHibernate implements ResponsableDAO{
 
 	public ResponsableDAOImpHibernate() {
 		fabrica = HibernateUtil.getSessionFactory();
-		sesion  = fabrica.openSession();
 	}
 	
 	/*
@@ -34,11 +34,26 @@ public class ResponsableDAOImpHibernate implements ResponsableDAO{
 	 */
 	@Override
 	public List<Responsable> getAll() {
+		sesion  = fabrica.openSession();
 		Query<Responsable> q = sesion.createQuery("from Responsable");
 		List <Responsable> lista = q.list();
+		sesion.close();
 		return lista;
 	}
 
+	/**
+	 * Devuelve un responsable
+	 * @param idn id del responsable a devolver
+	 */
+	@Override
+	public Responsable getOne(Integer idn) {
+		sesion  = fabrica.openSession();
+		Query<Responsable> q = sesion.createQuery("from Responsable where id = " + idn);
+		Responsable res = q.list().get(0);
+		sesion.close();
+		return res;
+	}
+	
 	/** Creador responsables
 	 * Crea un responsable con el objeto que recibe
 	 * @param res Objeto responsable que se va a guardar
@@ -46,9 +61,12 @@ public class ResponsableDAOImpHibernate implements ResponsableDAO{
 	 */
 	@Override
 	public boolean create(Responsable element) {
+		sesion  = fabrica.openSession();
 		tx= sesion.beginTransaction();
 		sesion.saveOrUpdate(element);
 		tx.commit();
+		sesion.close();
+		System.out.println("Responsable insertado");
 		return true;
 	}
 
@@ -61,9 +79,12 @@ public class ResponsableDAOImpHibernate implements ResponsableDAO{
 	 */
 	@Override
 	public boolean modify(Integer idn, Responsable element) {
+		sesion  = fabrica.openSession();
 		tx= sesion.beginTransaction();
 		sesion.saveOrUpdate(element);
 		tx.commit();
+		sesion.close();
+		System.out.println("Responsable modificado");
 		return true;
 	}
 
@@ -75,29 +96,21 @@ public class ResponsableDAOImpHibernate implements ResponsableDAO{
 	*/
 	@Override
 	public boolean delete(Integer idn) {
+		sesion  = fabrica.openSession();
 		tx= sesion.beginTransaction();
 		sesion.delete(idn);
 		tx.commit();
+		sesion.close();
+		System.out.println("Responsable borrado");
 		return true;
 	}
 
-	/** Consultas responsables
-	 * Hace una consulta dependiendo del número que se le pase por parámetro 
-	 * Consulta 1 --> 
-	 * Consulta 2 -->
-	 * @param id identificador del difunto
-	 * @return Responsable
-	 * @exception IndexOutOfBoundsException
-	*/
+	//NO SE UTILIZA
 	@Override
-	public Responsable query(Integer idn) {
-		// TODO Auto-generated method stub
-		return null;
+	public void query() {
+		
 	}
-	@Override
-	public Responsable query2(Integer idn) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
+
 
 }

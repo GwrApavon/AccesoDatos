@@ -6,6 +6,7 @@ package com.dao.impl;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import org.neodatis.odb.ODB;
 import org.neodatis.odb.ODBFactory;
@@ -21,16 +22,20 @@ import com.modelo.Difunto;
 import com.modelo.Responsable;
 import com.modelo.Sepultura;
 
+import cementerio.app.Utilities;
+
 /**
  * @author Angel Pavon Fraile
  *
  */
 public class SepulturaDAOImpNeodatis implements SepulturaDAO{
 
-private static ODB odb;
+	private static ODB odb;
+	Scanner sc;
 	
-	public SepulturaDAOImpNeodatis(String db) {
-		odb = ODBFactory.open(db);
+	public SepulturaDAOImpNeodatis(ODB odb) {
+		this.odb = odb;
+		sc = new Scanner(System.in);
 	}
 	
 	public static ODB crearConexion() {
@@ -73,7 +78,7 @@ private static ODB odb;
 		sep.setIdSepultura(id);
 		odb.store(sep);
 		odb.commit();
-		System.out.println("Responsable insertado");
+		System.out.println("Sepultura insertada");
 		return true;
 	}
 
@@ -94,7 +99,7 @@ private static ODB odb;
 			odb.store(sep);
 			odb.commit();
 			valor = true;
-			System.out.println("Responsable modificado");
+			System.out.println("Sepultura modificada");
 		} catch (IndexOutOfBoundsException i) {
 			i.printStackTrace();
 		}
@@ -119,7 +124,7 @@ private static ODB odb;
 			odb.delete(responsable);
 			odb.commit();
 			valor = true;
-			System.out.println("Responsable eliminado");
+			System.out.println("Sepultura eliminada");
 		} catch (IndexOutOfBoundsException i) {
 			i.printStackTrace();
 		}
@@ -129,55 +134,39 @@ private static ODB odb;
 
 	
 	
-	/** Consultas responsables
+	/** 
+	 * Consultas responsables
 	 * Hace una consulta dependiendo del número que se le pase por parámetro 
-	 * Consulta 1 -->
-	 * Consulta 2 -->
-	 * @param id identificador del difunto
-	 * @return Sepultura
-	 * @exception IndexOutOfBoundsException
+	 * Consulta: Devuelve, con el nombre y el primer apellido del difunto,
+	 * 			 la id de la sepultura, la calle, numero y el responsable con su id, nombre y apellidos.
 	*/
 	@Override
-	public Sepultura query(Integer idn) {
-		Sepultura d = new Sepultura();
-		IQuery query;
-		Objects<Sepultura> objetos;
+	public void query() {
+		System.out.println("Introduzca los datos del difunto:");
+		String nombre = Utilities.pedirNombre(sc);
+		String apellido1 = Utilities.pedirApellido1(sc);
+
+		CriteriaQuery query = new CriteriaQuery(Difunto.class, Where.and()
+								                .add(Where.equal("nombre", nombre))
+								                .add(Where.equal("apellido1", apellido1)));
+		Objects<Difunto> results = odb.getObjects(query);
 		
-		query = new CriteriaQuery(Sepultura.class, Where.equal("idResponsable", idn));
-		objetos = odb.getObjects(query);
-				
-		if (objetos != null) {
-			try {
-				d = (Sepultura) objetos.getFirst();
-			} catch (IndexOutOfBoundsException i) {
-				i.printStackTrace();
-				System.out.println("No se ha encontrado ningun difunto con identificador" + idn);
-				d = null;
-			}
-		}
+		while (results.hasNext()) {
+		Difunto dif = results.next();
+		Sepultura sep = dif.getSepultura();
+		Responsable resp = sep.getResponsable();
 		
-		return d;
-	}
-	@Override
-	public Sepultura query2(Integer idn) {
-		Sepultura d = new Sepultura();
-		IQuery query;
-		Objects<Sepultura> objetos;
-		
-		query = new CriteriaQuery(Sepultura.class, Where.equal("idResponsable", idn));
-		objetos = odb.getObjects(query);
-				
-		if (objetos != null) {
-			try {
-				d = (Sepultura) objetos.getFirst();
-			} catch (IndexOutOfBoundsException i) {
-				i.printStackTrace();
-				System.out.println("No se ha encontrado ningun difunto con identificador" + idn);
-				d = null;
-			}
-		}
-		
-		return d;
+		System.out.println("ID difunto: " + dif.getIdDifunto()                    
+							+ "\nID sepultura: " + sep.getIdSepultura()
+							+ "\nPosicion sepultura:"            
+							+ "\n\tCalle: " + sep.getCalle()
+							+ "\n\tNum sepultura: " + sep.getNumSepultura()
+							+ "\nResponsable de la sepultura: "        
+							+ "\n\tID: " + resp.getIdResponsable()
+							+ "\n\tNombre: " + resp.getNombre()
+							+ "\n\tApellido1: " + resp.getApellido1()
+							+ "\n\tApellido2: " + resp.getApellido2());
+        }
 	}
 	
 	/**
@@ -195,6 +184,12 @@ private static ODB odb;
 		}
 		id++;
 		return id;
+	}
+
+	@Override
+	public Sepultura getOne(Integer idn) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

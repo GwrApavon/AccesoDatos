@@ -79,10 +79,9 @@ public class Utilities {
 	 * @param sc
 	 * @return
 	 */
-	static Sepultura pedirSepultura(Scanner sc) {
-		//TODO
+	static Sepultura pedirSepultura(Scanner sc, String db) {
 		System.out.print("Id Sepultura:");
-		Sepultura sep = new Sepultura();
+		Sepultura sep = Interacciones.mostrarSepulturas(db);
 		return sep;
 	}
 	/**
@@ -100,7 +99,7 @@ public class Utilities {
 	 * @param sc
 	 * @return Date
 	 */
-	static Date pedirFechaDef(Scanner sc) {
+	public static Date pedirFechaDef(Scanner sc) {
 		System.out.print("Fecha de defunción: ");
 		Date fDefuncion = stringToDate(sc);
 		return fDefuncion;
@@ -122,7 +121,7 @@ public class Utilities {
 	 * @param sc
 	 * @return String
 	 */
-	static String pedirApellido2(Scanner sc) {
+	public static String pedirApellido2(Scanner sc) {
 		System.out.print("Segundo apellido: ");
 		String ap2 = sc.nextLine();
 		return ap2;
@@ -133,7 +132,7 @@ public class Utilities {
 	 * @param sc
 	 * @return String
 	 */
-	static String pedirApellido1(Scanner sc) {
+	public static String pedirApellido1(Scanner sc) {
 		System.out.print("Primer Apellido: ");
 		String ap1 = sc.nextLine();
 		return ap1;
@@ -144,7 +143,7 @@ public class Utilities {
 	 * @param sc
 	 * @return String
 	 */
-	static String pedirNombre(Scanner sc) {
+	public static String pedirNombre(Scanner sc) {
 		System.out.print("Nombre: ");
 		String nombre = sc.nextLine();
 		return nombre;
@@ -206,12 +205,11 @@ public class Utilities {
 	
 	/**
 	 * @param sc
+	 * @param db 
 	 * @return
 	 */
-	static Responsable pedirResponsable(Scanner sc) {
-		//TODO
-		System.out.print("Id Responsable:");
-		Responsable res = new Responsable();
+	static Responsable pedirResponsable(Scanner sc, String db) {
+		Responsable res = Interacciones.mostrarResponsable(db);
 		return res;
 	}
 	
@@ -222,22 +220,10 @@ public class Utilities {
 	 * @return int 
 	 */
 	static int pedirIDObjeto(Scanner sc, int op) {
-		if(op == 1) {
-			System.out.println("Introduzca la id de lo que quiera modificar:");
-			int id = sacarIntValido(sc);
-			return id;
-		}
-		if(op == 2) {
-			System.out.println("Introduzca la id de lo que quiera borrar:");
-			int id = sacarIntValido(sc);
-			return id;
-		}
-		//NOTE: creo que no se va a utilizar
-		if(op == 3) {
-			System.out.println("Introduzca la id de lo que quiera consultar:");
-			int id = sacarIntValido(sc);
-			return id;
-		}
-		return 0;
+		System.out.println("Introduzca la id de lo que quiera borrar:");
+		int id = sacarIntValido(sc);
+		return id;
+		
+
 	}
 }

@@ -12,7 +12,7 @@ public class NeodatisUtils {
 		try {
 			if (db == null || db.isClosed()) {
 				System.out.println("Es null o está cerrada");
-				db = ODBFactory.open(basedatos); 
+				db = ODBFactory.open(basedatos, "miusuario", "Pass!123456"); 
 			}
 			return db;
 		} catch(org.neodatis.odb.ODBRuntimeException e) {

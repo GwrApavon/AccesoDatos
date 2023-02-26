@@ -108,6 +108,8 @@ public class Menu {
 	 * 		- Trabajar en Difunto
 	 * 		- Trabajar en Sepultura
 	 * 		- Trabajar en Responsable
+	 * 		- Consulta 1 
+	 * 		- Consulta 2
 	 * 		- Salir
 	 * 
 	 * @param sc Scanner para poder recibir input
@@ -115,27 +117,39 @@ public class Menu {
 	private static boolean subMenuTablas() {
 		boolean salirSubMenuTabla = false;
 		
-		System.out.println("En que tabla de la base de datos quieres trabajar:\n"
+		System.out.println("Que quieres hacer:\n"
 							
-							+ "\n\t1. Difunto"
+							+ "\n\t1. Trabajar en Difunto"
 				
-							+ "\n\t2. Sepultura"
+							+ "\n\t2. Trabajar en Sepultura"
 							
-							+ "\n\t3. Responsable"
+							+ "\n\t3. Trabajar en Responsable"
+							
+							+ "\n\t4. Consultar datos generales por fecha de defunción"
+							
+							+ "\n\t5. Consultar Sepultura y Responsable por datos del difunto"
 							
 							+ "\n\n0. Atrás");
 		
 		int op = Utilities.sacarIntValido(sc);
 		
-		if(op == 0) {
-			return true;
+		switch(op) {
+		
+			case 1,2,3:
+					do {
+						salirSubMenuTabla = subMenuTabla(op);
+					}while(!salirSubMenuTabla);
+				break;
+			case 4:
+					Interacciones.prepararConsulta(1,db);
+				break;
+			case 5:
+					Interacciones.prepararConsulta(2,db);
+				break;
+			default: 
+					System.out.println("Saliendo...");
+				return true;
 		}
-		
-		do {
-			salirSubMenuTabla = subMenuTabla(op);
-		}while(!salirSubMenuTabla);
-		
-		
 		return false;
 	}
 	
@@ -145,8 +159,6 @@ public class Menu {
 	 * 		- Crear
 	 * 		- Modificar
 	 * 		- Borrar
-	 * 		- Consulta 1
-	 * 		- Consulta 2
 	 * 		- Salir
 	 * 
 	 * @param sc Scanner para poder recibir input
@@ -170,10 +182,6 @@ public class Menu {
 				
 				+ "\n\t3. Borrar"
 				
-				+ "\n\t4. Hacer Consulta"
-				
-				+ "\n\t5. Hacer Consulta"
-				
 				+ "\n\n0. Atrás");
 		
 		op = Utilities.sacarIntValido(sc);
@@ -195,16 +203,11 @@ public class Menu {
 			//CREAR
 			case 1:
 					if(option == 1) {
-						dif = Interacciones.pedirDatosDifunto();
-						if (difc.crearDifunto(dif)) {
-							System.out.println("Difunto insertado con exito");
-						}
-						else {
-							System.out.println("Error al insertar Difunto");
-						}
+						dif = Interacciones.pedirDatosDifunto(db);
+						difc.crearDifunto(dif);
 					}
 					else if(option == 2) {
-						sep = Interacciones.pedirDatosSepultura();
+						sep = Interacciones.pedirDatosSepultura(db);
 						sepc.crearSepultura(sep);		
 					}
 					else if(option == 3) {
@@ -216,15 +219,15 @@ public class Menu {
 			case 2: 
 					if(option == 1) {
 						dif = Interacciones.modificarDifunto(db);
-						difc.modificarDifunto(Utilities.pedirIDObjeto(sc, 1), dif);
+						difc.modificarDifunto(dif.getIdDifunto(), dif);
 					}
 					else if(option == 2) {
 						sep = Interacciones.modificarSepultura(db);
-						sepc.modificarSepultura(Utilities.pedirIDObjeto(sc, 1), sep);
+						sepc.modificarSepultura(sep.getIdSepultura(), sep);
 					}
 					else if(option == 3) {
 						res = Interacciones.modificarResponsable(db);
-						resc.modificarResponsable(Utilities.pedirIDObjeto(sc, 1), res);	
+						resc.modificarResponsable(res.getIdResponsable(), res);	
 					}
 				break;
 			//BORRAR
@@ -241,36 +244,6 @@ public class Menu {
 						id = Utilities.pedirIDObjeto(sc, 3);
 						resc.borrarResponsable(id);
 					}
-				break;
-			//CONSULTA 1
-			case 4:
-					if(option == 1) {
-						id = Utilities.pedirIDObjeto(sc, 3);
-						difc.query(id);
-					}
-					else if(option == 2) {
-						id = Utilities.pedirIDObjeto(sc, 3);
-						sepc.query(id);
-					}
-					else if(option == 3) {
-						id = Utilities.pedirIDObjeto(sc, 3);
-						resc.query(id);
-					}
-				break;
-			//CONSULTA 2
-			case 5:
-				if(option == 1) {
-					id = Utilities.pedirIDObjeto(sc, 3);
-					difc.query2(id);
-				}
-				else if(option == 2) {
-					id = Utilities.pedirIDObjeto(sc, 3);
-					sepc.query2(id);
-				}
-				else if(option == 3) {
-					id = Utilities.pedirIDObjeto(sc, 3);
-					resc.query2(id);
-				}
 				break;
 			default: 
 					System.out.println("Saliendo...");

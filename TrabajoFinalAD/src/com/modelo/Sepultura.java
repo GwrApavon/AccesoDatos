@@ -1,4 +1,6 @@
 package com.modelo;
+// Generated 26 feb 2023 13:26:26 by Hibernate Tools 5.4.12.Final
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -7,7 +9,7 @@ import java.util.Set;
  */
 public class Sepultura implements java.io.Serializable {
 
-	private int idSepultura;
+	private Integer idSepultura;
 	private Responsable responsable;
 	private String codigoContable;
 	private String calle;
@@ -22,14 +24,20 @@ public class Sepultura implements java.io.Serializable {
 	public Sepultura() {
 	}
 
-	public Sepultura(int idSepultura) {
-		this.idSepultura = idSepultura;
+	public Sepultura(Responsable responsable, String codigoContable, String calle, int numSepultura,
+			String nombreTitular, String apellido1Titular, String tipoContrato) {
+		this.responsable = responsable;
+		this.codigoContable = codigoContable;
+		this.calle = calle;
+		this.numSepultura = numSepultura;
+		this.nombreTitular = nombreTitular;
+		this.apellido1Titular = apellido1Titular;
+		this.tipoContrato = tipoContrato;
 	}
 
-	public Sepultura(int idSepultura, Responsable responsable, String codigoContable, String calle, int numSepultura,
+	public Sepultura(Responsable responsable, String codigoContable, String calle, int numSepultura,
 			String nombreTitular, String apellido1Titular, String apellido2Titular, String tipoContrato,
 			String observaciones, Set difuntos) {
-		this.idSepultura = idSepultura;
 		this.responsable = responsable;
 		this.codigoContable = codigoContable;
 		this.calle = calle;
@@ -42,11 +50,11 @@ public class Sepultura implements java.io.Serializable {
 		this.difuntos = difuntos;
 	}
 
-	public int getIdSepultura() {
+	public Integer getIdSepultura() {
 		return this.idSepultura;
 	}
 
-	public void setIdSepultura(int idSepultura) {
+	public void setIdSepultura(Integer idSepultura) {
 		this.idSepultura = idSepultura;
 	}
 
@@ -78,8 +86,8 @@ public class Sepultura implements java.io.Serializable {
 		return this.numSepultura;
 	}
 
-	public void setNumSepultura(int i) {
-		this.numSepultura = i;
+	public void setNumSepultura(int numSepultura) {
+		this.numSepultura = numSepultura;
 	}
 
 	public String getNombreTitular() {
@@ -128,6 +136,18 @@ public class Sepultura implements java.io.Serializable {
 
 	public void setDifuntos(Set difuntos) {
 		this.difuntos = difuntos;
+	}
+
+	@Override
+	public String toString() {
+		return "Sepultura [" + (idSepultura != null ? "idSepultura=" + idSepultura + ", " : "")
+				+ (codigoContable != null ? "codigoContable=" + codigoContable + ", " : "")
+				+ (calle != null ? "calle=" + calle + ", " : "") + "numSepultura=" + numSepultura + ", "
+				+ (nombreTitular != null ? "nombreTitular=" + nombreTitular + ", " : "")
+				+ (apellido1Titular != null ? "apellido1Titular=" + apellido1Titular + ", " : "")
+				+ (apellido2Titular != null ? "apellido2Titular=" + apellido2Titular + ", " : "")
+				+ (tipoContrato != null ? "tipoContrato=" + tipoContrato + ", " : "")
+				+ (observaciones != null ? "observaciones=" + observaciones : "") + "]";
 	}
 
 }

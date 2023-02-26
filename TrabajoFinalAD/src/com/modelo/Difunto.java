@@ -1,4 +1,6 @@
 package com.modelo;
+// Generated 26 feb 2023 13:26:26 by Hibernate Tools 5.4.12.Final
+
 import java.util.Date;
 
 /**
@@ -6,7 +8,7 @@ import java.util.Date;
  */
 public class Difunto implements java.io.Serializable {
 
-	private int idDifunto;
+	private Integer idDifunto;
 	private Sepultura sepultura;
 	private String nombre;
 	private String apellido1;
@@ -17,26 +19,15 @@ public class Difunto implements java.io.Serializable {
 
 	public Difunto() {
 	}
-	
-	public Difunto(String nombre, String apellido1, Sepultura sepultura) {
-		this.nombre = nombre;
-		this.apellido1 = apellido1;
-		this.sepultura = sepultura;
-	}
-	public Difunto(Sepultura sepultura, String nombre, String apellido1, String apellido2,
-			Date fechaNacimiento, Date fechaDefuncion, Date fechaEnterramiento) {
+
+	public Difunto(Sepultura sepultura, String nombre, String apellido1) {
 		this.sepultura = sepultura;
 		this.nombre = nombre;
 		this.apellido1 = apellido1;
-		this.apellido2 = apellido2;
-		this.fechaNacimiento = fechaNacimiento;
-		this.fechaDefuncion = fechaDefuncion;
-		this.fechaEnterramiento = fechaEnterramiento;
 	}
-	
-	public Difunto(int id, Sepultura sepultura, String nombre, String apellido1, String apellido2,
-			Date fechaNacimiento, Date fechaDefuncion, Date fechaEnterramiento) {
-		this.idDifunto = id;
+
+	public Difunto(Sepultura sepultura, String nombre, String apellido1, String apellido2, Date fechaNacimiento,
+			Date fechaDefuncion, Date fechaEnterramiento) {
 		this.sepultura = sepultura;
 		this.nombre = nombre;
 		this.apellido1 = apellido1;
@@ -45,11 +36,12 @@ public class Difunto implements java.io.Serializable {
 		this.fechaDefuncion = fechaDefuncion;
 		this.fechaEnterramiento = fechaEnterramiento;
 	}
-	public int getIdDifunto() {
+
+	public Integer getIdDifunto() {
 		return this.idDifunto;
 	}
 
-	public void setIdDifunto(int idDifunto) {
+	public void setIdDifunto(Integer idDifunto) {
 		this.idDifunto = idDifunto;
 	}
 
@@ -111,13 +103,13 @@ public class Difunto implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "Difunto [idDifunto=" + idDifunto + ", " + (sepultura != null ? "sepultura=" + sepultura.getIdSepultura() + ", " : "")
+		return "Difunto [" + (idDifunto != null ? "idDifunto=" + idDifunto + ", " : "")
 				+ (nombre != null ? "nombre=" + nombre + ", " : "")
 				+ (apellido1 != null ? "apellido1=" + apellido1 + ", " : "")
 				+ (apellido2 != null ? "apellido2=" + apellido2 + ", " : "")
-				+ (fechaNacimiento != null ? "fechaNacimiento=" + fechaNacimiento.toString() + ", " : "")
-				+ (fechaDefuncion != null ? "fechaDefuncion=" + fechaDefuncion.toString() + ", " : "")
-				+ (fechaEnterramiento != null ? "fechaEnterramiento=" + fechaEnterramiento.toString() : "") + "]";
+				+ (fechaNacimiento != null ? "fechaNacimiento=" + fechaNacimiento + ", " : "")
+				+ (fechaDefuncion != null ? "fechaDefuncion=" + fechaDefuncion + ", " : "")
+				+ (fechaEnterramiento != null ? "fechaEnterramiento=" + fechaEnterramiento : "") + "]";
 	}
 
 }

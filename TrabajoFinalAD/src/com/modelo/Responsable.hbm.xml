@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 26 feb 2023 13:26:26 by Hibernate Tools 5.4.12.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="Cementerio" dynamic-insert="false" dynamic-update="false" mutable="true" name="com.modelo.Responsable" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="responsable">
+        <id name="idResponsable" type="java.lang.Integer">
+            <column name="id_responsable"/>
+            <generator class="identity"/>
+        </id>
+        <property generated="never" lazy="false" name="nombre" optimistic-lock="true" type="string" unique="false">
+            <column length="30" name="nombre" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="apellido1" optimistic-lock="true" type="string" unique="false">
+            <column length="30" name="apellido1" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="apellido2" optimistic-lock="true" type="string" unique="false">
+            <column length="30" name="apellido2"/>
+        </property>
+        <property generated="never" lazy="false" name="cuentaDomiciliacion" optimistic-lock="true" type="string" unique="false">
+            <column length="20" name="cuenta_domiciliacion" not-null="true"/>
+        </property>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="sepulturas" optimistic-lock="true" sort="unsorted" table="sepultura">
+            <key on-delete="noaction">
+                <column name="id_responsable" not-null="true" unique="true"/>
+            </key>
+            <one-to-many class="com.modelo.Sepultura" embed-xml="true" not-found="exception"/>
+        </set>
+    </class>
+</hibernate-mapping>

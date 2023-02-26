@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 26 feb 2023 13:26:26 by Hibernate Tools 5.4.12.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="Cementerio" dynamic-insert="false" dynamic-update="false" mutable="true" name="com.modelo.Sepultura" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="sepultura">
+        <id name="idSepultura" type="java.lang.Integer">
+            <column name="id_sepultura"/>
+            <generator class="identity"/>
+        </id>
+        <many-to-one class="com.modelo.Responsable" embed-xml="true" fetch="select" insert="true" name="responsable" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="id_responsable" not-null="true" unique="true"/>
+        </many-to-one>
+        <property generated="never" lazy="false" name="codigoContable" optimistic-lock="true" type="string" unique="false">
+            <column length="10" name="codigo_contable" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="calle" optimistic-lock="true" type="string" unique="false">
+            <column length="2" name="calle" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="numSepultura" optimistic-lock="true" type="int" unique="false">
+            <column name="num_sepultura" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="nombreTitular" optimistic-lock="true" type="string" unique="false">
+            <column length="30" name="nombre_titular" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="apellido1Titular" optimistic-lock="true" type="string" unique="false">
+            <column length="30" name="apellido1_titular" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="apellido2Titular" optimistic-lock="true" type="string" unique="false">
+            <column length="30" name="apellido2_titular"/>
+        </property>
+        <property generated="never" lazy="false" name="tipoContrato" optimistic-lock="true" type="string" unique="false">
+            <column length="20" name="tipo_contrato" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="observaciones" optimistic-lock="true" type="string" unique="false">
+            <column length="200" name="observaciones"/>
+        </property>
+        <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="difuntos" optimistic-lock="true" sort="unsorted" table="difunto">
+            <key on-delete="noaction">
+                <column name="id_sepultura" not-null="true" unique="true"/>
+            </key>
+            <one-to-many class="com.modelo.Difunto" embed-xml="true" not-found="exception"/>
+        </set>
+    </class>
+</hibernate-mapping>

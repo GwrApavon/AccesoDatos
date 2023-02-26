@@ -5,11 +5,16 @@ package com.dao.impl;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
 import com.dao.DifuntoDAO;
 import com.modelo.Difunto;
 import com.modelo.Responsable;
+import com.modelo.Sepultura;
+
+import cementerio.app.Utilities;
 
 import org.neodatis.odb.ODB;
 import org.neodatis.odb.ODBFactory;
@@ -27,9 +32,11 @@ import org.neodatis.odb.impl.core.query.values.ValuesCriteriaQuery;
 public class DifuntoDAOImpNeodatis implements DifuntoDAO{
 
 	private static ODB odb;
+	Scanner sc;
 	
 	public DifuntoDAOImpNeodatis(ODB odb) {
 		this.odb = odb;
+		sc = new Scanner(System.in);
 	}
 	
 	public static ODB crearConexion() {
@@ -126,56 +133,47 @@ public class DifuntoDAOImpNeodatis implements DifuntoDAO{
 		return valor;
 	}
 	
-	
-	
-	/** Consultas difuntos
-	 * Hace una consulta dependiendo del número que se le pase por parámetro 
-	 * Consulta 1 -->
-	 * Consulta 2 -->
-	 * @param id identificador del difunto
-	 * @return boolean
-	 * @exception IndexOutOfBoundsException
+	/** Consultas difunto
+	 * Consulta: selecciona los datos del difunto, sepultura y responsable de la sepultura 
+	 * 			 para aquellos difuntos que fallecieron después de la fecha que introduzcas, 
+	 * 			 ordenados por fecha de defunción descendente.
+	 * Nota: .ge significa "mayor o igual que" (greater or equal than)
 	*/
 	
 	@Override
-	public Difunto query(Integer idn) {
-		Difunto d = new Difunto();
-		IQuery query;
-		Objects<Difunto> objetos;
+	public void query() {
+
+		Date fecha = Utilities.pedirFechaDef(sc);
 		
-		query = new CriteriaQuery(Difunto.class, Where.equal("idResponsable", idn));
-		objetos = odb.getObjects(query);
-				
-		if (objetos != null) {
-			try {
-				d = (Difunto) objetos.getFirst();
-			} catch (IndexOutOfBoundsException i) {
-				i.printStackTrace();
-				System.out.println("No se ha encontrado ningun difunto con identificador" + idn);
-				d = null;
-			}
+		CriteriaQuery query = new CriteriaQuery(Difunto.class, Where.ge("fechaDefuncion", fecha));
+		Objects<Difunto> difuntos = odb.getObjects(query);
+
+		for (Difunto dif : difuntos) {
+		    Sepultura sep = dif.getSepultura();
+		    Responsable res = sep.getResponsable();
+
+		    System.out.println("Difunto:"
+		            + "\n\tNombre: " + dif.getNombre()
+		            + "\n\tApellido1: " + dif.getApellido1()
+		            + "\n\tApellido2: " + dif.getApellido2()
+		            + "\nFechas: "
+		            + "\n\tFecha de nacimiento: " + dif.getFechaNacimiento()
+		            + "\n\tFecha de defunción: " + dif.getFechaDefuncion()
+		            + "\n\tFecha de enterramiento: " + dif.getFechaEnterramiento()
+		            + "\nPosicion sepultura:"
+		            + "\n\tCalle sepultura: " + sep.getCalle()
+		            + "\n\tNumero sepultura " + sep.getNumSepultura()
+		            + "\nTitular de la sepultura: "
+		            + "\n\tNombre: " + sep.getNombreTitular()
+		            + "\n\tApellido1: " + sep.getApellido1Titular()
+		            + "\n\tApellido2: " + sep.getApellido2Titular()
+		            + "\n\tTipo de contrato: " + sep.getTipoContrato()
+		            + "\n\tObservaciones: " + sep.getObservaciones()
+		            + "\nResponsable de la sepultura: "
+		            + "\n\tNombre: " + res.getNombre()
+		            + "\n\tApellido1: " + res.getApellido1()
+		            + "\n\tApellido2: " + res.getApellido2());
 		}
-		return d;
-	}
-	@Override
-	public Difunto query2(Integer idn) {
-		Difunto d = new Difunto();
-		IQuery query;
-		Objects<Difunto> objetos;
-		
-		query = new CriteriaQuery(Difunto.class, Where.equal("idResponsable", idn));
-		objetos = odb.getObjects(query);
-				
-		if (objetos != null) {
-			try {
-				d = (Difunto) objetos.getFirst();
-			} catch (IndexOutOfBoundsException i) {
-				i.printStackTrace();
-				System.out.println("No se ha encontrado ningun difunto con identificador" + idn);
-				d = null;
-			}
-		}
-		return d;
 	}
 	
 	/**
@@ -193,5 +191,11 @@ public class DifuntoDAOImpNeodatis implements DifuntoDAO{
 		}
 		id++;
 		return id;
+	}
+
+	@Override
+	public Difunto getOne(Integer idn) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

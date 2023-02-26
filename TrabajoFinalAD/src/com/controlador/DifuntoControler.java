@@ -10,6 +10,7 @@ import com.dao.impl.DifuntoDAOImpHibernate;
 import com.dao.impl.DifuntoDAOImpExistDB;
 import com.dao.impl.DifuntoDAOImpNeodatis;
 import com.modelo.Difunto;
+import com.modelo.Responsable;
 
 /**
  * @author Angel Pavon Fraile
@@ -44,6 +45,14 @@ public class DifuntoControler {
 	}
 	
 	/**
+	 * Llama al metodo difunto.getOne()
+	 * @return difunto
+	 */
+	public Difunto devolverUno(int id){
+		return difunto.getOne(id);
+	}
+	
+	/**
 	 * Llama al metodo difunto.create()
 	 * @param d Difunto que va a ser insertado
 	 * @return devuelve true despues de insertar
@@ -72,18 +81,8 @@ public class DifuntoControler {
 	
 	/**
 	 * LLaman al metodo difunto.query()
-	 * @param id identificador del difunto
-	 * @return El obejto (Por ver si es esto lo que devuelve o un array)
 	 */
-	public Difunto query(int idn) {
-		return difunto.query(idn);
-	}
-	/**
-	 * LLaman al metodo difunto.query2()
-	 * @param id identificador del difunto
-	 * @return El obejto (Por ver si es esto lo que devuelve o un array)
-	 */
-	public Difunto query2(int idn) {
-		return difunto.query(idn);
+	public void query() {
+		difunto.query();
 	}
 }

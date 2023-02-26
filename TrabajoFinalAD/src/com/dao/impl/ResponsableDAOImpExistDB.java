@@ -49,25 +49,17 @@ public class ResponsableDAOImpExistDB implements ResponsableDAO{
 		return false;
 	}
 
-	/** Consultas responsables
-	 * Hace una consulta dependiendo del número que se le pase por parámetro 
-	 * Consulta 1 --> 
-	 * Consulta 2 -->
-	 * @param id identificador del difunto
-	 * @return Responsable
-	 * @exception IndexOutOfBoundsException
-	*/
+	//NO SE UTILIZA
 	@Override
-	public Responsable query(Integer idn) {
+	public void query() {
+	}
+
+	@Override
+	public Responsable getOne(Integer idn) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public Responsable query2(Integer idn) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	
 }

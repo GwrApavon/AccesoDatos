@@ -10,6 +10,7 @@ import com.dao.impl.SepulturaDAOImpExistDB;
 import com.dao.impl.SepulturaDAOImpHibernate;
 import com.dao.impl.SepulturaDAOImpNeodatis;
 import com.modelo.Difunto;
+import com.modelo.Responsable;
 import com.modelo.Sepultura;
 
 /**
@@ -26,7 +27,7 @@ public class SepulturaControler {
 	 */
 	public SepulturaControler(String tipo) {
 		if(tipo.equals("Neodatis")){
-			sepultura = new SepulturaDAOImpNeodatis("cementerio.db");
+			sepultura = new SepulturaDAOImpNeodatis(NeodatisUtils.buildODBConection("Cementerio.db"));
 		}
 		if(tipo.equals("Hibernate")){
 			sepultura = new SepulturaDAOImpHibernate();
@@ -44,6 +45,13 @@ public class SepulturaControler {
 		return sepultura.getAll();
 	}
 	
+	/**
+	 * Llama al metodo sepultura.getOne()
+	 * @return responsable
+	 */
+	public Sepultura devolverUno(int id){
+		return sepultura.getOne(id);
+	}
 	/**
 	 * Llama al metodo sepultura.create()
 	 * @param d Sepultura que va a ser insertada
@@ -73,18 +81,9 @@ public class SepulturaControler {
 	
 	/**
 	 * LLaman al metodo sepultura.query()
-	 * @param id identificador de la sepultura
-	 * @return El obejto (Por ver si es esto lo que devuelve o un array)
 	 */
-	public Sepultura query(int idn) {
-		return sepultura.query(idn);
+	public void query() {
+		sepultura.query();
 	}
-	/**
-	 * LLaman al metodo sepultura.query2()
-	 * @param id identificador de la sepultura
-	 * @return El obejto (Por ver si es esto lo que devuelve o un array)
-	 */
-	public Sepultura query2(int idn) {
-		return sepultura.query( idn);
-	}
+
 }

@@ -47,21 +47,20 @@ public class DifuntoDAOImpExistDB implements DifuntoDAO{
 		return false;
 	}
 
+	//TODO
 	/** Consultas difuntos
-	 * Hace una consulta dependiendo del número que se le pase por parámetro 
-	 * Consulta 1 -->
-	 * Consulta 2 -->
+	 * Consulta 
 	 * @param id identificador del Difunto
 	 * @return boolean
 	 * @exception IndexOutOfBoundsException
 	*/
 	@Override
-	public Difunto query(Integer idn) {
+	public void query() {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 	@Override
-	public Difunto query2(Integer idn) {
+	public Difunto getOne(Integer idn) {
 		// TODO Auto-generated method stub
 		return null;
 	}

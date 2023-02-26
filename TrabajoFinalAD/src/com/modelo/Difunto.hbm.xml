@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 26 feb 2023 13:26:26 by Hibernate Tools 5.4.12.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class catalog="Cementerio" dynamic-insert="false" dynamic-update="false" mutable="true" name="com.modelo.Difunto" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="difunto">
+        <id name="idDifunto" type="java.lang.Integer">
+            <column name="id_difunto"/>
+            <generator class="identity"/>
+        </id>
+        <many-to-one class="com.modelo.Sepultura" embed-xml="true" fetch="select" insert="true" name="sepultura" not-found="exception" optimistic-lock="true" unique="false" update="true">
+            <column name="id_sepultura" not-null="true" unique="true"/>
+        </many-to-one>
+        <property generated="never" lazy="false" name="nombre" optimistic-lock="true" type="string" unique="false">
+            <column length="30" name="nombre" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="apellido1" optimistic-lock="true" type="string" unique="false">
+            <column length="30" name="apellido1" not-null="true"/>
+        </property>
+        <property generated="never" lazy="false" name="apellido2" optimistic-lock="true" type="string" unique="false">
+            <column length="30" name="apellido2"/>
+        </property>
+        <property generated="never" lazy="false" name="fechaNacimiento" optimistic-lock="true" type="date" unique="false">
+            <column length="10" name="fecha_nacimiento"/>
+        </property>
+        <property generated="never" lazy="false" name="fechaDefuncion" optimistic-lock="true" type="date" unique="false">
+            <column length="10" name="fecha_defuncion"/>
+        </property>
+        <property generated="never" lazy="false" name="fechaEnterramiento" optimistic-lock="true" type="date" unique="false">
+            <column length="10" name="fecha_enterramiento"/>
+        </property>
+    </class>
+</hibernate-mapping>

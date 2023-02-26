@@ -28,8 +28,8 @@ public class ResponsableDAOImpNeodatis implements ResponsableDAO{
 
 private static ODB odb;
 	
-	public ResponsableDAOImpNeodatis(String db) {
-		odb = ODBFactory.open(db);
+	public ResponsableDAOImpNeodatis(ODB odb) {
+		this.odb = odb;
 	}
 	
 	public static ODB crearConexion() {
@@ -127,56 +127,13 @@ private static ODB odb;
 	}
 
 	
-	
-	/* Consultas responsables
-	 * Hace una consulta dependiendo del número que se le pase por parámetro 
-	 * Consulta 1 --> 
-	 * Consulta 2 -->
-	 * @param id identificador del difunto
-	 * @return Responsable
-	 * @exception IndexOutOfBoundsException
-	*/
+	//NO SE UTILIZA
 	@Override
-	public Responsable query(Integer idn) {
-		Responsable d = new Responsable();
-		IQuery query;
-		Objects<Responsable> objetos;
+	public void query() {
+		// TODO Auto-generated method stub
 		
-		query = new CriteriaQuery(Responsable.class, Where.equal("idResponsable", idn));
-		objetos = odb.getObjects(query);
-				
-		if (objetos != null) {
-			try {
-				d = (Responsable) objetos.getFirst();
-			} catch (IndexOutOfBoundsException i) {
-				i.printStackTrace();
-				System.out.println("No se ha encontrado ningun difunto con identificador" + idn);
-				d = null;
-			}
-		}
-		return d;
 	}
 	
-	@Override
-	public Responsable query2(Integer idn) {
-		Responsable d = new Responsable();
-		IQuery query;
-		Objects<Responsable> objetos;
-		
-		query = new CriteriaQuery(Responsable.class, Where.equal("idResponsable", idn));
-		objetos = odb.getObjects(query);
-				
-		if (objetos != null) {
-			try {
-				d = (Responsable) objetos.getFirst();
-			} catch (IndexOutOfBoundsException i) {
-				i.printStackTrace();
-				System.out.println("No se ha encontrado ningun difunto con identificador" + idn);
-				d = null;
-			}
-		}
-		return d;
-	}
 	
 	/**
 	 * Obtiene la ultima id le suma uno y la devuelve
@@ -193,6 +150,12 @@ private static ODB odb;
 		}
 		id++;
 		return id;
+	}
+
+	@Override
+	public Responsable getOne(Integer idn) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -5,7 +5,6 @@ package com.dao;
 
 import java.io.Serializable;
 import java.util.List;
-
 /**
  * @author Angel Pavon Fraile
  *
@@ -14,9 +13,9 @@ import java.util.List;
 public interface GenericDAO<T, ID extends Serializable>{
 
 	public List <T> getAll();
+	public T getOne(ID idn);
 	public boolean create(T element);
 	public boolean modify(ID idn, T element);
 	public boolean delete(ID idn);
-	public T query(ID idn);
-	public T query2(ID idn);
+	public void query();
 }

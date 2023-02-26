@@ -49,6 +49,7 @@ public class SepulturaDAOImpExistDB implements SepulturaDAO{
 		return false;
 	}
 
+	
 	/** Consultas responsables
 	 * Hace una consulta dependiendo del número que se le pase por parámetro 
 	 * Consulta 1 -->
@@ -57,14 +58,15 @@ public class SepulturaDAOImpExistDB implements SepulturaDAO{
 	 * @return Sepultura
 	 * @exception IndexOutOfBoundsException
 	*/
+
 	@Override
-	public Sepultura query(Integer idn) {
+	public void query() {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 
 	@Override
-	public Sepultura query2(Integer idn) {
+	public Sepultura getOne(Integer idn) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -26,7 +26,7 @@ public class ResponsableControler {
 	 */
 	public ResponsableControler(String tipo) {
 		if(tipo.equals("Neodatis")){
-			responsable = new ResponsableDAOImpNeodatis("cementerio.db");
+			responsable = new ResponsableDAOImpNeodatis(NeodatisUtils.buildODBConection("Cementerio.db"));
 		}
 		if(tipo.equals("Hibernate")){
 			responsable = new ResponsableDAOImpHibernate();
@@ -42,6 +42,14 @@ public class ResponsableControler {
 	 */
 	public List <Responsable> listarTodos(){
 		return responsable.getAll();
+	}
+	
+	/**
+	 * Llama al metodo responsable.getOne()
+	 * @return responsables
+	 */
+	public Responsable devolverUno(int id){
+		return responsable.getOne(id);
 	}
 	
 	/**
@@ -73,18 +81,9 @@ public class ResponsableControler {
 	
 	/**
 	 * LLaman al metodo responsable.query()
-	 * @param id identificador del responsable
-	 * @return El obejto (Por ver si es esto lo que devuelve o un array)
 	 */
-	public Responsable query(int idn) {
-		return responsable.query(idn);
+	public void query() {
+		responsable.query();
 	}
-	/**
-	 * LLaman al metodo responsable.query2()
-	 * @param id identificador del responsable
-	 * @return El obejto (Por ver si es esto lo que devuelve o un array)
-	 */
-	public Responsable query2(int idn) {
-		return responsable.query(idn);
-	}
+
 }

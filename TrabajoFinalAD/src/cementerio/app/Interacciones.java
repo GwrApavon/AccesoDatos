@@ -30,7 +30,7 @@ public class Interacciones {
 	 * @param sc Scanner Input
 	 * @return dif Difunto creado
 	 */
-	public static Difunto pedirDatosDifunto() {
+	public static Difunto pedirDatosDifunto(String db) {
 		Difunto dif = new Difunto();
 		
 		String nombre = Utilities.pedirNombre(sc);
@@ -48,7 +48,7 @@ public class Interacciones {
 		Date fechaEntr = Utilities.pedirFechaEntr(sc);
 		dif.setFechaEnterramiento(fechaEntr);
 		
-		Sepultura sepultura = Utilities.pedirSepultura(sc);
+		Sepultura sepultura = Utilities.pedirSepultura(sc,db);
 		dif.setSepultura(sepultura);
 		
 		return dif;	
@@ -79,11 +79,12 @@ public class Interacciones {
 	/**
 	 * Pedir datos de la sepultura
 	 * Pide los datos de la sepultura para insertarlo en la base de datos
+	 * @param db 
 	 * 
 	 * @param sc Scanner Input
 	 * @return dif Sepultura creada
 	 */
-	public static Sepultura pedirDatosSepultura() {
+	public static Sepultura pedirDatosSepultura(String db) {
 		Sepultura sep = new Sepultura();
 		
 		sep.setNombreTitular(Utilities.pedirNombre(sc));
@@ -95,11 +96,8 @@ public class Interacciones {
 		sep.setCodigoContable(Utilities.pedirCodContable(sc));
 		sep.setTipoContrato(Utilities.pedirTipoContrato(sc));
 		sep.setObservaciones(Utilities.pedirObservaciones(sc));
-
-		//TODO
-		sep.setDifuntos(null);
 		
-		sep.setResponsable(Utilities.pedirResponsable(sc));
+		sep.setResponsable(Utilities.pedirResponsable(sc,db));
 		
 		
 		return sep;	
@@ -135,7 +133,7 @@ public class Interacciones {
 					break;
 				case 6: dif.setFechaEnterramiento(Utilities.pedirFechaEntr(sc));
 					break;
-				case 7: dif.setSepultura(Utilities.pedirSepultura(sc));
+				case 7: dif.setSepultura(Utilities.pedirSepultura(sc,db));
 					break;
 				default: System.out.println("Saliendo...");
 						 salir = true;
@@ -185,7 +183,6 @@ public class Interacciones {
 	 * @param db
 	 * @return sepultura modificado
 	 */
-	//TODO
 	public static Sepultura modificarSepultura(String db) {
 		boolean salir = false;
 		Sepultura sep = mostrarSepulturas(db);
@@ -213,7 +210,7 @@ public class Interacciones {
 					break;
 				case 8: sep.setObservaciones(Utilities.pedirObservaciones(sc));
 					break;
-				case 9: //TODO
+				case 9:
 						sep.setDifuntos(null);
 					break;
 				default: System.out.println("Saliendo...");
@@ -237,11 +234,12 @@ public class Interacciones {
 			System.out.println(d.toString());
 		}
 		
-		System.out.println("Que difunto quieres modificar: ");
-		int election = sc.nextInt();
-		sc.nextLine();
+		System.out.println("Que difunto quieres modificar(id): ");
+		int election = Utilities.sacarIntValido(sc);
 		
-		return adif.get(election);
+		Difunto dif = difc.devolverUno(election);
+		
+		return dif;
 	}
 	//Sepultura
 	public static Sepultura mostrarSepulturas(String db) {
@@ -251,11 +249,12 @@ public class Interacciones {
 		for (Sepultura s : asep) {
 			System.out.println(s.toString());
 		}
-		System.out.println("Que difunto quieres modificar: ");
-		int election = sc.nextInt();
-		sc.nextLine();
+		System.out.println("Que sepultura quieres modificar(id): ");
+		int election = Utilities.sacarIntValido(sc);
 		
-		return asep.get(election);
+		Sepultura sep = sepc.devolverUno(election);
+		
+		return sep;
 		
 	}
 	//Responsable
@@ -267,11 +266,28 @@ public class Interacciones {
 			System.out.println(r.toString());
 		}
 		
-		System.out.println("Que difunto quieres modificar: ");
-		int election = sc.nextInt();
-		sc.nextLine();
+		System.out.println("Que responsable quieres modificar(id): ");
+		int election = Utilities.sacarIntValido(sc);
 		
-		return ares.get(election);
+		Responsable res = resc.devolverUno(election);
+		
+		return res;
+	}
+
+	/**
+	 * Prepara las consultas 
+	 * @param i --> Consulta 1 o 2
+	 * @param db
+	 */
+	public static void prepararConsulta(int i, String db) {
+		if(i == 1) {
+			DifuntoControler difc = new DifuntoControler(db);			
+			difc.query();
+		}
+		else {
+			SepulturaControler sepc = new SepulturaControler(db);			
+			sepc.query();
+		}
 	}
 	
 }
