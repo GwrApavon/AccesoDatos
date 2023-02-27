@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <!--
+    - Base de datos: 'Cementerio'
+    -->
+    <database name="Cementerio">
+        <!-- Tabla difunto -->
+        <table name="difunto">
+            <column name="id_difunto">1</column>
+            <column name="nombre">José</column>
+            <column name="apellido1">Perez</column>
+            <column name="apellido2">Palomares</column>
+            <column name="fecha_nacimiento">NULL</column>
+            <column name="fecha_defuncion">2023-02-16</column>
+            <column name="fecha_enterramiento">NULL</column>
+            <column name="id_sepultura">1</column>
+        </table>
+        <table name="difunto">
+            <column name="id_difunto">4</column>
+            <column name="nombre">Pepito</column>
+            <column name="apellido1">Sierra</column>
+            <column name="apellido2">NULL</column>
+            <column name="fecha_nacimiento">NULL</column>
+            <column name="fecha_defuncion">NULL</column>
+            <column name="fecha_enterramiento">NULL</column>
+            <column name="id_sepultura">2</column>
+        </table>
+        <table name="difunto">
+            <column name="id_difunto">5</column>
+            <column name="nombre">Anton</column>
+            <column name="apellido1">Pirulero</column>
+            <column name="apellido2">NULL</column>
+            <column name="fecha_nacimiento">NULL</column>
+            <column name="fecha_defuncion">NULL</column>
+            <column name="fecha_enterramiento">NULL</column>
+            <column name="id_sepultura">3</column>
+        </table>
+        <table name="difunto">
+            <column name="id_difunto">6</column>
+            <column name="nombre">Martin</column>
+            <column name="apellido1">Lopez</column>
+            <column name="apellido2">NULL</column>
+            <column name="fecha_nacimiento">NULL</column>
+            <column name="fecha_defuncion">NULL</column>
+            <column name="fecha_enterramiento">NULL</column>
+            <column name="id_sepultura">4</column>
+        </table>
+        <table name="difunto">
+            <column name="id_difunto">7</column>
+            <column name="nombre">Leonor</column>
+            <column name="apellido1">Pans</column>
+            <column name="apellido2">NULL</column>
+            <column name="fecha_nacimiento">NULL</column>
+            <column name="fecha_defuncion">NULL</column>
+            <column name="fecha_enterramiento">NULL</column>
+            <column name="id_sepultura">5</column>
+        </table>
+        <table name="difunto">
+            <column name="id_difunto">8</column>
+            <column name="nombre">Martin</column>
+            <column name="apellido1">Lopez</column>
+            <column name="apellido2">NULL</column>
+            <column name="fecha_nacimiento">NULL</column>
+            <column name="fecha_defuncion">NULL</column>
+            <column name="fecha_enterramiento">NULL</column>
+            <column name="id_sepultura">6</column>
+        </table>
+        <table name="difunto">
+            <column name="id_difunto">9</column>
+            <column name="nombre">Leonor</column>
+            <column name="apellido1">Pans</column>
+            <column name="apellido2">NULL</column>
+            <column name="fecha_nacimiento">NULL</column>
+            <column name="fecha_defuncion">NULL</column>
+            <column name="fecha_enterramiento">NULL</column>
+            <column name="id_sepultura">7</column>
+        </table>
+        <!-- Tabla responsable -->
+        <table name="responsable">
+            <column name="id_responsable">4</column>
+            <column name="nombre">Adolfo</column>
+            <column name="apellido1">Pérez</column>
+            <column name="apellido2">Antolín</column>
+            <column name="cuenta_domiciliacion">ES852086101020203030</column>
+        </table>
+        <table name="responsable">
+            <column name="id_responsable">5</column>
+            <column name="nombre">Genaro</column>
+            <column name="apellido1">Martín</column>
+            <column name="apellido2">Pescador</column>
+            <column name="cuenta_domiciliacion">ES852087101020203030</column>
+        </table>
+        <table name="responsable">
+            <column name="id_responsable">6</column>
+            <column name="nombre">Pepe</column>
+            <column name="apellido1">Pòtamo</column>
+            <column name="apellido2">Pótamo</column>
+            <column name="cuenta_domiciliacion">ES852087101020203030</column>
+        </table>
+        <table name="responsable">
+            <column name="id_responsable">7</column>
+            <column name="nombre">Luís</column>
+            <column name="apellido1">Alto</column>
+            <column name="apellido2">Llano</column>
+            <column name="cuenta_domiciliacion">ES852088101020203030</column>
+        </table>
+        <table name="responsable">
+            <column name="id_responsable">8</column>
+            <column name="nombre">Juanillo</column>
+            <column name="apellido1">Pardo</column>
+            <column name="apellido2">Oscuro</column>
+            <column name="cuenta_domiciliacion">ES852089101020203030</column>
+        </table>
+        <table name="responsable">
+            <column name="id_responsable">9</column>
+            <column name="nombre">Antón</column>
+            <column name="apellido1">Pirulero</column>
+            <column name="apellido2">Fresco</column>
+            <column name="cuenta_domiciliacion">ES852090101020203030</column>
+        </table>
+        <table name="responsable">
+            <column name="id_responsable">10</column>
+            <column name="nombre">Perico</column>
+            <column name="apellido1">Delos</column>
+            <column name="apellido2">Palotes</column>
+            <column name="cuenta_domiciliacion">ES852092101020203030</column>
+        </table>
+        <table name="responsable">
+            <column name="id_responsable">11</column>
+            <column name="nombre">Manolo</column>
+            <column name="apellido1">Eldel</column>
+            <column name="apellido2">Bombo</column>
+            <column name="cuenta_domiciliacion">ES852093101020203030</column>
+        </table>
+        <table name="responsable">
+            <column name="id_responsable">12</column>
+            <column name="nombre">Paco</column>
+            <column name="apellido1">León</column>
+            <column name="apellido2">Fierro</column>
+            <column name="cuenta_domiciliacion">ES852089401020203030</column>
+        </table>
+        <table name="responsable">
+            <column name="id_responsable">13</column>
+            <column name="nombre">Juan</column>
+            <column name="apellido1">Martín</column>
+            <column name="apellido2">Pescador</column>
+            <column name="cuenta_domiciliacion">ES852095101020203030</column>
+        </table>
+        <!-- Tabla sepultura -->
+        <table name="sepultura">
+            <column name="id_sepultura">1</column>
+            <column name="codigo_contable">1234567890</column>
+            <column name="calle">1b</column>
+            <column name="num_sepultura">5</column>
+            <column name="nombre_titular">Manuel</column>
+            <column name="apellido1_titular">Blasco</column>
+            <column name="apellido2_titular">López</column>
+            <column name="tipo_contrato">Temporal</column>
+            <column name="observaciones">NULL</column>
+            <column name="id_responsable">4</column>
+        </table>
+        <table name="sepultura">
+            <column name="id_sepultura">2</column>
+            <column name="codigo_contable">2345678901</column>
+            <column name="calle">1b</column>
+            <column name="num_sepultura">6</column>
+            <column name="nombre_titular">Tono</column>
+            <column name="apellido1_titular">Agudo</column>
+            <column name="apellido2_titular">Simple</column>
+            <column name="tipo_contrato">Perpetua</column>
+            <column name="observaciones">NULL</column>
+            <column name="id_responsable">5</column>
+        </table>
+        <table name="sepultura">
+            <column name="id_sepultura">3</column>
+            <column name="codigo_contable">3456789012</column>
+            <column name="calle">1b</column>
+            <column name="num_sepultura">4</column>
+            <column name="nombre_titular">Loco</column>
+            <column name="apellido1_titular">Mía</column>
+            <column name="apellido2_titular">Sebastián</column>
+            <column name="tipo_contrato">Temporal</column>
+            <column name="observaciones">NULL</column>
+            <column name="id_responsable">6</column>
+        </table>
+        <table name="sepultura">
+            <column name="id_sepultura">4</column>
+            <column name="codigo_contable">4567890123</column>
+            <column name="calle">1b</column>
+            <column name="num_sepultura">1</column>
+            <column name="nombre_titular">Lirio</column>
+            <column name="apellido1_titular">Del</column>
+            <column name="apellido2_titular">Campo</column>
+            <column name="tipo_contrato">Perpetua</column>
+            <column name="observaciones">NULL</column>
+            <column name="id_responsable">13</column>
+        </table>
+        <table name="sepultura">
+            <column name="id_sepultura">5</column>
+            <column name="codigo_contable">5678901234</column>
+            <column name="calle">1b</column>
+            <column name="num_sepultura">2</column>
+            <column name="nombre_titular">Jazmín</column>
+            <column name="apellido1_titular">Bueno</column>
+            <column name="apellido2_titular">Olorosa</column>
+            <column name="tipo_contrato">Temporal</column>
+            <column name="observaciones">NULL</column>
+            <column name="id_responsable">7</column>
+        </table>
+        <table name="sepultura">
+            <column name="id_sepultura">6</column>
+            <column name="codigo_contable">6789012345</column>
+            <column name="calle">1b</column>
+            <column name="num_sepultura">1</column>
+            <column name="nombre_titular">Lirio</column>
+            <column name="apellido1_titular">Del</column>
+            <column name="apellido2_titular">Campo</column>
+            <column name="tipo_contrato">Perpetua</column>
+            <column name="observaciones">NULL</column>
+            <column name="id_responsable">8</column>
+        </table>
+        <table name="sepultura">
+            <column name="id_sepultura">7</column>
+            <column name="codigo_contable">7890123456</column>
+            <column name="calle">1b</column>
+            <column name="num_sepultura">10</column>
+            <column name="nombre_titular">Julián</column>
+            <column name="apellido1_titular">Jolín</column>
+            <column name="apellido2_titular">Saco</column>
+            <column name="tipo_contrato">Temporal</column>
+            <column name="observaciones">NULL</column>
+            <column name="id_responsable">10</column>
+        </table>
+    </database>

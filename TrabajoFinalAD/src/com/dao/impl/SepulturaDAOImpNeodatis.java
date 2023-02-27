@@ -156,6 +156,7 @@ public class SepulturaDAOImpNeodatis implements SepulturaDAO{
 		Sepultura sep = dif.getSepultura();
 		Responsable resp = sep.getResponsable();
 		
+		System.out.println("=========================================");
 		System.out.println("ID difunto: " + dif.getIdDifunto()                    
 							+ "\nID sepultura: " + sep.getIdSepultura()
 							+ "\nPosicion sepultura:"            
@@ -167,6 +168,7 @@ public class SepulturaDAOImpNeodatis implements SepulturaDAO{
 							+ "\n\tApellido1: " + resp.getApellido1()
 							+ "\n\tApellido2: " + resp.getApellido2());
         }
+		System.out.println("=========================================");
 	}
 	
 	/**

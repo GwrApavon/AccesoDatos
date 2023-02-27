@@ -152,6 +152,7 @@ public class DifuntoDAOImpNeodatis implements DifuntoDAO{
 		    Sepultura sep = dif.getSepultura();
 		    Responsable res = sep.getResponsable();
 
+		    System.out.println("=========================================");
 		    System.out.println("Difunto:"
 		            + "\n\tNombre: " + dif.getNombre()
 		            + "\n\tApellido1: " + dif.getApellido1()
@@ -174,6 +175,7 @@ public class DifuntoDAOImpNeodatis implements DifuntoDAO{
 		            + "\n\tApellido1: " + res.getApellido1()
 		            + "\n\tApellido2: " + res.getApellido2());
 		}
+		System.out.println("=========================================");
 	}
 	
 	/**

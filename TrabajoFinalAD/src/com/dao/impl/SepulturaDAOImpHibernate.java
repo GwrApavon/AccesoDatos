@@ -134,6 +134,7 @@ public class SepulturaDAOImpHibernate implements SepulturaDAO{
 		List<Object[]> results = query.list();
 		
 		for(Object[] result : results) {
+			System.out.println("=========================================");
 			System.out.println("ID difunto: " + result[0]					
 								+ "\nID sepultura: " + result[1]
 								
@@ -147,6 +148,7 @@ public class SepulturaDAOImpHibernate implements SepulturaDAO{
 								+ "\n\tApellido1: " + result[6]
 								+ "\n\tApellido2: " + result[7]);
 		}
+		System.out.println("=========================================");
 	}
 
 }

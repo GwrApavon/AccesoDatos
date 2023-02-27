@@ -37,6 +37,18 @@ public class Difunto implements java.io.Serializable {
 		this.fechaEnterramiento = fechaEnterramiento;
 	}
 
+	public Difunto(int id,  Sepultura sepultura, String nombre, String apellido1, String apellido2, Date fechaNacimiento,
+			Date fechaDefuncion, Date fechaEnterramiento) {
+		this.idDifunto = id;
+		this.sepultura = sepultura;
+		this.nombre = nombre;
+		this.apellido1 = apellido1;
+		this.apellido2 = apellido2;
+		this.fechaNacimiento = fechaNacimiento;
+		this.fechaDefuncion = fechaDefuncion;
+		this.fechaEnterramiento = fechaEnterramiento;
+	}
+	
 	public Integer getIdDifunto() {
 		return this.idDifunto;
 	}

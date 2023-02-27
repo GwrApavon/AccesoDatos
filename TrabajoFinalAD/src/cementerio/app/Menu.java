@@ -116,39 +116,64 @@ public class Menu {
 	 */
 	private static boolean subMenuTablas() {
 		boolean salirSubMenuTabla = false;
+		if (!db.equalsIgnoreCase("existDB")) {
+			System.out.println("Que quieres hacer:\n"
+								
+								+ "\n\t1. Trabajar en Difunto"
+					
+								+ "\n\t2. Trabajar en Sepultura"
+								
+								+ "\n\t3. Trabajar en Responsable"
+								
+								+ "\n\t4. Consultar datos generales por fecha de defunción"
+								
+								+ "\n\t5. Consultar Sepultura y Responsable por datos del difunto"
+								
+								+ "\n\n0. Atrás");
+			
+			int op = Utilities.sacarIntValido(sc);
+			
+			switch(op) {
+			
+				case 1,2,3:
+						do {
+							salirSubMenuTabla = subMenuTabla(op);
+						}while(!salirSubMenuTabla);
+					break;
+				case 4:
+						Interacciones.prepararConsulta(1,db);
+					break;
+				case 5:
+						Interacciones.prepararConsulta(2,db);
+					break;
+				default: 
+						System.out.println("Saliendo...");
+					return true;
+			}
+		}
 		
-		System.out.println("Que quieres hacer:\n"
-							
-							+ "\n\t1. Trabajar en Difunto"
-				
-							+ "\n\t2. Trabajar en Sepultura"
-							
-							+ "\n\t3. Trabajar en Responsable"
-							
-							+ "\n\t4. Consultar datos generales por fecha de defunción"
-							
-							+ "\n\t5. Consultar Sepultura y Responsable por datos del difunto"
-							
-							+ "\n\n0. Atrás");
-		
-		int op = Utilities.sacarIntValido(sc);
-		
-		switch(op) {
-		
-			case 1,2,3:
-					do {
-						salirSubMenuTabla = subMenuTabla(op);
-					}while(!salirSubMenuTabla);
-				break;
-			case 4:
-					Interacciones.prepararConsulta(1,db);
-				break;
-			case 5:
-					Interacciones.prepararConsulta(2,db);
-				break;
-			default: 
-					System.out.println("Saliendo...");
-				return true;
+		else {
+			System.out.println("Que quieres hacer:\n"
+					
+								+ "\n\t1. Consultar todos los difuntos"
+					
+								+ "\n\t2. Consultar todas las sepulturas"
+								
+								+ "\n\n0. Atrás");
+			
+			int op = Utilities.sacarIntValido(sc);
+			
+			switch(op) {
+				case 1:
+						Interacciones.prepararConsulta(1,db);
+					break;
+				case 2:
+						Interacciones.prepararConsulta(2,db);
+					break;
+				default: 
+						System.out.println("Saliendo...");
+					return true;
+			}
 		}
 		return false;
 	}

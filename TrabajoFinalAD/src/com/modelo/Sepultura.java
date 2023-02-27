@@ -34,6 +34,17 @@ public class Sepultura implements java.io.Serializable {
 		this.apellido1Titular = apellido1Titular;
 		this.tipoContrato = tipoContrato;
 	}
+	public Sepultura(int id, Responsable responsable, String codigoContable, String calle, int numSepultura,
+			String nombreTitular, String apellido1Titular, String tipoContrato) {
+		this.idSepultura = id;
+		this.responsable = responsable;
+		this.codigoContable = codigoContable;
+		this.calle = calle;
+		this.numSepultura = numSepultura;
+		this.nombreTitular = nombreTitular;
+		this.apellido1Titular = apellido1Titular;
+		this.tipoContrato = tipoContrato;
+	}
 
 	public Sepultura(Responsable responsable, String codigoContable, String calle, int numSepultura,
 			String nombreTitular, String apellido1Titular, String apellido2Titular, String tipoContrato,

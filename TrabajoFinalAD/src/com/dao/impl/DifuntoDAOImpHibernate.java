@@ -139,6 +139,7 @@ public class DifuntoDAOImpHibernate implements DifuntoDAO{
 		List<Object[]> results = query.list();
 		
 		for(Object[] result : results) {
+			System.out.println("=========================================");
 			System.out.println("Difunto:"
 								+ "\n\tNombre: " +  result[0]
 								+ "\n\tApellido1: " + result[1]  
@@ -164,7 +165,8 @@ public class DifuntoDAOImpHibernate implements DifuntoDAO{
 								+ "\n\tNombre:" + result[13] 
 								+ "\n\tApellido1: " + result[14] 
 								+ "\n\tApellido2: " + result[15]);
-				}
+		}
+		System.out.println("=========================================");
 		sesion.close();
 	}
 
